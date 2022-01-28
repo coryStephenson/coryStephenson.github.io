@@ -1,10 +1,4 @@
-# coryStephenson.github.io
-
-
-
-[TOC]
-
-
+# Cory's Linux Notes
 
 # Downloading Typora
 
