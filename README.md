@@ -1,3 +1,0 @@
-# coryStephenson.github.io
-
-efefefeff
