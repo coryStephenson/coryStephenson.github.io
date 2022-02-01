@@ -48,6 +48,10 @@ a {
 button:hover, a:hover {
   opacity: 0.7;
 }
+  
+div button{
+    display:inline-block;
+  }
 </style>
 </head>
 <body>
@@ -64,7 +68,9 @@ button:hover, a:hover {
     <a href="https://github.com/coryStephenson"><i class="fa fa-github"></i></a>   
     <a href="https://www.linkedin.com/in/corystephenson/"><i class="fa fa-linkedin"></i></a>   
   </div>
-  <p><button>Contact</button></p>
+  <div style="width:300px;">
+  <button type="submit" class="msgBtn" onClick="window.location.href='tel:931-215-5067'>Contact</button>
+  </div>
 </div>
   
   <p>Born and raised in Columbia, Tennessee, I used Windows operating systems exclusively until 2015, when a friend gave me a 2012 MacBook Pro
