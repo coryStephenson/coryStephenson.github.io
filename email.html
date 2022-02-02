@@ -18,7 +18,7 @@ input[type=text], select, textarea {
 }
 
 input[type=submit] {
-  background-color: #04AA6D;
+  background-color: #242148;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -41,12 +41,13 @@ input[type=submit]:hover {
 <h1>Send me an email<h1>
 <form action="https://postmail.invotes.com/send"
     method="post" id="email_form">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Your email address...">  
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstname" placeholder="Your name...">
     <label for="lname">Last Name</label>
     <input type="text" id="lname" name="lastname" placeholder="Your last name...">
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" placeholder="Your email address...">
+    <label for="subject">Subject</label>
     <input type="text" name="subject" placeholder="Subject" />
     <textarea name="text" placeholder="Message"></textarea>
     <input type="hidden" name="access_token" value="d8vizjq9orutvjb2edy4pevl" />
