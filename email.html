@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
-input[type="text"] {
-  max_width: 100%;
-}
-  
+<head>
+    <style type="text/css">
+        fieldset {
+          position: relative;
+        }  
+      
+        label {
+          font: 18px;
+        }
+
+        input {
+          width: 98%;
+          padding: 2%;
+          position: absolute;
+          left: 0;
+          right: 0;
+        }
+  </style>
+  </head>
 <body>
   
   <h2>Contact Me</h2>
         
 <form action="http://postmail.invotes.com/send"
     method="post" id="email_form">
-
+    <fieldset>
     <input type="text" name="subject" placeholder="Subject" />
     <textarea name="text" placeholder="Message"></textarea>
     <input type="hidden" name="access_token" value="abc123" />
@@ -19,7 +34,7 @@ input[type="text"] {
     <input type="hidden" name="error_url" value=".?err=1" />
     
     <input id="submit_form" type="submit" value="Send" />
-    
+    </fieldset>
 </form>
     
   </body>
