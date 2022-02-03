@@ -1,96 +1,64 @@
 <!DOCTYPE html>
 <html>
-  /*code example from https://www.codegrepper.com/code-examples/whatever/vertical+navigation+bar+in+html */
-     <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>My Linux Page
-       </title>
-    <style>
-         /*navbar properties */
-         .navbar .brand {
-         max-height: 40px;
-         overflow: visible;
-         padding-top: 0;
-         padding-bottom: 0;
-         }
-         
-         .navbar a.navbar-brand {
-         padding: 9px 15px 8px;
-         }
+<head>
+<style>
+body {
+  margin: 0;
+}
 
-         .navbar{
-         font-family: young;
-         clear: both;
-         }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
 
-         .navbar a{
-         color: #515254;
-         }
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
-         .navbar-nav{
-         font-size: 20px;
-         padding-top: 20px;
-         }
+li a.active {
+  background-color: #04AA6D;
+  color: white;
+}
 
-         #bs-example-navbar-collapse-1{
-         float: left;
-         }
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+</style>
+</head>
+<body>
 
-         .nav > li > a:hover, .nav > li > a:focus{
-         color: #007f3d;
-         background: none;
-         }
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
 
-         .navbar-toggle .icon-bar {
-         background-color: black;
-         }
+<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+  <h2>Fixed Full-height Side Nav</h2>
+  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+  <p>Some text..</p>
+</div>
 
-        .navbar-toggle {
-        border: 1px solid #000;
-        }
-        
-        .verticalLine {
-        border-left: thick solid #ff0000;
-        }
-        
-       hr.vertical
-       {
-            color: black;
-            width: 0px;
-            height: 100%; /* or height in PX */
-       }
-/*navbar properties */
-   </style>
-  </head>
-      <body>
-           <nav class="navbar" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div style="margin: auto;display: table;">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <hr class="vertical"/>
-                    <li><a href="#">Deals</a></li>
-                    <li><a href="#">Pickup Deals</a></li>
-                    <li><a href="#">Menu</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div>
-    </div>
-</nav>
 </body>
-</html>  
-       
+</html>
+
+
