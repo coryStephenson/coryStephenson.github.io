@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html>
+  /*code example from https://www.codegrepper.com/code-examples/whatever/vertical+navigation+bar+in+html */
+     <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>My Linux Page
+       </title>
+    <style>
+         /*navbar properties */
+         .navbar .brand {
+         max-height: 40px;
+         overflow: visible;
+         padding-top: 0;
+         padding-bottom: 0;
+         }
+         
+         .navbar a.navbar-brand {
+         padding: 9px 15px 8px;
+         }
 
+         .navbar{
+         font-family: young;
+         clear: both;
+         }
+
+         .navbar a{
+         color: #515254;
+         }
+
+         .navbar-nav{
+         font-size: 20px;
+         padding-top: 20px;
+         }
+
+         #bs-example-navbar-collapse-1{
+         float: left;
+         }
+
+         .nav > li > a:hover, .nav > li > a:focus{
+         color: #007f3d;
+         background: none;
+         }
+
+         .navbar-toggle .icon-bar {
+         background-color: black;
+         }
+
+        .navbar-toggle {
+        border: 1px solid #000;
+        }
+        
+        .verticalLine {
+        border-left: thick solid #ff0000;
+        }
+        
+       hr.vertical
+       {
+            color: black;
+            width: 0px;
+            height: 100%; /* or height in PX */
+       }
+/*navbar properties */
+   </style>
+  </head>
+      <body>
+           <nav class="navbar" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div style="margin: auto;display: table;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <hr class="vertical"/>
+                    <li><a href="#">Deals</a></li>
+                    <li><a href="#">Pickup Deals</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </div>
+</nav>
+</body>
+</html>  
+       
