@@ -2,10 +2,55 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #242148;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],
     m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4d3a66b8b57afd1bd5e240d65/d140d9025f20976e3354ece35.js");
   </script>  
 </head>    
-
+<body>
+<h1>Send me an email</h1>
+<form action="https://script.google.com/macros/s/AKfycbwnHpieUkfo5D84Ab1l5BD-2TRk7-9xkg18Gar3qZFH58cWipT_EyCpRzcUJABtLXqVLw/exec"
+    method="post" id="email_form">
+    <input type="email" id="email" name="email" placeholder="Your email address...">  
+    <input type="text" id="fname" name="firstname" placeholder="Your first name...">
+    <input type="text" id="lname" name="lastname" placeholder="Your last name...">
+    <input type="text" name="subject" placeholder="Subject" />
+    <textarea name="text" placeholder="Message"></textarea>
+    <input id="submit_form" type="submit" value="Send" />
+</form>
+</body>
+</html>
 </html>
