@@ -1,8 +1,8 @@
 <?php
 
 if($_POST["submit"]) {
-    $recipient="your@email.address";
-    $subject="Form to email message";
+    $recipient="coryintenn@gmail.com";
+    $subject="corystephenson.github.io form submission";
     $sender=$_POST["sender"];
     $senderEmail=$_POST["senderEmail"];
     $message=$_POST["message"];
@@ -13,8 +13,8 @@ if($_POST["submit"]) {
 
     $thankYou="<p>Thank you! Your message has been sent.</p>";
 }
-
-<!DOCTYPE html>
+   
+?><!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,11 +54,13 @@ input[type=submit]:hover {
 </style>  
 </head>    
 <body>
+    
+    <?=$thankYou ?>
+    
 <div class="modal fade" id="contact" role="dialogue">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="gform" class="form-horizontal" method="POST" action="https://script.google.com/macros/s/AKfycbwnHpieUkfo5D84Ab1l5BD-2TRk7-9xkg18Gar3qZFH58cWipT_EyCpRzcUJABtLXqVLw/exec">
-
+        <form class="form-horizontal" method="POST" action="pages/email.php">
           <div class="modal-header">
             <h1>Send me an email</h1>
           </div>
@@ -71,19 +73,19 @@ input[type=submit]:hover {
             <fieldset class="form-group">
               <label for="name" class="col-lg-2 control-label">Name: </label>
               <div class="col-lg-10">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Please put your full name" />
+              <input type="text" class="form-control" id="sender" name="sender" placeholder="Please put your full name" />
             </fieldset>
 
             <fieldset class="form-group">
               <label for="email" class="col-lg-2 control-label">Email: </label>
               <div class="col-lg-10">
-              <input type="email" class="form-control" id="email" name="email" value="" required placeholder="email@siteexample.com"/>
+              <input type="email" class="form-control" id="senderEmail" name="senderEmail" value="" required placeholder="email@siteexample.com"/>
             </fieldset>
 
             <fieldset class="form-group">
               <label for="message" class="col-lg-2 control-label">Message: </label>
               <div class="col-lg-10">
-              <textarea type= "text" id="message" name="message" rows="8" class="form-control"></textarea>
+              <textarea type= "text" id="message" name="message" rows="10" cols="30" class="form-control"></textarea>
             </fieldset>
 
             <div class="modal-footer">
