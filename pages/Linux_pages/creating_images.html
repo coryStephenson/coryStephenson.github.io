@@ -1,0 +1,84 @@
+<h1 id="creating-images-for-cds-dvds-and-flash-drives">Creating images for CDs, DVDs, and flash drives</h1>
+<p>The command line has applications for burning data CDS, DVDs, flash, or Blu-ray disks. Before you can actually burn a disk, however, you first need to create an ISO image - that is, an archive file for your optical disc. ISO images images usually have the file extension <code>.iso</code>. The name is taken from the ISO 9660 standard, which is the standard filesystem for managing files on CD-ROMS. ISO images can also contain a UDF filesystem used by DVDs and Blu-ray disks.</p>
+<p>Regardless of the filesystem, you can create ISO images using one of two tools. The first is the <code>dd</code> command, which generally allows copying from any source, as well as the creation of ISO images. The command is especially useful for rescuing data on a dying hard drive.</p>
+<p>Alternatively, you can create an ISO image with <code>mkisofs</code>, <code>genisoimage</code>, or <code>xorrisofs</code>. Which of these tools is available to you depends on your distribution. Because of licensing issues, few if any distributions still use <code>mkisofs</code>, although it is still available as part of CDRTools. However, because of licensing issues with <code>mkisofs</code>, Debian uses <code>genisoimage</code>. Also, <code>genisoimage</code> has not been updated for several years, so distributions like Ubuntu and Linux Mint use <code>xorrisofs</code>. All these tools do the same job and understand almost all of the same options. You can use any of them to back up your data automatically, and even to exclude individual files if necessary.</p>
+<h2 id="converting-and-copying-with-dd">Converting and Copying with dd</h2>
+<p>The <code>dd</code> does far more than create ISO images. It really should be called <em>cc</em> - for convert and copy. However, because this name had already been assigned to the C compiler, the developers just chose the next letter of the alphabet when naming it.</p>
+<p>The <code>dd</code> tool creates exact copies of media, whether they are hard disk partitions, CDs, or DVDs. Also, <code>dd</code> supports reliable, blockwise reading and writing operations. Because <code>dd</code> does not process or interpret these blocks, the underlying filesystem is not important. In fact, <code>dd</code> isn&#39;t even fazed by hard disks with errors. The basic command syntax for <code>dd</code> is:</p>
+<pre><code><span class="hljs-selector-tag">dd</span> <span class="hljs-keyword">if</span>=&lt;source&gt; of=&lt;target&gt;
+</code></pre><p>The <em>if</em> option tells <em>dd</em> where to read the source data (input file), and the <em>of</em> option defines the destination (output file). The source and target are often devices, such as hard disk partitions or CD/DVD drives. Alternatively, you can use an equals sign to point to a file. To copy the hard disk partition <code>/dev/sda1</code> bit for bit to <code>/dev/sdb1</code>, you could type:</p>
+<pre><code>dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/dev/sda</span>1 <span class="hljs-keyword">of</span>=<span class="hljs-regexp">/dev/sdb</span>1
+</code></pre><p>You can also use <code>dd</code> in the shell to copy a CD or DVD quickly. To create an ISO image, for example, use the command:</p>
+<pre><code>$ dd if=/dev/sr0 of=myimage.iso
+<span class="hljs-number">1529961</span>+<span class="hljs-number">0</span> records in
+<span class="hljs-number">1529960</span>+<span class="hljs-number">0</span> records out
+<span class="hljs-number">783339520</span> bytes (<span class="hljs-number">783</span> MB) copied, <span class="hljs-number">90.6944</span> s, <span class="hljs-number">8.6</span> MB/s
+</code></pre><p>When you are using <code>dd</code>, you do not need to mount the medium to perform a quick copy: Just replace the <code>/dev/sr0</code> drive designator with the device name for your drive.</p>
+<p>The ISO image is written to a file called <code>myimage.iso</code> in the current directory. You can rename the file as necessary.</p>
+<h2 id="optimizing-dd-options">Optimizing dd Options</h2>
+<p>The <code>dd</code> tool also has a number of options. One practical option that speeds up the program considerably is <em>bs</em> (for &quot;block size&quot;). By default, <code>dd</code> uses 512-byte blocks; that is, it reads 512 bytes at a time and writes them to the output file. If you select a larger block size, you can speed up this process. For example, typing</p>
+<pre><code>dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/dev/sda</span>1 <span class="hljs-keyword">of</span>=<span class="hljs-regexp">/dev/sdb</span>1 bs=<span class="hljs-number">2</span>k
+</code></pre><p> tells <code>dd</code> to copy the partition in blocks of 2KB (2048 bytes). If the last block is smaller than the specified block size, <code>dd</code> will not pad it. Padding is when bits or characters are used to fill up unused portions of a data structure.</p>
+<pre><code>$ dd if=/dev/sda1 of=/dev/sdb1 bs=<span class="hljs-number">6</span>k
+<span class="hljs-number">16059</span>+<span class="hljs-number">1</span> records in
+<span class="hljs-number">16059</span>+<span class="hljs-number">1</span> records out
+<span class="hljs-number">98670592</span> bytes (<span class="hljs-number">95</span> MB) copied <span class="hljs-number">13.801482</span> s,<span class="hljs-number">6.9</span> MB/s
+</code></pre><p>The output tells you that <code>dd</code> has copied 16059 blocks of 6144 bytes each with one remaining block of 4096 bytes.</p>
+<p>Besides block size, you can specify how many block <code>dd</code> reads. To copy 40MB, just write <em>bs=1M count=40</em>. The <em>count</em> option specifies the number of blocks. This makes sense if you want to save a hard disk boot sector; for example, entering</p>
+<pre><code>dd <span class="hljs-attr">if=/dev/sda</span> <span class="hljs-attr">of=bootsector</span> <span class="hljs-attr">bs=512</span> <span class="hljs-attr">count=1</span>
+</code></pre><p>will just copy the first 512-byte block.</p>
+<h2 id="rescuing-with-dd">Rescuing with dd</h2>
+<p>If you are faced with the daunting task of rescuing data from damaged filesystems, <code>dd</code> is essential. Before you repair the damage, you first should create a backup copy. To do so, use <code>dd</code> to create a 1:1 copy of the damaged system and then use the copy for your rescue attempt.</p>
+<p>Because <code>dd</code> excludes defective sectors from the copy by default, you need to enable the <em>conv=noerror,sync</em> option,</p>
+<pre><code>dd bs=<span class="hljs-number">512</span> conv=noerror,sync <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/dev/sda</span> <span class="hljs-keyword">of</span>=<span class="hljs-regexp">/dev/sdb</span>
+</code></pre><p>which tells <code>dd</code> to continue reading and storing data, even if it discovers defective sectors. The <em>noerror</em> tells <code>dd</code> not to stop on errors, and <em>sync</em> pads unreadable sectors with zeros.</p>
+<h2 id="generating-iso-images">Generating ISO images</h2>
+<p>The <code>mkisofs</code> command used to be the most common for creating ISO images in Linux. Because of licensing issues and some conflicts within the developer community, <code>genisoimage</code> emerged as a fork of the <code>mkisofs</code> codebase. Another tool called <code>xorriso</code> offers a range of ISO creation and manipulation features. The <code>xorrisofs</code> command launches <code>xorriso</code> in <code>mkisofs</code> emulation mode. The result is that <code>mkisofs</code>, <code>genisoimage</code>, and <code>xorrisofs</code> all have very similar features and command-line options. Check your own Linux distribution to see which of these commands is available (they might not all be present). Debian, Ubuntu, and othe Debian-based alternatives ship ship with <code>genisoimage</code>, which will be used in the following examples. The basic syntax for all three is:</p>
+<pre><code>genisoimage <span class="hljs-tag">&lt;<span class="hljs-name">parameter</span>&gt;</span> -o <span class="hljs-tag">&lt;<span class="hljs-name">myfile</span>&gt;</span>.iso /<span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
+</code></pre><p>The <em>-o</em> flag lets you define the target file name. This is followed by the data you want to store in the image. As an optional parameter, you can tell the tool to enable Rock Ridge extensions by setting the <em>-r</em> option, which is useful chiefly for enabling longer file names. To set privileges and file ownership, you could specify <em>-R</em>. The Joliet extension, which enables the support of non-Latin characters, is enabled by the <em>-J</em> flag:</p>
+<pre><code>genisoimage -J -R -o <span class="hljs-tag">&lt;<span class="hljs-name">myfile</span>&gt;</span>.iso /<span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
+</code></pre><p>The <em>-V</em> option lets you specify a name (volume ID) for the CD/DVD. If the name includes blanks, special characters, or both, don&#39;t forget to use double quotation marks:</p>
+<pre><code>genisoimage -V <span class="hljs-string">"Backup, 29th of June"</span> ...
+</code></pre><p>For more detailed output, you could enable the <em>-v</em>  (verbose) option. The opposite of the verbose option is <em>-quiet</em>. If you prefer to avoid seeing status messages in your terminal window but don&#39;t want to do without the information these messages provide, use</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">genisoimage</span></span> ... -<span class="hljs-built-in">log</span>-<span class="hljs-keyword">file</span> <span class="hljs-built-in">log</span>.txt ...
+</code></pre><p>to pipe the output of the <code>genisoimage</code> command to a logfile.</p>
+<h2 id="creating-backups">Creating Backups</h2>
+<p><em>Genisoimage</em> and <em>xorrisofs</em> have a number of practical options for creating regular backups. For example, the <em>-m</em> option lets you exclude files from an image. The file name arguments follow the option. <em>Genisoimage</em> can even handle wildcards and multiple names. For example, to exclude all HTML files from your ISO image, just use the following structure, changing the command as necessary:</p>
+<pre><code>genisoimage ... -m *<span class="hljs-selector-class">.html</span> -m *<span class="hljs-selector-class">.HTML</span> -o backup<span class="hljs-selector-class">.iso</span> /home/huhn
+</code></pre><p>The <em>-x</em> option lets you exclude whole directories; multiple arguments are supported:</p>
+<pre><code>genisoimage ... -x /tmp -x /<span class="hljs-selector-tag">var</span> -o backup<span class="hljs-selector-class">.iso</span> /
+</code></pre><p>When you use these parameters, make sure you avoid using wildcards when specifying the files you want to write to the image. For example, the command</p>
+<pre><code>genisoimage ... -m *<span class="hljs-selector-class">.html</span> -m *<span class="hljs-selector-class">.HTML</span> -o backup<span class="hljs-selector-class">.iso</span> *
+</code></pre><p>tells the shell to resolve the final wildcard, adding all your files to the image.</p>
+<p>If you want to exclude files with typical backup extensions, such as files ending in ~, #, or <em>.bak</em>, just specify the <em>-no-bak</em> option.</p>
+<h2 id="creating-bootable-media">Creating Bootable Media</h2>
+<p>A bootable medium can be used to start a computer. To create bootable, just add the Isolinux bootloader, which works hand in hand with <code>genisoimage</code> or <code>xorrisofs</code>:</p>
+<pre><code>genisoimage -J -R -o bootcd<span class="hljs-selector-class">.iso</span> -<span class="hljs-selector-tag">b</span> isolinux/isolinux<span class="hljs-selector-class">.bin</span> -c isolinux/boot<span class="hljs-selector-class">.cat</span> -no-emul-boot
+-boot-load-size <span class="hljs-number">4</span> -boot-info-<span class="hljs-selector-tag">table</span> /folder/data
+</code></pre><p>The additional <em>genisoimage</em> options in the preceding command are: <em>-b</em> to name the boot image and <em>-c</em> to specify the boot catalog. The <em>-no-emul-boot</em> parameter tells the program not to create an emulation when installing from this CD; instead, it writes the contents of the image file to disk. The <em>-boot-load-size 4</em> option specifies that the BIOS should provide four 512-byte sectors for the boot file. Finally, the <em>-boot-info-table</em> option stipulates that the layout information of the medium should be read at boot time. Note that this information must be stored in the <em>isolinux</em> directory below <em>/folder/data</em>.</p>
+<h2 id="testing-images-before-burning">Testing Images Before Burning</h2>
+<p>The &#39;mount&#39; utility gives you a practical approach to testing ISO images before burning them to CD. To test your image, just mount it on your filesystem, specifying the <em>-o loop</em> option:</p>
+<pre><code>mount -o loop myfile<span class="hljs-selector-class">.iso</span> /mnt/tmp
+</code></pre><p>The mountpoint must exist, and you do need root privileges for this command. After completing the test (Figure 1), you can unmount the ISO image again by entering <em>umount /mnt/tmp</em>.</p>
+<p>Some distributions also include the <code>isoinfo</code> tool. You can access all sorts of information with it. To do so, specify the image file name after -i; <em>-d</em> outputs the report to the terminal.</p>
+<p>If you want to find out which files are included in the ISO image, use <em>-l</em> instead of <em>-d</em>. Figure 1 shows the &quot;content&quot; of the Blu-ray image that was created with <code>genisoimage -udf</code>.</p>
+<pre><code>root@jessie:~/test<span class="hljs-comment"># isoinfo -l -i blu-ray-test.iso</span>
+
+Directory listing of /
+d---------  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>      <span class="hljs-number"> 2048 </span>Jun<span class="hljs-number"> 30 </span>2015 [ <span class="hljs-number"> 267 </span>02]  .
+d---------  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>      <span class="hljs-number"> 2048 </span>Jun<span class="hljs-number"> 30 </span>2015 [ <span class="hljs-number"> 267 </span>02]  ..
+----------  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span><span class="hljs-number"> 3976200192 </span>Apr<span class="hljs-number"> 27 </span>2015 [ <span class="hljs-number"> 268 </span>00]DEBIAN_8_0_0_AMD64_DVD_1.ISO;1
+----------  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>459570267 Apr<span class="hljs-number"> 22 </span>2015 [1941772 00]LINUXMINT_17_1_CINNAMON_64B.ISO;1
+root@jessie:~/test<span class="hljs-comment">#</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">INFO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[1] Isolinux: <a href="http://syslinux.zytor.com/iso.php">http://syslinux.zytor.com/iso.php</a></td>
+</tr>
+</tbody>
+</table>
