@@ -1,19 +1,56 @@
-<h1 id="creating-images-for-cds-dvds-and-flash-drives">Creating images for CDs, DVDs, and flash drives</h1>
-<p>The command line has applications for burning data CDS, DVDs, flash, or Blu-ray disks. Before you can actually burn a disk, however, you first need to create an ISO image - that is, an archive file for your optical disc. ISO images images usually have the file extension <code>.iso</code>. The name is taken from the ISO 9660 standard, which is the standard filesystem for managing files on CD-ROMS. ISO images can also contain a UDF filesystem used by DVDs and Blu-ray disks.</p>
-<p>Regardless of the filesystem, you can create ISO images using one of two tools. The first is the <code>dd</code> command, which generally allows copying from any source, as well as the creation of ISO images. The command is especially useful for rescuing data on a dying hard drive.</p>
-<p>Alternatively, you can create an ISO image with <code>mkisofs</code>, <code>genisoimage</code>, or <code>xorrisofs</code>. Which of these tools is available to you depends on your distribution. Because of licensing issues, few if any distributions still use <code>mkisofs</code>, although it is still available as part of CDRTools. However, because of licensing issues with <code>mkisofs</code>, Debian uses <code>genisoimage</code>. Also, <code>genisoimage</code> has not been updated for several years, so distributions like Ubuntu and Linux Mint use <code>xorrisofs</code>. All these tools do the same job and understand almost all of the same options. You can use any of them to back up your data automatically, and even to exclude individual files if necessary.</p>
-<h2 id="converting-and-copying-with-dd">Converting and Copying with dd</h2>
-<p>The <code>dd</code> does far more than create ISO images. It really should be called <em>cc</em> - for convert and copy. However, because this name had already been assigned to the C compiler, the developers just chose the next letter of the alphabet when naming it.</p>
-<p>The <code>dd</code> tool creates exact copies of media, whether they are hard disk partitions, CDs, or DVDs. Also, <code>dd</code> supports reliable, blockwise reading and writing operations. Because <code>dd</code> does not process or interpret these blocks, the underlying filesystem is not important. In fact, <code>dd</code> isn&#39;t even fazed by hard disks with errors. The basic command syntax for <code>dd</code> is:</p>
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<h1 id="creating-images-for-cds-dvds-and-flash-drives">Creating images for CDs, DVDs, and flash drives
+</h1>
+<p>The command line has applications for burning data CDS, DVDs, flash, or Blu-ray disks. 
+   Before you can actually burn a disk, however, you first need to create an ISO image - that is, an archive file for your optical disc. 
+   ISO images images usually have the file extension <code>.iso</code>. 
+   The name is taken from the ISO 9660 standard, which is the standard filesystem for managing files on CD-ROMS. 
+   ISO images can also contain a UDF filesystem used by DVDs and Blu-ray disks.
+</p>
+<p>Regardless of the filesystem, you can create ISO images using one of two tools. 
+   The first is the <code>dd</code> command, which generally allows copying from any source, as well as the creation of ISO images. 
+   The command is especially useful for rescuing data on a dying hard drive.
+</p>
+<p>Alternatively, you can create an ISO image with <code>mkisofs</code>, <code>genisoimage</code>, or <code>xorrisofs</code>. 
+   Which of these tools is available to you depends on your distribution. 
+   Because of licensing issues, few if any distributions still use <code>mkisofs</code>, although it is still available as part of CDRTools. 
+   However, because of licensing issues with <code>mkisofs</code>, Debian uses <code>genisoimage</code>. 
+   Also, <code>genisoimage</code> has not been updated for several years, so distributions like Ubuntu and Linux Mint use <code>xorrisofs</code>. 
+   All these tools do the same job and understand almost all of the same options. 
+   You can use any of them to back up your data automatically, and even to exclude individual files if necessary.
+</p>
+<h2 id="converting-and-copying-with-dd">Converting and Copying with dd
+</h2>
+<p>The <code>dd</code> does far more than create ISO images. 
+   It really should be called <em>cc</em> - for convert and copy. 
+   However, because this name had already been assigned to the C compiler, the developers just chose the next letter of the alphabet when naming it.
+</p>
+<p>The <code>dd</code> tool creates exact copies of media, whether they are hard disk partitions, CDs, or DVDs. 
+   Also, <code>dd</code> supports reliable, blockwise reading and writing operations. 
+   Because <code>dd</code> does not process or interpret these blocks, the underlying filesystem is not important. 
+   In fact, <code>dd</code> isn&#39;t even fazed by hard disks with errors. 
+   The basic command syntax for <code>dd</code> is:
+</p>
 <pre><code><span class="hljs-selector-tag">dd</span> <span class="hljs-keyword">if</span>=&lt;source&gt; of=&lt;target&gt;
-</code></pre><p>The <em>if</em> option tells <em>dd</em> where to read the source data (input file), and the <em>of</em> option defines the destination (output file). The source and target are often devices, such as hard disk partitions or CD/DVD drives. Alternatively, you can use an equals sign to point to a file. To copy the hard disk partition <code>/dev/sda1</code> bit for bit to <code>/dev/sdb1</code>, you could type:</p>
-<pre><code>dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/dev/sda</span>1 <span class="hljs-keyword">of</span>=<span class="hljs-regexp">/dev/sdb</span>1
-</code></pre><p>You can also use <code>dd</code> in the shell to copy a CD or DVD quickly. To create an ISO image, for example, use the command:</p>
+</code></pre>
+  <p>The <em>if</em> option tells <em>dd</em> where to read the source data (input file), and the <em>of</em> option defines the destination (output file). 
+     The source and target are often devices, such as hard disk partitions or CD/DVD drives. 
+     Alternatively, you can use an equals sign to point to a file. 
+     To copy the hard disk partition <code>/dev/sda1</code> bit for bit to <code>/dev/sdb1</code>, you could type:
+  </p>
+
+  <pre><code>dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/dev/sda</span>1 <span class="hljs-keyword">of</span>=<span class="hljs-regexp">/dev/sdb</span>1
+</code></pre>
+  <p>You can also use <code>dd</code> in the shell to copy a CD or DVD quickly. To create an ISO image, for example, use the command:
+  </p>
 <pre><code>$ dd if=/dev/sr0 of=myimage.iso
 <span class="hljs-number">1529961</span>+<span class="hljs-number">0</span> records in
 <span class="hljs-number">1529960</span>+<span class="hljs-number">0</span> records out
 <span class="hljs-number">783339520</span> bytes (<span class="hljs-number">783</span> MB) copied, <span class="hljs-number">90.6944</span> s, <span class="hljs-number">8.6</span> MB/s
-</code></pre><p>When you are using <code>dd</code>, you do not need to mount the medium to perform a quick copy: Just replace the <code>/dev/sr0</code> drive designator with the device name for your drive.</p>
+</code></pre>
+  <p>When you are using <code>dd</code>, you do not need to mount the medium to perform a quick copy: Just replace the <code>/dev/sr0</code> drive designator with the device name for your drive.</p>
 <p>The ISO image is written to a file called <code>myimage.iso</code> in the current directory. You can rename the file as necessary.</p>
 <h2 id="optimizing-dd-options">Optimizing dd Options</h2>
 <p>The <code>dd</code> tool also has a number of options. One practical option that speeds up the program considerably is <em>bs</em> (for &quot;block size&quot;). By default, <code>dd</code> uses 512-byte blocks; that is, it reads 512 bytes at a time and writes them to the output file. If you select a larger block size, you can speed up this process. For example, typing</p>
@@ -82,3 +119,4 @@ root@jessie:~/test<span class="hljs-comment">#</span>
 </tr>
 </tbody>
 </table>
+</html>
