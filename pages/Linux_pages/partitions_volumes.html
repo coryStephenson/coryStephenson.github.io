@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <style>
-code {
-    white-space: nowrap;
-}	
+	
 </style>
 <html>
-  <meta name="viewport" content="width=device-width, initial-scale=1"> The following content was taken almost verbatim from pages 30 and 31 of <it>Linux Pro Magazine Special - Linux Shell Handbook - 2021 Edition</it>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> The following content was taken almost verbatim from pages 30 and 31 of <em>Linux Pro Magazine Special - Linux Shell Handbook - 2021 Edition</em>
   <h1 id="device-partitions-and-volumes">Device partitions and volumes</h1>
   <p>A hard disk on a modern computer is usually divided into partitions. A partition can contain exactly one filesystem (the data structure that stores files and directories). In Linux, swap space is usually implemented as a filesystem of its own, requiring its own partition. Additionally, many users create separate partitions for the <em>/boot</em>, <em>/var</em>, and <em>/home</em> directories. In theory, although Linux can be installed on one partition, likely you&#39;ll find multiple partitions. </p>
   <p>Before you can install an operating system, you need to create partitions and format them with filesystems. Most Linux installers provide a GUI for creating and managing partitions during the installation process, but if your system is already installed, you can turn to several management utilities for configuring partitions. The Bash command line provides several utilities for creating and configuring partitions, including <em>fdisk</em>, <em>gdisk</em>, and <em>parted</em>. </p>
@@ -15,65 +13,59 @@ code {
   <p>The old MBR served the hard disk industry well, but the industry outgrew it. MBR-based disks could only have four primary partitions, and the size of a partition was limited to 2TB (once an impossibly large size but today sometimes severely limiting). The Unified Extensible Firmware Interface (UEFI) standard, which has rapidly gained acceptance in recent years, defines a new format for specifying partition information known as the GUID Partition Table (GPT). As older PCs are gradually replaced, GPT-based disks are gradually replacing MBR-based disks.</p>
   <h2 id="fdisk-for-mbr-partitions">fdisk for MBR partitions</h2>
   <p>The <em>fdisk</em> utility lets you create and manage partitions on MBR-based disks. Fdisk has two basic modes: interactive and non-interactive. Non-interactive mode queries a partition and displays the information. By contrast, interactive mode is menu driven and lets you alter, as well as explore, partitions and partition tables. </p>
-  <p>Running == <em>fdisk -l</em> prints a listing of the partition tables of all of the drives on the system. To use <em>fdisk</em>, you might need to preface it with <em>su</em> or <em>sudo</em> to attain root privileges, depending on your distribution. To view only a single drive&#39;s table, append the drive name to the command:== </p>
+  <p>Running <em>fdisk -l</em> prints a listing of the partition tables of all of the drives on the system. To use <em>fdisk</em>, you might need to preface it with <em>su</em> or <em>sudo</em> to attain root privileges, depending on your distribution. To view only a single drive&#39;s table, append the drive name to the command:</p>
   <pre>
 			<code class="lang-bash">fdisk -l 
-				<span class="hljs-regexp">/dev/</span>sda
-
-			</code>
+				<span>/dev/sda</span>
+                        </code>
 		</pre>
   <p>==Note that <em>fdisk</em> requires a drive as its device argument. Fdisk&#39;s output includes the total drive size and basic geometry, then lists the partitions on the drive and their start and end locations, size, and partition type (both by name and by ID number). Size is reported in blocks. By adding the <em>-u</em> flag, you can have <em>fdisk</em> report start and end locations in sectors instead of cylinders. Running </p>
   <pre>
-			<code class="lang-bash">fdisk -s &lt;/
-				<span class="hljs-keyword">some</span>/device&gt;
-
-			</code>
+			<code class="lang-bash">fdisk -s 
+				<span>&lt;/some/device&gt;</span>
+                        </code>
 		</pre>
   <p>prints only the size of the device, but it works for both drives and partitions. To create or change partitions with <em>fdisk</em>, start it in interactive mode: Omit both the <em>-l</em> and <em>-s</em> flags, and specify a drive, such as </p>
   <pre>
-			<code class="lang-bash">fdisk 
-				<span class="hljs-regexp">/dev/</span>hda
-fdisk -u 
-				<span class="hljs-regexp">/dev/</span>sdc
-
-			</code>
+  <code class="lang-bash">
+    fdisk <span>/dev/hda</span><br>
+    fdisk -u <span>/dev/sdc</span>
+  </code>
 		</pre>
-  <p>The program writes its output to the screen and provides a command prompt but does not provide paging (e.g., <em>less</em>), so you might need to scroll up to read lengthy output. ==Entering <em>m</em> at the prompt list the available fdisk commands. From the main menu, you can create new partitions ( <em>n</em>), delete existing partitions ( <em>d</em>), verify the partition table ( <em>v</em>), and set several flags (the most notable being the bootable flag, toggled with <em>a</em>). To apply any changes, write a new partition table to the drive by entering <em>w</em>. At any time, you can quit without writing the partition table with <em>q</em>.== </p>
-  <p>==Creating a partition is a multistep process. Type <em>n</em> to begin, and fdisk will ask whether you want to create a primary partition ( <em>p</em>) or an extended partition ( <em>e</em>). Whichever you choose, fdisk will then ask you to select the partition number (be careful to choose an unused one if you have already created several), the location on the drive where you want the partition to start, and its size.== </p>
-  <p>==Fdisk will prompt you with the number of the first available cylinder on the drive. To leave an empty space between partitions, choose a higher number, which could help if you ever need to resize your partition.==</p>
+  <p>The program writes its output to the screen and provides a command prompt but does not provide paging (e.g., <em>less</em>), so you might need to scroll up to read lengthy output. Entering <em>m</em> at the prompt list the available fdisk commands. From the main menu, you can create new partitions ( <em>n</em>), delete existing partitions ( <em>d</em>), verify the partition table ( <em>v</em>), and set several flags (the most notable being the bootable flag, toggled with <em>a</em>). To apply any changes, write a new partition table to the drive by entering <em>w</em>. At any time, you can quit without writing the partition table with <em>q</em>.== </p>
+  <p>Creating a partition is a multistep process. Type <em>n</em> to begin, and fdisk will ask whether you want to create a primary partition ( <em>p</em>) or an extended partition ( <em>e</em>). Whichever you choose, fdisk will then ask you to select the partition number (be careful to choose an unused one if you have already created several), the location on the drive where you want the partition to start, and its size.== </p>
+  <p>Fdisk will prompt you with the number of the first available cylinder on the drive. To leave an empty space between partitions, choose a higher number, which could help if you ever need to resize your partition.</p>
   <h2 id="gdisk-for-gpt-partitions">gdisk for GPT Partitions</h2>
   <p>The new UEFI standard replaces the old MBR with the new GPT format, which solves some of the problems associated with the MBR, supporting a much larger disk size and theoretically allowing up to 128 partitions on a disk.</p>
   <p>Because GPT uses a different format for storing partition information, it requires a different utility. The most popular options for the Linux command line are the GPT fdisk utilities <em>gdisk</em>, <em>sgdisk</em>, and <em>fixparts</em>. The GPT fdisk toolset comes standard on several contemporary Linux systems; if you don&#39;t find it, install it through your distro&#39;s packagement system. Once you have installed the GPT toolset, you can use it to check and modify the disk. The <em>gdisk</em> command here returns what follows for a new disk: </p>
   <pre>
-			<code class="lang-bash">gdisk 
-				<span class="hljs-regexp">/dev/</span>sdh
+			<code class="lang-bash">gdisk <span>/dev/sdh</span><br><br>
 
-Partition table 
-				<span class="hljs-string">scan:</span>
-				<span class="hljs-string">MBR:</span> not present
+                         Partition table scan:<br>
+				&nbsp; <span>MBR:</span> not present<br>
 
-				<span class="hljs-string">BSD:</span> not present
+				&nbsp; <span>BSD:</span> not present<br>
 
-				<span class="hljs-string">APM:</span> not present
+				&nbsp; <span>APM:</span> not present<br>
 
-				<span class="hljs-string">GPT:</span> not present
+				&nbsp; <span>GPT:</span> not present
 
-			</code>
+                         </code>
 		</pre>
   <p>Several choices for managing the partition table appear in the text mode menu. For instance, choosing the <em>p</em> option prints the partition table, whereas <em>o</em> first outputs a security prompt and then creates a GPT table. The <em>n</em> option lets you create a new disk-sized data partition. The <em>w</em> option writes the data (saves the changes) from the gdisk session. </p>
   <p>Gdisk can convert MBR-partitioned hard disks to GPT, which removes the need to back up and restore existing partition content. Choosing <em>r</em> sends you to the recovery and transformation menu, which offers options for converting your MBR disk to GPT. Gdisk can also convert from GPT to MBR. In some cases, this option will not work, so be sure to back up your data if you try it. </p>
   <h2 id="gnu-parted">GNU Parted</h2>
   <p>Fdisk is one of the older Linux tools, and Gdisk is modeled after it. Increasingly, many users prefer GNU Parted.</p>
-  <p>==You can run <em>parted</em> in interactive or non-interactive mode. The non-interactive syntax is <em>parted </some /device>
+  <p>You can run <em>parted</em> in interactive or non-interactive mode. The non-interactive syntax is <em>parted </some /device>
       <command>
-    </em>. Running the command== </p>
+    </em>. Running the command</p>
   <pre>
 			<code class="lang-bash">parted 
 				<span class="hljs-regexp">/dev/</span>sda 
 				<span class="hljs-keyword">print</span>
 			</code>
 		</pre>
-  <p>==prints the partition table found on the <em>/dev/sda</em> disk. The information displayed is similar to fdisk&#39;s.== </p>
+  <p>prints the partition table found on the <em>/dev/sda</em> disk. The information displayed is similar to fdisk&#39;s. </p>
   <p>Providing the <em>-i</em> flag before the device and command arguments launches <em>parted</em> in interactive mode. Unlike <em>fdisk</em>, however, you can create and modify partitions in non-interactive mode as well. </p>
   <p>One important difference between between <em>parted</em> and <em>fdisk</em> and <em>gdisk</em> is that <em>parted</em> commands take effect immediately; that is when you create a new partition table, the existing partition table (if any) on the target drive is overwritten. This leaves little margin for error when working with a drive that has existing partitions and can leave you hunting for recovery tools (fortunately, Parted can assist in that task as well). The command </p>
   <pre>
