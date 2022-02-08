@@ -15,8 +15,7 @@ ul {
   padding: 0;
   width: 25%;
   background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
+  position: absolute;
   overflow: auto;
 }
 
@@ -49,7 +48,12 @@ li a:hover:not(.active) {
 </style>
 </head>
 <body>
-     
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul>
                    <li><a href="pages/aboutme.html">About Me</a></li>
                    <li><a href="pages/contact.html">Contact</a></li>
@@ -57,7 +61,8 @@ li a:hover:not(.active) {
                    <li><a href="pages/bookmarks.html">Resources</a></li>
                    <li><a href="pages/news_sources.html">News Sources</a></li>
                  </ul>
-            
+  </div>
+  </nav>
                  <div style="margin-left:25%;padding:1px 16px;height:1000px;">
                       <h2>Cory Stephenson - Cybersecurity Professional</h2>   
                    <h3>Personal Website</h3>
