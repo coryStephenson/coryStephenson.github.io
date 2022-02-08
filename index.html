@@ -6,54 +6,72 @@
 <style>
 
 body {
-  margin: 0;
+  font-family: "Lato", sans-serif;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 25%;
-  position: absolute;
-  overflow: auto;
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
-li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
+.sidebar a {
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
-li a.active {
-  background-color: #242148;
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
   color: white;
+  padding: 10px 15px;
+  border: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+.openbtn:hover {
+  background-color: #444;
 }
 
-.dark-mode {
-        background-color: black;
-        color: white;
-      }
-      .light-mode {
-        background-color: white;
-        color: black;
-      }
-  
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
 </style>
 </head>
 <body>
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">Navbar</a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                    <li><a href="pages/aboutme.html">About Me</a></li>
                    <li><a href="pages/contact.html">Contact</a></li>
                    <li><a href="pages/Linux.html">Linux</a></li>
@@ -61,21 +79,9 @@ li a:hover:not(.active) {
                    <li><a href="pages/news_sources.html">News Sources</a></li>
                  </ul>
   </div>
-  </nav>
-                 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
-                      <h2>Cory Stephenson - Cybersecurity Professional</h2>   
-                   <h3>Personal Website</h3>
-                 
-                 <p>
-                   <b>31 - 01 - 2022</b>: I built this website using GitHub Pages as the platform, and Jekyll, a static site generator (SSG) written in Ruby. 
-                      I chose GitHub Pages on account of the free web hosting, the option of an SSL certificate (now referred to as a TLS certificate), and
-                      the fact that I needed to learn how to use Git. A personal website was a long awaited ambition of mine, so I figured this was the ideal 
-                      stepping stone to becoming proficient with Git as well as GitHub.
-                 </p>
-                 </div>
-
-
-<h3 id="DarkModetext">Dark Mode is OFF</h3>
+  
+  
+                 <h3 id="DarkModetext">Dark Mode is OFF</h3>
     <button onclick="darkMode()">Darkmode</button>
     <button onclick="lightMode()">LightMode</button>
 <script>
@@ -91,7 +97,34 @@ li a:hover:not(.active) {
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
       }
-    </script>  
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+  
+                 <div id="main">
+                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>  
+                      <h2>Cory Stephenson - Cybersecurity Professional</h2>   
+                   <h3>Personal Website</h3>
+                 
+                 <p>
+                   <b>31 - 01 - 2022</b>: I built this website using GitHub Pages as the platform, and Jekyll, a static site generator (SSG) written in Ruby. 
+                      I chose GitHub Pages on account of the free web hosting, the option of an SSL certificate (now referred to as a TLS certificate), and
+                      the fact that I needed to learn how to use Git. A personal website was a long awaited ambition of mine, so I figured this was the ideal 
+                      stepping stone to becoming proficient with Git as well as GitHub.
+                 </p>
+                 </div>
+
+
+
 </body>
 </html>
 
