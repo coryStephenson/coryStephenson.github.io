@@ -82,7 +82,37 @@ body {
   <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
 </div>
 
-<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+  
+                 <div id="main">
+                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
   <h2>About Me</h2>
   <h3>The kinds of platforms that I've used</h3>
   <p>Born and raised in Columbia, Tennessee, I used Windows operating systems exclusively until 2015, when a friend gave me a 2012 MacBook Pro that he modified himself, replacing
