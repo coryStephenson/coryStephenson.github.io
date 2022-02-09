@@ -4,7 +4,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-.container {
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111; /*black*/
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181; /* gray - text on sidebar that isn't being hovered over*/
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1; /*white - text on sidebar that is being hovered over*/
+}
+
+.sidebar .closebtn { /* The x in the upper right corner of the sidebar*/
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn { 
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #0000FF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #0099FF;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+ .dark-mode {
+        background-color: black;
+        color: #00FF33;
+}
+.light-mode {
+        background-color: white;
+        color: black;
+} 
+  
+ .container {
   width: 80%;
   padding: 50px;
   display: flex;
@@ -47,12 +117,44 @@ a {
 
 button:hover, a:hover {
   opacity: 0.7;
-}
-  
-
+}  
 </style>
 </head>
 <body>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
+</div>
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
 
 <h2>Contact Me</h2>
 
@@ -72,7 +174,6 @@ button:hover, a:hover {
   <div style="width:300px;">
        <button type="submit" class="inline-block" onclick="window.location.href='tel:9312155067';">Call</button>
        <button type="submit" class="inline-block" onclick="window.location.href='SMS:9312155067';">Text</button>
-       <a href="https://corystephenson.github.io/index.html">Home</a>
   </div>
 </div>
   
