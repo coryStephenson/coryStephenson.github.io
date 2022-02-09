@@ -16,7 +16,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #111; /*black*/
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -26,16 +26,16 @@ body {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #818181; /* gray - text on sidebar that isn't being hovered over*/
   display: block;
   transition: 0.3s;
 }
 
 .sidebar a:hover {
-  color: #f1f1f1;
+  color: #f1f1f1; /*white - text on sidebar that is being hovered over*/
 }
 
-.sidebar .closebtn {
+.sidebar .closebtn { /* The x in the upper right corner of the sidebar*/
   position: absolute;
   top: 0;
   right: 25px;
@@ -43,17 +43,17 @@ body {
   margin-left: 50px;
 }
 
-.openbtn {
+.openbtn { 
   font-size: 20px;
   cursor: pointer;
-  background-color: #111;
+  background-color: #0000FF;
   color: white;
   padding: 10px 15px;
   border: none;
 }
 
 .openbtn:hover {
-  background-color: #444;
+  background-color: #0099FF;
 }
 
 #main {
@@ -68,7 +68,7 @@ body {
 }
  .dark-mode {
         background-color: black;
-        color: white;
+        color: #00FF33;
 }
 .light-mode {
         background-color: white;
@@ -80,16 +80,10 @@ body {
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                   <li><a href="pages/aboutme.html">About Me</a></li>
-                   <li><a href="pages/contact.html">Contact</a></li>
-                   <li><a href="pages/Linux.html">Linux</a></li>
-                   <li><a href="pages/bookmarks.html">Resources</a></li>
-                   <li><a href="pages/news_sources.html">News Sources</a></li>
-                 </ul>
-  </div>
-  
-  
-                 <h3 id="DarkModetext">Dark Mode is OFF</h3>
+  <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
+</div>
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
     <button onclick="darkMode()">Darkmode</button>
     <button onclick="lightMode()">LightMode</button>
 <script>
@@ -119,8 +113,18 @@ function closeNav() {
 </script>
   
                  <div id="main">
-                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>  
-                      <h2>Cory Stephenson - Cybersecurity Professional</h2>   
+                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+                   <li><a href="pages/aboutme.html">About Me</a></li>
+                   <li><a href="pages/contact.html">Contact</a></li>
+                   <li><a href="pages/Linux.html">Linux</a></li>
+                   <li><a href="pages/bookmarks.html">Resources</a></li>
+                   <li><a href="pages/news_sources.html">News Sources</a></li>
+                 </ul>
+  </div>
+  
+  
+ 
+                   <h2>Cory Stephenson - Cybersecurity Professional</h2>   
                    <h3>Personal Website</h3>
                  
                  <p>
