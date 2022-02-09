@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cory Stephenson</title>
-<style>
+<!DOCTYPE html>                                                        /*Defines document type and HTML version
+<html>                                                                 /*Encloses the entire HTML document
+<head>                                                                 /*Document header - contains 
+<meta name="viewport" content="width=device-width, initial-scale=1">   /*metadata that makes HTML page mobile-friendly*/
+<title>Cory Stephenson</title>                                         /*browser tab title for this HTML page*/
+<style>                                                                /*code between style tags define CSS and/or Javascript*/
 
-body {
-  font-family: "Lato", sans-serif;
-}
+body {                                                                 <!--contains CSS property declarations that specify style attributes
+  font-family: "Lato", sans-serif;                                         for the body HTML element
+}                                                                       -->
 
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
+.sidebar {                                                             <!--class selector - used to identify more than one element.
+  height: 100%;                                                          height: auto|length|%|initial|inherit
+  width: 0;                                                              width: auto|length|%|initial|inherit 
+  position: fixed;                                                       
   z-index: 1;
   top: 0;
   left: 0;
@@ -46,10 +46,10 @@ body {
 .openbtn { 
   font-size: 20px;
   cursor: pointer;
-  background-color: #0000FF;
-  color: white;
+  background-color: #8E24AA;
+  color: #00FF33;
   padding: 10px 15px;
-  border: none;
+  border: 2px solid #000000;
 }
 
 .openbtn:hover {
@@ -81,6 +81,11 @@ body {
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
+  <li><a href="pages/aboutme.html">About Me</a></li>
+  <li><a href="pages/contact.html">Contact</a></li>
+  <li><a href="pages/Linux.html">Linux</a></li>
+  <li><a href="pages/bookmarks.html">Resources</a></li>
+  <li><a href="pages/news_sources.html">News Sources</a></li>
 </div>
 
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
@@ -114,25 +119,19 @@ function closeNav() {
   
                  <div id="main">
                   <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
-                   <li><a href="pages/aboutme.html">About Me</a></li>
-                   <li><a href="pages/contact.html">Contact</a></li>
-                   <li><a href="pages/Linux.html">Linux</a></li>
-                   <li><a href="pages/bookmarks.html">Resources</a></li>
-                   <li><a href="pages/news_sources.html">News Sources</a></li>
-                 </ul>
-  </div>
+                       <h2>Cory Stephenson - Cybersecurity Professional</h2>   
+                            <h3>Personal Website</h3>
+                       <p>
+                            31 - 01 - 2022: I built this website using GitHub Pages as the platform, and Jekyll, a static site generator (SSG) written in Ruby. 
+                            I chose GitHub Pages on account of the free web hosting, the option of an SSL certificate (now referred to as a TLS certificate), and
+                            the fact that I needed to learn how to use Git. A personal website was a long awaited ambition of mine, so I figured this was the ideal 
+                            stepping stone to becoming proficient with Git as well as GitHub.
+                       </p> 
+                 </div>
   
   
  
-                   <h2>Cory Stephenson - Cybersecurity Professional</h2>   
-                   <h3>Personal Website</h3>
-                 
-                 <p>
-                   <b>31 - 01 - 2022</b>: I built this website using GitHub Pages as the platform, and Jekyll, a static site generator (SSG) written in Ruby. 
-                      I chose GitHub Pages on account of the free web hosting, the option of an SSL certificate (now referred to as a TLS certificate), and
-                      the fact that I needed to learn how to use Git. A personal website was a long awaited ambition of mine, so I figured this was the ideal 
-                      stepping stone to becoming proficient with Git as well as GitHub.
-                 </p>
+                   
                  </div>
 
 
