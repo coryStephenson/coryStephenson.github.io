@@ -1,0 +1,908 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type='text/css'>html {overflow-x: initial !important;}:root { --mermaid-theme: default; --mermaid-sequence-numbers: off; --mermaid-flowchart-curve: linear; --mermaid--gantt-left-padding: 75; --sequence-theme: simple; }
+
+
+:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    /**
+    * 系统变量
+    */
+    /*基础文字颜色*/
+    --text-color: #f5f6f7;
+    /*背景颜色*/
+    --bg-color: #18191a;
+    /*侧边栏宽度*/
+    --sidebar-width: 300px;
+    /*选择字体颜色*/
+    --select-text-font-color: #000000;
+    /*侧边栏颜色*/
+    --side-bar-bg-color: var(--bg-color);
+    /*代码块背景*/
+    --code-block-bg-color: rgb(40, 42, 54);
+    /*文件选中的背景*/
+    --active-file-bg-color: #4b4b4b;
+    /*latex背景*/
+    --rawblock-edit-panel-bd: var(--code-block-bg-color);
+
+    /**
+    * 自定义变量
+    */
+    /*基础字体*/
+    --as-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /*等宽代码字体*/
+    --as-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /*yaml块背景*/
+    --as-meta-block-bg-color: hsla(0, 0%, 100%, 0.05);
+    /*yaml块字体颜色*/
+    --as-meta-block-font-color: #dadde1;
+    /*行内代码颜色*/
+    --as-inline-code-color: #ff6e6e;
+    /*超链接颜色*/
+    --as-link-color: #00aeff;
+    /*标题颜色*/
+    --as-title-color: #e3f7ff;
+    /*右键菜单背景颜色*/
+    --as-dropdown-menu: #242526;
+    /*偏好设置背景颜色*/
+    --as-nav-group-item-bg-color: #4b4b4b;
+    /*引用边栏颜色*/
+    --as-blockquote-border-color: #606770;
+    /*引用字体颜色*/
+    --as-blockquote-font-color: #ebedf0;
+}
+
+html,
+body,
+#write {
+    background: var(--bg-color);
+    font: 100%/1.65 var(--as-font-family-base);
+    max-width: 1200px;
+}
+
+
+/*标题*/
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+    color: var(--as-title-color);
+    font-family: var(--as-font-family-base);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 1rem 0;
+}
+
+#write h1 {
+    font-size: 3rem;
+}
+
+#write h2 {
+    font-size: 1.6rem;
+}
+
+#write h3 {
+    font-size: 1.2rem;
+}
+
+#write h4 {
+    font-size: 1rem;
+}
+
+#write h5 {
+    font-size: 0.85rem;
+}
+
+#write h6 {
+    font-size: 0.8rem;
+}
+
+#write .md-heading:before {
+    color: var(--as-link-color);
+}
+
+/*表格*/
+#write table:not(.md-grid-board) {
+    background-color: var(--code-block-bg-color);
+    margin: 20px 0;
+    border-collapse: separate;
+    border-radius: 5px;
+}
+
+
+#write table:not(.md-grid-board) td {
+    padding: 12px 24px;
+    /*border-left: 1px dashed var(--text-color);*/
+    /*border-bottom: 1px dashed var(--text-color);*/
+}
+
+#write table:not(.md-grid-board) th {
+    padding: 12px 24px;
+    /*border-left: 1px solid var(--text-color);*/
+    /*border-bottom: 1px solid var(--text-color);*/
+}
+
+#write table tbody tr:nth-child(2n-1) {
+    background-color: var(--as-meta-block-bg-color);
+}
+
+#write table:not(.md-grid-board) td:hover, #write table:not(.md-grid-board) th:hover {
+    background-color: rgba(140, 140, 140, .2);
+}
+
+#write table:not(.md-grid-board) tr td:first-child, #write table:not(.md-grid-board) tr th:first-child {
+    border-left: 0;
+}
+
+#write table:not(.md-grid-board) tr:last-child td {
+    border-bottom: 0;
+}
+
+#write table:not(.md-grid-board) tr:first-child th:first-child {
+    border-top-left-radius: 5px;
+}
+
+#write table:not(.md-grid-board) tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+}
+
+#write table:not(.md-grid-board) tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+#write table:not(.md-grid-board) tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+/*表格更多菜单, 其它的右键菜单*/
+.dropdown-menu:not(.megamenu-menu-list) {
+    border-radius: 5px;
+    /*border: 1px solid var(--text-color);*/
+    background: var(--as-dropdown-menu);
+}
+
+/*表格编辑栏*/
+#write .ty-table-edit {
+    background: var(--code-block-bg-color);
+    border-radius: 5px;
+}
+
+#write .popover {
+    background: var(--code-block-bg-color);
+}
+
+#write .arrow::after {
+    border-bottom-color: var(--as-meta-block-bg-color) !important;
+}
+
+#write .popover-title {
+    padding: 0;
+}
+
+#md-resize-grid {
+
+    display: block !important;
+    margin-left: 40px !important;
+}
+
+/*段落*/
+#write > p, #write > pre, #write > ul {
+    margin-bottom: 1.25rem;
+}
+
+/*mark 高亮*/
+mark {
+    background: var(--as-inline-code-color) !important;
+    border-radius: 4px !important;
+    padding: 1px 4px;
+    font-weight: 700;
+}
+
+/*行内代码*/
+#write :not(pre) > code {
+    color: var(--as-inline-code-color);
+    padding: 0 4px;
+}
+
+#write code {
+    background-color: var(--code-block-bg-color);
+    border: .1rem solid rgba(0, 0, 0, .1);
+    border-radius: 0.4rem;
+    font-family: var(--as-font-family-monospace);
+    font-size: 0.95rem;
+    padding: 0.1rem;
+}
+
+/*Latex*/
+.md-hover-tip .md-arrow:after {
+    background: var(--code-block-bg-color);
+
+}
+
+.md-hover-tip .code-tooltip-content {
+    background: var(--code-block-bg-color);
+}
+
+/*角标*/
+sup.md-footnote {
+    background: transparent;
+    color: var(--as-link-color);
+}
+
+/*目录*/
+.md-toc {
+    font-size: 0.95rem;
+}
+
+/*Mac 的内容*/
+#toc-dropmenu.open {
+    background: var(--code-block-bg-color);
+}
+
+/*引用*/
+blockquote {
+    border: 0 solid var(--as-blockquote-border-color);
+    border-left: 2px solid var(--as-blockquote-border-color);
+    color: var(--as-blockquote-font-color);
+    padding: 0 1rem;
+}
+
+/*checkbox*/
+input {
+    /*position: relative !important;*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 8px;
+    box-sizing: content-box;
+    overflow: hidden;
+}
+
+input:before {
+    content: '';
+    display: block;
+    box-sizing: content-box;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--as-title-color);
+    transition: 0.2s border-color ease;
+}
+
+input:checked:before {
+    border-color: var(--as-link-color);
+    transition: 0.5s border-color ease;
+}
+
+input:disabled:before {
+    border-color: #ccc;
+    background-color: #ccc;
+}
+
+input:after {
+    content: '';
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 50%;
+    background-color: var(--as-link-color);
+    width: 16px;
+    height: 16px;
+    border-radius: 100vh;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+input[type="checkbox"]:before {
+    border-radius: 4px;
+}
+
+input[type="checkbox"] + * {
+    margin-left: 10px;
+}
+
+input[type="checkbox"]:after {
+    width: 9px;
+    height: 16px;
+    border-radius: 0;
+    transform: translate(-50%, -85%) scale(0) rotate(45deg);
+    background-color: transparent;
+    box-shadow: 4px 4px 0 0 var(--as-link-color);
+}
+
+input[type="checkbox"]:checked:after {
+    -webkit-animation: toggleOnCheckbox 0.2s ease forwards;
+    animation: toggleOnCheckbox 0.2s ease forwards;
+}
+
+input[type="radio"]:before {
+    border-radius: 100vh;
+}
+
+input[type="radio"]:after {
+    width: 16px;
+    height: 16px;
+    border-radius: 100vh;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+input[type="radio"]:checked:after {
+    -webkit-animation: toggleOnRadio 0.2s ease forwards;
+    animation: toggleOnRadio 0.2s ease forwards;
+}
+
+@-webkit-keyframes toggleOnCheckbox {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -85%) scale(0) rotate(45deg);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -85%) scale(0.9) rotate(45deg);
+    }
+    100% {
+        transform: translate(-50%, -85%) scale(0.8) rotate(45deg);
+    }
+}
+
+@keyframes toggleOnCheckbox {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -85%) scale(0) rotate(45deg);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -85%) scale(0.9) rotate(45deg);
+    }
+    100% {
+        transform: translate(-50%, -85%) scale(0.8) rotate(45deg);
+    }
+}
+
+@-webkit-keyframes toggleOnRadio {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+@keyframes toggleOnRadio {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/*链接*/
+a {
+    font-weight: 700;
+    color: var(--as-link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--as-link-color);
+    text-decoration: underline;
+}
+
+pre {
+    font-family: var(--as-font-family-monospace);
+    border-radius: 0.4rem;
+    font-size: 0.95rem !important;
+    padding: 1rem;
+}
+
+/*yaml标签*/
+.md-meta-block {
+    background: var(--as-meta-block-bg-color) !important;
+    color: var(--as-meta-block-font-color);
+    margin: 1rem 0;
+    overflow: auto;
+}
+
+/*悬浮窗*/
+.modal-content {
+    background: var(--code-block-bg-color);
+}
+
+/*提示窗*/
+#md-notification {
+    background: var(--as-blockquote-border-color);
+}
+
+/*侧边栏列表*/
+#file-library-search-input {
+    background: transparent;
+}
+
+.pin-outline #outline-content .outline-active strong, .pin-outline .outline-active {
+    color: var(--as-link-color);
+}
+
+#typora-sidebar,
+#switch-file-list-btn {
+    background: var(--code-block-bg-color);
+}
+
+.info-panel-tab-title:hover {
+    background-color: var(--as-meta-block-bg-color);
+}
+
+.active-tab-files #info-panel-tab-file .info-panel-tab-border, .active-tab-outline #info-panel-tab-outline .info-panel-tab-border {
+    background: var(--as-link-color);
+}
+
+/*退出源码模式*/
+.typora-sourceview-on #toggle-sourceview-btn {
+    background: transparent;
+}
+
+
+/*.fa-caret-right:before {*/
+/*    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.5)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>') 50% / 2rem 2rem;*/
+/*    content: " ";*/
+/*    filter: invert(100%) sepia(94%) saturate(17%) hue-rotate(223deg) brightness(104%) contrast(98%);;*/
+/*    height: 1.25rem;*/
+/*    min-width: 1.25rem;*/
+/*    transform: rotate(180deg);*/
+/*    transition: transform 200ms linear;*/
+/*}*/
+/**
+* 菜单页面
+*/
+
+/*菜单右侧背景*/
+.megamenu-opened header {
+    background: var(--bg-color);
+}
+
+.megamenu-content {
+    background: var(--bg-color);
+}
+
+/*最近使用文件单数列表项*/
+.open > .dropdown-menu {
+    background: var(--code-block-bg-color);
+}
+
+#recent-file-panel-action-btn-container {
+    margin-top: 10px;
+}
+
+#recent-file-panel-action-btn {
+    background: transparent;
+}
+
+.megamenu-menu-panel .btn:hover {
+    color: var(--as-inline-code-color);
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: var(--code-block-bg-color);
+}
+
+/*偏好设置*/
+.nav-group-item.active {
+    background: var(--as-nav-group-item-bg-color) !important;
+}
+
+/*代码块*/
+.md-fences {
+    background-color: var(--code-block-bg-color);
+}
+
+.md-fences:hover::after {
+    content: attr(lang);
+    transition-duration: 200ms;
+    color: var(--text-color);
+    font-size: .8rem;
+    font-style: italic;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 5;
+}
+
+.CodeMirror div.CodeMirror-cursor {
+    border-left: 1px solid var(--text-color) !important;
+}
+
+.cm-s-inner .CodeMirror-gutters {
+    color: #404b53;
+    background-color: transparent;
+    border: none
+}
+
+.cm-s-inner .CodeMirror-cursor {
+    border-left: solid thin #f8f8f0
+}
+
+.cm-s-inner .CodeMirror-linenumber {
+    color: #6d8a88
+}
+
+.cm-s-inner.CodeMirror-focused div.CodeMirror-selected {
+    background: rgba(255, 255, 255, .1)
+}
+
+.cm-s-inner .CodeMirror-line::selection, .cm-s-inner .CodeMirror-line > span::selection, .cm-s-inner .CodeMirror-line > span > span::selection {
+    background: rgba(255, 255, 255, .1)
+}
+
+.cm-s-inner .CodeMirror-line::-moz-selection, .cm-s-inner .CodeMirror-line > span::-moz-selection, .cm-s-inner .CodeMirror-line > span > span::-moz-selection {
+    background: rgba(255, 255, 255, .1)
+}
+
+.cm-s-inner span.cm-comment {
+    color: #41535b
+}
+
+.cm-s-inner span.cm-string, .cm-s-inner span.cm-string-2 {
+    color: #55b5db
+}
+
+.cm-s-inner span.cm-number {
+    color: #cd3f45
+}
+
+.cm-s-inner span.cm-variable {
+    color: #55b5db
+}
+
+.cm-s-inner span.cm-variable-2 {
+    color: #a074c4
+}
+
+.cm-s-inner span.cm-def {
+    color: #55b5db
+}
+
+.cm-s-inner span.cm-keyword {
+    color: #ff79c6
+}
+
+.cm-s-inner span.cm-operator {
+    color: #9fca56
+}
+
+.cm-s-inner span.cm-keyword {
+    color: #e6cd69
+}
+
+.cm-s-inner span.cm-atom {
+    color: #cd3f45
+}
+
+.cm-s-inner span.cm-meta {
+    color: #55b5db
+}
+
+.cm-s-inner span.cm-tag {
+    color: #55b5db
+}
+
+.cm-s-inner span.cm-attribute {
+    color: #9fca56
+}
+
+.cm-s-inner span.cm-qualifier {
+    color: #9fca56
+}
+
+.cm-s-inner span.cm-property {
+    color: #a074c4
+}
+
+.cm-s-inner span.cm-type, .cm-s-inner span.cm-variable-3 {
+    color: #9fca56
+}
+
+.cm-s-inner span.cm-builtin {
+    color: #9fca56
+}
+
+
+
+</style><title>Cloud_Computing</title>
+</head>
+<body class='typora-export'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='what-is-the-cloud'><span>What is the cloud?</span></h1><div class="md-diagram-panel md-fences-adv-panel"><svg id="mermaidChart94" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="158" style="max-width: 523.5px;" viewBox="0 0 523.5 158"><style>#mermaidChart94{font-family:sans-serif;font-size:16px;fill:#333;}#mermaidChart94 .error-icon{fill:#552222;}#mermaidChart94 .error-text{fill:#552222;stroke:#552222;}#mermaidChart94 .edge-thickness-normal{stroke-width:2px;}#mermaidChart94 .edge-thickness-thick{stroke-width:3.5px;}#mermaidChart94 .edge-pattern-solid{stroke-dasharray:0;}#mermaidChart94 .edge-pattern-dashed{stroke-dasharray:3;}#mermaidChart94 .edge-pattern-dotted{stroke-dasharray:2;}#mermaidChart94 .marker{fill:#333333;}#mermaidChart94 .marker.cross{stroke:#333333;}#mermaidChart94 svg{font-family:sans-serif;font-size:16px;}#mermaidChart94 .label{font-family:sans-serif;color:#333;}#mermaidChart94 .label text{fill:#333;}#mermaidChart94 .node rect,#mermaidChart94 .node circle,#mermaidChart94 .node ellipse,#mermaidChart94 .node polygon,#mermaidChart94 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaidChart94 .node .label{text-align:center;}#mermaidChart94 .node.clickable{cursor:pointer;}#mermaidChart94 .arrowheadPath{fill:#333333;}#mermaidChart94 .edgePath .path{stroke:#333333;stroke-width:1.5px;}#mermaidChart94 .flowchart-link{stroke:#333333;fill:none;}#mermaidChart94 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaidChart94 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaidChart94 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaidChart94 .cluster text{fill:#333;}#mermaidChart94 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:sans-serif;font-size:12px;background:hsl(80,100%,96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaidChart94:root{--mermaid-font-family:sans-serif;}#mermaidChart94:root{--mermaid-alt-font-family:sans-serif;}#mermaidChart94 flowchart{fill:apa;}</style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath LS-A LE-B" id="L-A-B" style="opacity: 1;"><path class="path" d="M187.05078125,46.13692166115169L50.4609375,79L50.4609375,104" marker-end="url(#arrowhead727)" style="fill:none"></path><defs><marker id="arrowhead727" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-A LE-C" id="L-A-C" style="opacity: 1;"><path class="path" d="M216.89298502604166,54L180.9453125,79L180.9453125,104" marker-end="url(#arrowhead728)" style="fill:none"></path><defs><marker id="arrowhead728" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-A LE-D" id="L-A-D" style="opacity: 1;"><path class="path" d="M283.0367024739583,54L318.984375,79L318.984375,104" marker-end="url(#arrowhead729)" style="fill:none"></path><defs><marker id="arrowhead729" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-A LE-E" id="L-A-E" style="opacity: 1;"><path class="path" d="M312.87890625,44.89821123595506L467.25,79L467.25,104" marker-end="url(#arrowhead730)" style="fill:none"></path><defs><marker id="arrowhead730" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-A-1018" transform="translate(249.96484375,31)" style="opacity: 1;"><rect rx="5" ry="5" x="-62.9140625" y="-23" width="125.828125" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-52.9140625,-13)"><foreignObject width="105.828125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Cloud Platform</div></foreignObject></g></g></g><g class="node default" id="flowchart-B-1019" transform="translate(50.4609375,127)" style="opacity: 1;"><rect rx="5" ry="5" x="-42.4609375" y="-23" width="84.921875" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-32.4609375,-13)"><foreignObject width="64.921875" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Compute</div></foreignObject></g></g></g><g class="node default" id="flowchart-C-1021" transform="translate(180.9453125,127)" style="opacity: 1;"><rect rx="5" ry="5" x="-38.0234375" y="-23" width="76.046875" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-28.0234375,-13)"><foreignObject width="56.046875" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Storage</div></foreignObject></g></g></g><g class="node default" id="flowchart-D-1023" transform="translate(318.984375,127)" style="opacity: 1;"><rect rx="5" ry="5" x="-50.015625" y="-23" width="100.03125" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-40.015625,-13)"><foreignObject width="80.03125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Networking</div></foreignObject></g></g></g><g class="node default" id="flowchart-E-1025" transform="translate(467.25,127)" style="opacity: 1;"><rect rx="5" ry="5" x="-48.25" y="-23" width="96.5" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-38.25,-13)"><foreignObject width="76.5" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Databases</div></foreignObject></g></g></g></g></g></g></svg></div><h2 id='cloud-computing-models'><span>Cloud Computing Models</span></h2><ul><li><span>Private</span></li><li><span>Public</span></li><li><span>Hybrid</span></li></ul><h2 id='where-did-cloud-computing-come-from'><span>Where did Cloud Computing come from?</span></h2><p><span>Cloud computing comes from the term </span><strong><span>virtualization</span></strong><span>, the process of running the virtual instance of a computer in a layer abstracted from the actual hardware.</span></p><h2 id='cloud-computing-timeline'><span>Cloud Computing Timeline</span></h2><ul><li><strong><span>1963:</span></strong><span> The Defense Advanced Research Projects Agency (DARPA) funded $2 million for a project that included developing a technology that allowed 2 or more people to use a computer simultaneously.</span></li><li><strong><span>1969:</span></strong><span> Joseph Carl Robnett Licklider, associated with ARPANET, discussed and brought forth the concept of the &quot;Intergalactic Computer Network,&quot; which would connect people and data from anywhere at any time. This involves the birth of the internet.</span></li><li><strong><span>1999:</span></strong><span> Salesforce was very successful in using cloud computing, which they used to deliver software programs to customers over the internet so that they could use their marketing and CRM platform.</span></li><li><strong><span>2002:</span></strong><span> Amazon used the cloud computing model to provide capacity for their own infrastructure. In 2006, they launched Amazon Web Services - allowing other companies to take advantage.</span></li></ul><h2 id='why-do-we-use-cloud-computing'><span>Why do we use Cloud Computing?</span></h2><ul><li><p><span>Speed to Market</span></p><ul><li><p><span>On-Premises network (not a cloud network): If the server goes down in this scenario, it could take weeks to get another server shipped in. Then you would have to attach the new server to your network, upload or install the software, install security patches, etc.</span></p></li><li><p><span>Cloud network: If you had a server offering an application to your internal or external customers over the internet, and the server went down, then you can literally have another server up within seconds with all of your software and those software dependencies already installed and ready to go. This drmatically decreases the downtime and impact to the customer, either you or the external customer.</span></p><div class="md-diagram-panel md-fences-adv-panel"><svg id="mermaidChart95" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="62" style="max-width: 335.1875px;" viewBox="0 0 335.1875 62"><style>#mermaidChart95{font-family:sans-serif;font-size:16px;fill:#333;}#mermaidChart95 .error-icon{fill:#552222;}#mermaidChart95 .error-text{fill:#552222;stroke:#552222;}#mermaidChart95 .edge-thickness-normal{stroke-width:2px;}#mermaidChart95 .edge-thickness-thick{stroke-width:3.5px;}#mermaidChart95 .edge-pattern-solid{stroke-dasharray:0;}#mermaidChart95 .edge-pattern-dashed{stroke-dasharray:3;}#mermaidChart95 .edge-pattern-dotted{stroke-dasharray:2;}#mermaidChart95 .marker{fill:#333333;}#mermaidChart95 .marker.cross{stroke:#333333;}#mermaidChart95 svg{font-family:sans-serif;font-size:16px;}#mermaidChart95 .label{font-family:sans-serif;color:#333;}#mermaidChart95 .label text{fill:#333;}#mermaidChart95 .node rect,#mermaidChart95 .node circle,#mermaidChart95 .node ellipse,#mermaidChart95 .node polygon,#mermaidChart95 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaidChart95 .node .label{text-align:center;}#mermaidChart95 .node.clickable{cursor:pointer;}#mermaidChart95 .arrowheadPath{fill:#333333;}#mermaidChart95 .edgePath .path{stroke:#333333;stroke-width:1.5px;}#mermaidChart95 .flowchart-link{stroke:#333333;fill:none;}#mermaidChart95 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaidChart95 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaidChart95 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaidChart95 .cluster text{fill:#333;}#mermaidChart95 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:sans-serif;font-size:12px;background:hsl(80,100%,96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaidChart95:root{--mermaid-font-family:sans-serif;}#mermaidChart95:root{--mermaid-alt-font-family:sans-serif;}#mermaidChart95 flowchart{fill:apa;}</style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath LS-A LE-B" id="L-A-B" style="opacity: 1;"><path class="path" d="M75.125,31L100.125,31L125.125,31" marker-end="url(#arrowhead742)" style="fill:none"></path><defs><marker id="arrowhead742" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-B LE-C" id="L-B-C" style="opacity: 1;"><path class="path" d="M223.40625,31L248.40625,31L273.40625,31" marker-end="url(#arrowhead743)" style="fill:none"></path><defs><marker id="arrowhead743" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-A-1029" transform="translate(41.5625,31)" style="opacity: 1;"><rect rx="5" ry="5" x="-33.5625" y="-23" width="67.125" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-23.5625,-13)"><foreignObject width="47.125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Server</div></foreignObject></g></g></g><g class="node default" id="flowchart-B-1030" transform="translate(174.265625,31)" style="opacity: 1;"><rect rx="5" ry="5" x="-49.140625" y="-23" width="98.28125" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-39.140625,-13)"><foreignObject width="78.28125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Application</div></foreignObject></g></g></g><g class="node default" id="flowchart-C-1031" transform="translate(300.296875,31)" style="opacity: 1;"><rect rx="5" ry="5" x="-26.890625" y="-23" width="53.78125" height="46" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-16.890625,-13)"><foreignObject width="33.78125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">User</div></foreignObject></g></g></g></g></g></g></svg></div></li></ul></li></ul></div></div>
+</body>
+</html>
