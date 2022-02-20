@@ -12,9 +12,36 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-  </style>
+    .dark-mode {
+        background-color: black;
+        color: #00FF33;
+    }
+    .light-mode {
+        background-color: white;
+        color: black;
+     }   
+   </style>
 </head>
 <body>
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+</script>  
+  
 <h1 id="bookmarks">Bookmarks</h1>
 <h2 id="information-security-publications">Information Security Publications</h2>
 <ul>
