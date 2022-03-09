@@ -76,28 +76,12 @@ body {
 </style>
 </head>
 <body>
-
+onload="onload()"
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
 </div>
 
-<div id="DarkModetext"></div>
-
-<script>
-      function darkMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "dark-mode";
-        content.innerText = "Dark Mode is ON";
-      }
-      function lightMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "light-mode";
-        content.innerText = "Dark Mode is OFF";
-      }
-</script>
 <script>
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
