@@ -3,59 +3,77 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: "Lato", sans-serif;
+<style>                                                               
+
+body {                                                                 
+  font-family: "Lato", sans-serif;                                     
+}                                                                    
+
+.sidebar {                                                            
+  height: 100%;                                                         
+  width: 0;                                                               
+  position: fixed;                                                       
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #0099FF; 
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
-.dark-mode {
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white; 
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #0000FF; 
+}
+
+.sidebar .closebtn { 
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn { 
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #0000FF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #0099FF;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+ .dark-mode {
         background-color: black;
         color: #00FF33;
 }
 .light-mode {
         background-color: white;
         color: black;
-} 
-  
- .container {
-  width: 80%;
-  padding: 50px;
-  display: flex;
-  justify-content: space-between;
-  }
-  
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 320px;
-  margin: 10px;
-  float: center;
-  text-align: center;
-  font-family: arial;
-  
-}
-
-button {
-  border: 2px solid #000000;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: #00FF33;
-  background-color: #8E24AA;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
-
-a {
-  text-decoration: none;
-  font-size: 22px;
-  color: #00FF33
-}
-
-button:hover, a:hover {
-  opacity: 0.7;
-}  
+}   
 </style>
 </head>
 <body>
