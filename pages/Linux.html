@@ -75,13 +75,30 @@ body {
 }   
 </style>
 </head>
-<body onload="onload()">
+<body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <li><a href="https://corystephenson.github.io/index.html">Home</a></li>
 </div>
 
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+</script>
 <script>
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
@@ -98,11 +115,12 @@ function closeNav() {
                   <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
   <h2>My Linux Compendium</h2>
   
-  <li><a href="https://corystephenson.github.io/media/Linux Notes.pdf">My personal Linux notes</a></li>
-  <li><a href="https://corystephenson.github.io/media/up2020-en.pdf">Unix Philosophy (2020)</a></li>             
+  <li><a href="https://corystephenson.github.io/media/up2020-en.pdf">Unix Philosophy (2020)</a></li>                 
+  <li><a href="https://corystephenson.github.io/media/Linux Notes.pdf">My personal Linux notes</a></li>             
   <li><a href="https://corystephenson.github.io/media/audio.pdf">Deeper Look at the ALSA Architecture</a></li>
 
 </div>
 
 </body>
 </html>
+
