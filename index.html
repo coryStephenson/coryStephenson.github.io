@@ -1,105 +1,106 @@
 <!DOCTYPE html>                                                        
+
 <html>                                                                 
-<head>                                                                 
-<meta name="viewport" content="width=device-width, initial-scale=1">   
-<title>Cory Stephenson</title>                                         
-<style>                                                               
+                <head>                                                                 
+                      <meta name="viewport" content="width=device-width, initial-scale=1">   
+                      <title>Cory Stephenson</title>                                         
+                <style>                                                               
 
-body {                                                                 
-  font-family: "Lato", sans-serif;                                     
-}                                                                    
-/* Fixed sidebar, full height */
-.sidebar {                                                            
-  height: 100%;                                                         
-  width: 0;                                                               
-  position: fixed;                                                       
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #4F2984; 
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-/* Style the sidebar links and the dropdown button */
-.sidebar a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #FFDD00; 
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-  transition: 0.3s;
-}
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #FFFFFF; 
-}
-/* Style the sidebar close button */
-.sidebar .closebtn { 
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-/* Style the sidebar open button */
-.openbtn { 
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #0066CC;
-  color: #F3F4F5;
-  padding: 10px 15px;
-  border: none;
-}
-/* On mouse-over */
-.openbtn:hover {
-  background-color: #009AD6;
-}
-/* Main content */
-#main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  transition: .5s;
-  padding: 0px 10px;
-}
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: #009AD6;
-  color: #FFFFFF;
-}
+                       body {                                                                 
+                              font-family: "Lato", sans-serif;                                     
+                       }                                                                    
+                       /* Fixed sidebar, full height */
+                       .sidebar {                                                            
+                                  height: 100%;                                                         
+                                  width: 0;                                                               
+                                  position: fixed;                                                       
+                                  z-index: 1;
+                                  top: 0;
+                                  left: 0;
+                                  background-color: #4F2984; 
+                                  overflow-x: hidden;
+                                  transition: 0.5s;
+                                  padding-top: 60px;
+                        }
+                        /* Style the sidebar links and the dropdown button */
+                       .sidebar a, .dropdown-btn {
+                                                    padding: 6px 8px 6px 16px;
+                                                    text-decoration: none;
+                                                    font-size: 20px;
+                                                    color: #FFDD00; 
+                                                    display: block;
+                                                    border: none;
+                                                    background: none;
+                                                    width: 100%;
+                                                    text-align: left;
+                                                    cursor: pointer;
+                                                    outline: none;
+                                                    transition: 0.3s;
+                       }
+                          /* On mouse-over */
+                          .sidenav a:hover, .dropdown-btn:hover {
+                            color: #FFFFFF; 
+                          }
+                          /* Style the sidebar close button */
+                          .sidebar .closebtn { 
+                            position: absolute;
+                            top: 0;
+                            right: 25px;
+                            font-size: 36px;
+                            margin-left: 50px;
+                          }
+                          /* Style the sidebar open button */
+                          .openbtn { 
+                            font-size: 20px;
+                            cursor: pointer;
+                            background-color: #0066CC;
+                            color: #F3F4F5;
+                            padding: 10px 15px;
+                            border: none;
+                          }
+                          /* On mouse-over */
+                          .openbtn:hover {
+                            background-color: #009AD6;
+                          }
+                          /* Main content */
+                          #main {
+                            margin-left: 200px; /* Same as the width of the sidenav */
+                            transition: .5s;
+                            padding: 0px 10px;
+                          }
+                          /* Add an active class to the active dropdown button */
+                          .active {
+                            background-color: #009AD6;
+                            color: #FFFFFF;
+                          }
 
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #0066CC;
-  padding-left: 8px;
-}
+                          /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+                          .dropdown-container {
+                            display: none;
+                            background-color: #0066CC;
+                            padding-left: 8px;
+                          }
 
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
- .dark-mode {
-        background-color: black;
-        color: #00FF33;
-}
-.light-mode {
-        background-color: white;
-        color: black;
-}   
-</style>
-</head>
+                          /* Optional: Style the caret down icon */
+                          .fa-caret-down {
+                            float: right;
+                            padding-right: 8px;
+                          }
+                          /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+                          @media screen and (max-height: 450px) {
+                            .sidebar {padding-top: 15px;}
+                            .sidebar a {font-size: 18px;}
+                          }
+                           .dark-mode {
+                                  background-color: black;
+                                  color: #00FF33;
+                          }
+                          .light-mode {
+                                  background-color: white;
+                                  color: black;
+                          }   
+                 </style>
+                 </head>
 <body>
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
@@ -123,6 +124,7 @@ body {
   <a href="pages/bookmarks.html">Online</a>
   <a href="pages/news_sources.html">News Sources</a>
   <a href="pages/summaries/summaries.html">Summaries</a>
+  </div>
   </div>
   
 
@@ -183,7 +185,6 @@ for (i = 0; i < dropdown.length; i++) {
                             stepping stone to becoming proficient with Git as well as GitHub.
                        </p> 
                  </div>
-  </div>
   
   
 </body>
