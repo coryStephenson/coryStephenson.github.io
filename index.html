@@ -22,9 +22,9 @@
                                   transition: 0.5s;
                                   padding-top: 60px;
                         }
-
-                        /* Style the sidebar links and the dropdown button */
-                       .sidebar a, .dropdown-btn {
+                        
+                        /* Style the sidebar buttons and dropdown buttons */
+                       .sidebar-btn {
                                                     padding: 8px 8px 8px 32px;
                                                     text-shadow: 0 0 2px rgba(0,0,0,.3);
                                                     font-family: "Lato", sans-serif;
@@ -39,7 +39,7 @@
                                                     display: inline-block;
                         }
                           /* On mouse-over */
-                          .sidenav a:hover, .dropdown-btn:hover {
+                          .sidenav a:hover, .sidebar-btn:hover {
                             color: #FFFFFF; 
                           }
                           /* Style the sidebar close button */
@@ -48,6 +48,7 @@
                                                 top: 0;
                                                 right: 25px;
                                                 font-size: 36px;
+                                                color: #FFDD00
                                                 margin-left: 50px;
                           }
                           /* Style the sidebar open button */
@@ -78,6 +79,7 @@
                           .dropdown-container {
                             display: none;
                             background-color: #4F2984;
+                            color: #FFDD00
                             padding-left: 8px;
                           }
 
@@ -102,7 +104,7 @@
   <a href="https://corystephenson.github.io/index.html">Home</a>
   <a href="pages/aboutme.html">About Me</a>
   <a href="pages/contact.html">Contact</a>
-  <button class="dropdown-btn">Platforms &#9660; 
+  <button class="sidebar a">Platforms &#9660; 
   </button>
   <div class="dropdown-container">
     <a href="pages/Linux.html">Linux</a>
