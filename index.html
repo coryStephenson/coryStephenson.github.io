@@ -22,24 +22,18 @@
                                   transition: 0.5s;
                                   padding-top: 60px;
                         }
-                        
-                        /* Style the sidebar buttons and dropdown buttons */
-                       .sidebar-btn {
+
+                        /* Style the sidebar links and the dropdown button */
+                       .sidebar a, .dropdown-btn {
                                                     padding: 8px 8px 8px 32px;
-                                                    text-shadow: 0 0 2px rgba(0,0,0,.3);
-                                                    font-family: "Lato", sans-serif;
+                                                    text-decoration: none;
                                                     font-size: 25px;
-                                                    box-shadow:
-                                                        inset 0 0 2px 0 rgba(255,255,255,.4),
-                                                        inset 0 0 3px 0 rgba(0,0,0,.4),
-                                                        inset 0 0 3px 5px rgba(0,0,0,.05),
-                                                        border-radius: 4px;
-                                                        line-height: 14px;
+                                                    color: #FFDD00; 
+                                                    display: block;
                                                     transition: 0.3s;
-                                                    display: inline-block;
-                        }
+                      }
                           /* On mouse-over */
-                          .sidenav a:hover, .sidebar-btn:hover {
+                          .sidenav a:hover, .dropdown-btn:hover {
                             color: #FFFFFF; 
                           }
                           /* Style the sidebar close button */
@@ -48,7 +42,6 @@
                                                 top: 0;
                                                 right: 25px;
                                                 font-size: 36px;
-                                                color: #FFDD00
                                                 margin-left: 50px;
                           }
                           /* Style the sidebar open button */
@@ -66,20 +59,20 @@
                           }
                           /* Main content */
                           #main {
-                            transition: margin-left .5s;
-                            padding: 16px;
+                            margin-left: 200px; /* Same as the width of the sidenav */
+                            transition: .5s;
+                            padding: 0px 10px;
                           }
                           /* Add an active class to the active dropdown button */
                           .active {
                             background-color: #009AD6;
-                            color: #F3F4F5;
+                            color: #FFFFFF;
                           }
 
                           /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
                           .dropdown-container {
                             display: none;
-                            background-color: #4F2984;
-                            color: #FFDD00
+                            background-color: #0066CC;
                             padding-left: 8px;
                           }
 
@@ -104,7 +97,7 @@
   <a href="https://corystephenson.github.io/index.html">Home</a>
   <a href="pages/aboutme.html">About Me</a>
   <a href="pages/contact.html">Contact</a>
-  <button class="sidebar a">Platforms &#9660; 
+  <button class="dropdown-btn">Platforms &#9660; 
   </button>
   <div class="dropdown-container">
     <a href="pages/Linux.html">Linux</a>
@@ -184,5 +177,4 @@ for (i = 0; i < dropdown.length; i++) {
   
 </body>
 </html>
-
 
