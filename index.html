@@ -44,7 +44,7 @@
                                       inset 0 0 3px 5px rgba(0,0,0,.05),
                                   border-radius: 4px;
                                   padding: 8px 16px;
-                                  font-size: 25px;
+                                  font-size: 20px;
                                   line-height: 14px;
                                   position: relative;
                                   transition: 0.3s;                             
@@ -177,22 +177,45 @@
   
 
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
-    <button onclick="darkMode()">Darkmode</button>
-    <button onclick="lightMode()">LightMode</button>
+  
+    <button onclick="set_theme('dark-mode');">Darkmode</button>
+    <button onclick="set_theme('light-mode');">LightMode</button>
+
 <script>
-      function darkMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "dark-mode";
-        content.innerText = "Dark Mode is ON";
-      }
-      function lightMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "light-mode";
-        content.innerText = "Dark Mode is OFF";
-      }
-</script>
+            var THEME_KEY = "corystephenson_theme";
+            function set_theme(theme) {
+                var element = document.getElementsByTagName("html")[0];
+                var content = document.getElementById("DarkModetext");
+                if (!element) {
+                  return;
+                }
+
+                if (theme === "dark-mode" ) {
+                    element.className = "dark-mode";
+                    content.innerText = "Dark Mode is ON";
+                } else {
+                    element.className = "light-mode";
+                    content.innerText = "Dark Mode is OFF";
+                }
+
+                localStorage.setItem(THEME_KEY, theme);
+            }
+
+            function load_theme() {
+              var theme = localStorage.getItem(THEME_KEY);
+              if (theme) {
+                set_theme(theme);
+              }
+            }
+
+            // Attempt immediate application of html style
+            load_theme();
+
+            // Backup: do it onload. Will flash, but better than nothing.
+            window.addEventListener("load", function(){
+              load_theme();
+            });
+        </script>  
 <script>
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
