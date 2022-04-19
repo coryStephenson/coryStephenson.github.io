@@ -68,9 +68,9 @@
 function search_url() {
   // Declare variables
   var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('myInput');
+  input = document.getElementById('searchbar');
   filter = input.value.toUpperCase();
-  ul = document.getElementById("myUL");
+  ul = document.getElementById("urls");
   li = ul.getElementsByTagName('li');
 
   // Loop through all list items, and hide those who don't match the search query
@@ -91,7 +91,7 @@ function search_url() {
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
     <button onclick="darkMode()">Darkmode</button>
     <button onclick="lightMode()">LightMode</button>
-
+<br>
 <!-- input tag -->
     <input id="searchbar" onkeyup="search_url()" type="text"
         name="search" placeholder="Search URLs..">
