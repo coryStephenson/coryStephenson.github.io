@@ -11,7 +11,7 @@
     span.underline{text-decoration: underline;}
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    
     .dark-mode {
         background-color: black;
         color: #00FF33;
@@ -19,14 +19,37 @@
     .light-mode {
         background-color: white;
         color: black;
-     }   
+     }
+    
+    <!-- CSS code pertaining to search bar -->
+    #searchbar{
+     margin-left: 15%;
+     padding:15px;
+     border-radius: 10px;
+   }
+ 
+   input[type=text] {
+      width: 30%;
+      -webkit-transition: width 0.15s ease-in-out;
+      transition: width 0.15s ease-in-out;
+   }
+ 
+   /* When the input field gets focus,
+        change its width to 100% */
+   input[type=text]:focus {
+     width: 70%;
+   }
+ 
+  #list{
+    font-size:  1.5em;
+    margin-left: 90px;
+   }
+ 
+.urls{
+   display: list-item;    
+  } 
    </style>
-</head>
-<body>
-
-<h3 id="DarkModetext">Dark Mode is OFF</h3>
-    <button onclick="darkMode()">Darkmode</button>
-    <button onclick="lightMode()">LightMode</button>
+  
 <script>
       function darkMode() {
         var element = document.body;
@@ -40,7 +63,33 @@
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
       }
+      
+  // JavaScript code for URL search bar input
+function search_url() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('urls');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
 </script>  
+</head>
+<body>
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+
+<!-- input tag -->
+    <input id="searchbar" onkeyup="search_url()" type="text"
+        name="search" placeholder="Search URLs..">
   
 <h1 id="bookmarks">Bookmarks</h1>
 <h2 id="information-security-publications">Information Security Publications</h2>
