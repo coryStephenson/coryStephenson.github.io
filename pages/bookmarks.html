@@ -69,7 +69,7 @@ function search_url() {
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById("searchbar");
   filter = input.value.toUpperCase();
-  ul = document.getElementById("list");
+  ul = document.getElementsByTagName("ul");
   li = ul.getElementsByTagName("li");
 
   // Loop through all list items, and hide those who don't match the search query
