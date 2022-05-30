@@ -46,7 +46,6 @@
 </head>
 <body>
 
-<div id="urls">
 
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
     <button onclick="darkMode()">Darkmode</button>
@@ -54,21 +53,26 @@
 <br><br>
 
 
+<h1 id="bookmarks">Bookmarks</h1>
+
+
+<div id="urls">
+
 <!-- class="search" automatically makes an 
 	input a search field. -->
 
 <!-- input tag -->
     <input class="search" placeholder="Search" />
-  
-
-
-<h1 id="bookmarks">Bookmarks</h1>
 
 <!-- class="sort" automatically makes an element a sort button.
 	The data-sort value decides what to sort by. -->
 
 	<button class="sort" data-sort="topic">
-		Sort
+		Sort by topic
+	</button>
+
+	<button class="sort" data-sort="topic">
+		Sort by url
 	</button>
 
 	<!-- Child elements of container with class="list" become list items -->
@@ -1597,5 +1601,9 @@ $ git merge origin branch
 <p>(https://slideplayer.com/slide/4804417/)</p>
 <p>(http://www2.cs.uidaho.edu/~krings/CS270/Notes.S10/270-F10-04.pdf)</p>
 <p>(https://refspecs.linuxfoundation.org/elf/TIS1.1.pdf)</p>
+</li>
+</ul>
+</div>
+
 </body>
 </html>
