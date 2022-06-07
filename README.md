@@ -1,5 +1,13 @@
 # Advanced Linux: The Linux Kernel
 
+```mermaid
+graph TD
+A[Application]-->B[Std C Library]
+B-->C[Kernel]
+C-->D(disk)
+C-->E(keyboard)
+C-->F(mouse)
+```
 The name of the kernel: vmlinuz-<KERNEL VERSION>, which is located in the `/boot` directory.
   
 I believe that the rationale behind the filename for the kernel is that it is eventually loaded into virtual memory, and the "z" indicates that it's some sort of compressed filed.
