@@ -1,14 +1,26 @@
 # Advanced Linux: The Linux Kernel
 
+## System calls
+
 ```mermaid
 graph TD
-A[Application]-->B[Std C Library]
-B-->C[Kernel]
-C-->D(disk)
-C-->E(keyboard)
-C-->F(mouse)
+A[Application]--App calls functions in libraries-->B[Std C Library]
+B--functions invoke kernel syscalls-->C[Kernel]
+C--syscall interacts with-->D(disk)
+C--syscall interacts with-->E(keyboard)
+C--syscall interacts with-->F(mouse)
 ```
-The name of the kernel: vmlinuz-<KERNEL VERSION>, which is located in the `/boot` directory.
+
+## System call errors
+
+```mermaid
+graph BT
+A(device)-->B[Kernel]
+B--kernel syscall returns negative value to library-->C[Std C Library]
+C--library sets errno to absolute value-->D[Application]
+```
+
+The name of the kernel: vmlinuz-KERNEL-VERSION, which is located in the `/boot` directory.
   
 I believe that the rationale behind the filename for the kernel is that it is eventually loaded into virtual memory, and the "z" indicates that it's some sort of compressed filed.
   
@@ -16,8 +28,11 @@ The kernel is loaded with a bootloader that is stored in the boot sector of the 
   
 The virtual filesystems in Linux are /proc, /sys, and /debugfs.
   
+Device files (system calls)
+  
 The kernel enforces privileges, known as capabilities.
 
+System calls are functions implemented by the kernel and meant to be called from userspace.  
 ```  
 cd /boot          # Change directory to /boot
 uname -r          # Displays kernel version
