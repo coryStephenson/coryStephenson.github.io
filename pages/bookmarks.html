@@ -2,14 +2,78 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
 <link rel="stylesheet" href="css/bookmarks.css">
 	
 <title>Linux - Main</title>                                                               
 
+=======
+<title>Linux - Main</title>
+<style>                                                               
+
+body {                                                                 
+  font-family: "Lato", sans-serif;                                     
+}                                                                    
+
+.sidebar {                                                            
+  height: 100%;                                                         
+  width: 0;                                                               
+  position: fixed;                                                       
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4F2984; 
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #FFDD00; 
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #FFFFFF; 
+}
+
+.sidebar .closebtn { 
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn { 
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #0066CC;
+  color: #F3F4F5;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #009AD6;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+ 
+</style>
+>>>>>>> 44fd5aa (Update bookmarks.html)
 </head>
 <body>
 
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
+<<<<<<< HEAD
   
     <button onclick="set_theme('dark-mode');">Darkmode</button>
     <button onclick="set_theme('light-mode');">LightMode</button>
@@ -49,6 +113,25 @@
               load_theme();
             });
           
+=======
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+
+	
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+>>>>>>> 44fd5aa (Update bookmarks.html)
 </script>
 
 
