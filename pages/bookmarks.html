@@ -74,6 +74,7 @@ body {
 
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
   
     <button onclick="set_theme('dark-mode');">Darkmode</button>
     <button onclick="set_theme('light-mode');">LightMode</button>
@@ -116,9 +117,14 @@ body {
 =======
     <button onclick="darkMode()">Darkmode</button>
     <button onclick="lightMode()">LightMode</button>
+=======
+  
+    <button onclick="set_theme('dark-mode');">Darkmode</button>
+    <button onclick="set_theme('light-mode');">LightMode</button>
+>>>>>>> da32d5b (Update bookmarks.html)
 
-	
 <script>
+<<<<<<< HEAD
       function darkMode() {
         var element = document.body;
         var content = document.getElementById("DarkModetext");
@@ -133,6 +139,43 @@ body {
       }
 >>>>>>> 44fd5aa (Update bookmarks.html)
 </script>
+=======
+            var THEME_KEY = "corystephenson_theme";
+            function set_theme(theme) {
+                var element = document.getElementsByTagName("html")[0];
+                var content = document.getElementById("DarkModetext");
+                if (!element) {
+                  return;
+                }
+
+                if (theme === "dark-mode" ) {
+                    element.className = "dark-mode";
+                    content.innerText = "Dark Mode is ON";
+                } else {
+                    element.className = "light-mode";
+                    content.innerText = "Dark Mode is OFF";
+                }
+
+                localStorage.setItem(THEME_KEY, theme);
+            }
+
+            function load_theme() {
+              var theme = localStorage.getItem(THEME_KEY);
+              if (theme) {
+                set_theme(theme);
+              }
+            }
+
+            // Attempt immediate application of html style
+            load_theme();
+
+            // Backup: do it onload. Will flash, but better than nothing.
+            window.addEventListener("load", function(){
+              load_theme();
+            });
+        </script>  
+<script>
+>>>>>>> da32d5b (Update bookmarks.html)
 
 
 <h1 id="bookmarks">Bookmarks</h1>
