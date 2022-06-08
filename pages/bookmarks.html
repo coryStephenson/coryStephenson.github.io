@@ -37,13 +37,7 @@
         content.innerText = "Dark Mode is OFF";
       }
  
-      var options {
-	valueNames: [ 'url', 'topic' ]
-      };
-
-      var urlList = new List('urls', options);
-<script src="cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js">
-</script>  
+      
 </head>
 <body>
 
@@ -56,27 +50,6 @@
 
 <h1 id="bookmarks">Bookmarks</h1>
 
-
-<div id="urls">
-
-<!-- class="search" automatically makes an 
-	input a search field. -->
-
-<!-- input tag -->
-    <input class="search" placeholder="Search" />
-
-<!-- class="sort" automatically makes an element a sort button.
-	The data-sort value decides what to sort by. -->
-
-	<button class="sort" data-sort="topic">
-		Sort by topic
-	</button>
-
-	<button class="sort" data-sort="topic">
-		Sort by url
-	</button>
-
-	<!-- Child elements of container with class="list" become list items -->
 
 <ul class="list">
 <li>
@@ -1604,7 +1577,6 @@ $ git merge origin branch
 <p>(https://refspecs.linuxfoundation.org/elf/TIS1.1.pdf)</p>
 </li>
 </ul>
-</div>
 
 </body>
 </html>
