@@ -11,11 +11,15 @@ function darkMode() {
         content.innerText = "Dark Mode is OFF";
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 </script>
 <script>
 >>>>>>> 4ebcde2 (Create Linux.js)
+=======
+
+>>>>>>> aa3e027 (Update Linux.js)
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
