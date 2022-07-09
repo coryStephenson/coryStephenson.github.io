@@ -31,6 +31,7 @@ var THEME_KEY = "corystephenson_theme";
             window.addEventListener("load", function(){
               load_theme();
             });
+<<<<<<< HEAD
 
 function darkMode() {
         var element = document.body;
@@ -46,3 +47,5 @@ function lightMode() {
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
 }
+=======
+>>>>>>> 8e4d14e (Create aboutme.js)
