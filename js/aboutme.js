@@ -33,9 +33,13 @@ var THEME_KEY = "corystephenson_theme";
             });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 
+=======
+        
+>>>>>>> 911c047 (Update aboutme.js)
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
