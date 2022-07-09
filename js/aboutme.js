@@ -32,6 +32,9 @@ var THEME_KEY = "corystephenson_theme";
               load_theme();
             });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 
 function darkMode() {
         var element = document.body;
@@ -47,5 +50,8 @@ function lightMode() {
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
 }
+<<<<<<< HEAD
 =======
 >>>>>>> 8e4d14e (Create aboutme.js)
+=======
+>>>>>>> 5ffd7cb (Added darkMode() and lightMode())
