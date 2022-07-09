@@ -1,0 +1,52 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.dark-mode {
+        background-color: black;
+        color: #00FF33;
+}
+.light-mode {
+        background-color: white;
+        color: black;
+} 
+  
+ .container {
+  width: 80%;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  }
+  
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 320px;
+  margin: 10px;
+  float: center;
+  text-align: center;
+  font-family: arial;
+  
+}
+
+button {
+  border: 2px solid #000000;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: #FFDD00;
+  background-color: #4F2984;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: #00FF33
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
