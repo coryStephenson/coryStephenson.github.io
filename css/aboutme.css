@@ -124,16 +124,4 @@ body {
                                  float: right;
                            }
                            
-                          /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-                          @media screen and (max-height: 450px) {
-                            .sidebar {padding-top: 15px;}
-                            .sidebar a {font-size: 18px;}
-                          }
-                           .dark-mode {
-                                  background-color: black;
-                                  color: #00FF33;
-                          }
-                          .light-mode {
-                                  background-color: white;
-                                  color: black;
-                          }   
+                         
