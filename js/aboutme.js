@@ -31,7 +31,7 @@ var THEME_KEY = "corystephenson_theme";
             window.addEventListener("load", function(){
               load_theme();
             });
-
+        
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
