@@ -1,0 +1,262 @@
+<!DOCTYPE html>                                                        
+
+<html>                                                                 
+                <head>                                                                 
+                      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                      <title>Cory Stephenson</title>                                         
+                <style>                                                               
+
+                       body {                                                                 
+                              font-family: "Lato", sans-serif;                                     
+                       }                                                                    
+                       /* Fixed sidebar, full height */
+                       .sidebar {                                                            
+                                  height: 100%;                                                         
+                                  width: 0;                                                               
+                                  position: fixed;                                                       
+                                  z-index: 1;
+                                  top: 0;
+                                  left: 0;
+                                  background-color: #4F2984;
+                                  overflow-x: hidden;
+                                  transition: 0.5s;
+                                  padding-top: 60px;
+                        }
+                        .sidebar a { color: #FFDD00;
+                                     padding: 8px 16px;
+                                     text-decoration: none;
+                                     font-size: 25px;
+                                     color: #FFDD00
+                                     display: block;
+                                     transition: 0.3s;
+                        }
+                        
+                        /* Style the sidebar links and the dropdown button */
+                       .button, .dropdown-btn {
+                                 display: block;
+                                 color: #FFDD00;
+                                 text-shadow: 0 0 2px rgba(0,0,0,.3);
+                                 font-family: sans-serif;
+                                  box-shadow:
+                                      inset 0 0 2px 0 rgba(255,255,255,.4),
+                                      inset 0 0 3px 0 rgba(0,0,0,.4),
+                                      inset 0 0 3px 5px rgba(0,0,0,.05),
+                                  border-radius: 4px;
+                                  padding: 8px 16px;
+                                  font-size: 25px;
+                                  line-height: 14px;
+                                  position: relative;
+                                  transition: 0.3s;                             
+                      }
+    
+                      .button.purple { background: #4F2984; }
+                      .dropdown-btn { background: #4F2984; }
+                  
+                      .button:before, .button:after {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            left: 2px;
+                            right: 2px;
+                            height: 3px;
+                        }
+                        .button:before {
+                            top: 0;
+                            background: rgba(255,255,255,.6);
+                            box-shadow:
+                                      inset 0 0 2px 0 rgba(255,255,255,.4),
+                                      inset 0 0 3px 0 rgba(0,0,0,.4),
+                                      inset 0 0 3px 5px rgba(0,0,0,.05),
+                           border-radius: 4px;      
+                        }
+                        .button:after {
+                            bottom: 0;
+                            border-top-left-radius: 4px;
+                            border-top-right-radius: 4px;
+                            background: rgba(0,0,0,.15);
+                            box-shadow:
+                                      inset 0 0 2px 0 rgba(255,255,255,.4),
+                                      inset 0 0 3px 0 rgba(0,0,0,.4),
+                                      inset 0 0 3px 5px rgba(0,0,0,.05),
+                           border-radius: 4px;    
+                        }
+
+    
+    
+                          /* On mouse-over */
+                          .sidenav a:hover, .button:hover {
+                            color: #FFFFFF; 
+                          }
+                          /* Style the sidebar close button */
+                          .sidebar .closebtn { 
+                                                position: absolute;
+                                                top: 0;
+                                                right: 25px;
+                                                font-size: 36px;
+                                                color: #4F2984
+                                                margin-left: 50px;
+                          }
+                          /* Style the sidebar open button */
+                         .openbtn { 
+                                    font-size: 20px;
+                                    cursor: pointer;
+                                    background-color: #0066CC;
+                                    color: #F3F4F5;
+                                    padding: 10px 15px;
+                                    border: none;
+                         }
+                          /* On mouse-over */
+                          .openbtn:hover {
+                            background-color: #009AD6;
+                          }
+                          /* Main content */
+                          #main {
+                            transition: margin-left .5s;
+                            padding: 16px;
+                          }
+                          /* Add an active class to the active dropdown button */
+                          .active {
+                            background-color: #009AD6;
+                            color: #FFFFFF;
+                          }
+
+                          /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+                          .dropdown-container {
+                            display: none;
+                            background-color: #FFFFFF;
+                            color: #000000
+                            padding-left: 8px;
+                          }
+
+                          .fa-caret-down{
+                                 float: right;
+                           }
+                           
+                          /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+                          @media screen and (max-height: 450px) {
+                            .sidebar {padding-top: 15px;}
+                            .sidebar a {font-size: 18px;}
+                          }
+                           .dark-mode {
+                                  background-color: black;
+                                  color: #00FF33;
+                          }
+                          .light-mode {
+                                  background-color: white;
+                                  color: black;
+                          }   
+                 </style>
+                 </head>
+<body>
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a class='button' href="https://corystephenson.github.io/index.html">Home</a>
+  <a class='button purple' href="pages/aboutme.html">About Me</a>
+  <a class='button purple' href="pages/contact.html">Contact</a>
+  <button class="dropdown-btn">Platforms
+  <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a class='button purple' href="pages/Linux.html">Linux</a>
+    <a class='button purple' href="#">Windows</a>
+    <a class='button purple' href="#">iOS</a>
+    <a class='button purple' href="#">Android</a>
+    <a class='button purple' href="media/Cloud_Computing.pdf">Cloud</a>
+  </div>
+  <button class="dropdown-btn">Resources
+  <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  <a class='button purple' href="pages/bookmarks.html">Online</a>
+  <a class='button purple' href="pages/news_sources.html">News Sources</a>
+  <a class='button purple' href="pages/notes.html">Notes</a>
+  <a class='button purple' href="pages/summaries/summaries.html">Summaries</a>
+  </div>
+  </div>
+  
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+  
+    <button onclick="set_theme('dark-mode');">Darkmode</button>
+    <button onclick="set_theme('light-mode');">LightMode</button>
+
+<script>
+            var THEME_KEY = "corystephenson_theme";
+            function set_theme(theme) {
+                var element = document.getElementsByTagName("html")[0];
+                var content = document.getElementById("DarkModetext");
+                if (!element) {
+                  return;
+                }
+
+                if (theme === "dark-mode" ) {
+                    element.className = "dark-mode";
+                    content.innerText = "Dark Mode is ON";
+                } else {
+                    element.className = "light-mode";
+                    content.innerText = "Dark Mode is OFF";
+                }
+
+                localStorage.setItem(THEME_KEY, theme);
+            }
+
+            function load_theme() {
+              var theme = localStorage.getItem(THEME_KEY);
+              if (theme) {
+                set_theme(theme);
+              }
+            }
+
+            // Attempt immediate application of html style
+            load_theme();
+
+            // Backup: do it onload. Will flash, but better than nothing.
+            window.addEventListener("load", function(){
+              load_theme();
+            });
+        </script>  
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>  
+  
+                 <div id="main">
+                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+                       <h2>Cory Stephenson - Information Systems Security & Assurance Professional</h2>   
+                            <h3>About This Site</h3>
+                       <p>
+                            31 - 01 - 2022: I built this personal website using GitHub Pages as the platform, and Jekyll, a static site generator (SSG) written in Ruby. 
+                            I chose GitHub Pages on account of the free web hosting, the option of an SSL certificate (now referred to as a TLS certificate), and
+                            the fact that I needed to learn how to use Git. A personal website was a long awaited ambition of mine, so I figured this was the ideal 
+                            stepping stone to becoming proficient with Git as well as GitHub.
+                       </p> 
+                 </div>
+  
+  
+</body>
+</html>

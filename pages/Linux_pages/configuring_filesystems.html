@@ -1,0 +1,119 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<h1 id="configuring-filesystems-with-mkfs-df-du-and-fsck">Configuring filesystems with mkfs, df, du, and fsck</h1>
+<p>Linux supports a wide array of filesystem types, including many that originated on other operating systems. The most common choices for hard disks, however, remain the native ext3/4, followed by the high-performance XFS and Btrfs filesystems. For compatibility, knowing how to work with the VFAT filesystem is important, because it is the standard choice found pre-installed on many media, including USB thumb drives and flash disks. Additionally, several of the same utilities used to manage normal filesystems also apply to swap partitions, which the Linux kernel uses as virtual memory when RAM is scarce.</p>
+<h2 id="mkfs">mkfs</h2>
+<p>The <em>mkfs</em> command creates a new filesystem on a specified block device, such as a partition on a hard disk. The basic usage is: </p>
+<pre>
+	<code class="lang-bash">mkfs -t 
+		<span class="hljs-tag">&lt;
+			<span class="hljs-name">filesystem_type</span>&gt;
+		</span>
+		<span class="hljs-tag">&lt;/
+			<span class="hljs-name">the</span>/
+			<span class="hljs-attr">device</span>&gt;
+		</span>
+	</code>
+</pre>
+<p>where <em>&lt; filesystem_type &gt;</em> is a Linux-supported filesystem type (e.g., ext3 or XFS) and <em>&lt; /the/device &gt;</em> is the location of the target disk partition (e.g., <em>/dev/sda1</em> or <em>/dev/sdc3</em>). Filesystem-specific options are added after <em>&lt; filesystem_type &gt;</em>. </p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center">Filesystem options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center">The <em>mkfs. <fstype>
+        </em> utility, where <fstype> is a filesystem supported by the command (e.g., ext3, ext4, XFS, Btrfs, VFAT), supports options that tweak filesystem settings such as the size of blocks used, number and size of inodes, fragment size, amount of space reserved for root-privileged processes, amount of space reserved to grow the group block descriptor if the filesystem ever needs to be resized, and settings for stripe, stride, and other details required for using the filesystem in a RAID array. </td>
+    </tr>
+    <tr>
+      <td style="text-align:center">All of these parameters have default settings, and unless you are sure you need to change them, you can safely create a filesystem with the default settings. Nevertheless, it is a good idea to familiarize yourself with the basics of filesystem parameters in general, in case you ever run into problems. The <em>block size</em> is the size of the chunks that the filesystem uses to store data - in a sense, it is the granularity of the pieces into which a file is split when stored on the disk. </td>
+    </tr>
+    <tr>
+      <td style="text-align:center">Larger block sizes can improve disk throughput because the disk can read and write more data at a time before seeking to a new location; however, a large block size can waste space in the presence of many small files, because a full block is consumed for each fragment of a file, even if only a small portion of it is used. Ext3/4 and XFS allow you to specify the block size (1024, 2048, 4096, etc.) by adding a -b flag; the syntax that follows the flag varies, so consult the manual pages for each option.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">The <em>mkswap</em> command creates a swap area on a disk partition, just as <em>mkfs</em> creates a filesystem. The basic syntax is the same, <em>mkswap </the /swap/device>
+        </em>, with the optional -c flag again allows you to check the partition for bad blocks before creating the swap area. Just as a new filesystem must be attached to Linux&#39;s root filesystem with <em>mount</em> before you can use it, a new swap partition must be attached with <em>swapon -L </the /swap/device>
+        </em>. </td>
+    </tr>
+  </tbody>
+</table>
+<p>The basic form of the command described in the previous example hands off creation of the filesystem to one of several specialized utilities, depending on the filesystem type you specify (e.g., <em>mkfs.ext3</em>, <em>mkfs.xfs</em>, <em>mkfs.vfat</em>). Because filesystems differ so much from each other, having specialized tools maintained by experts in the individual filesystems results in more stable code. </p>
+<p>Most of these utilities implement the same options, although they vary according to the features implemented in the different filesystems. According to the <em>mkfs</em> man page, the general form of the command is now deprecated in favor of these type-specific <i>mkfs.*</i> utilities. </p>
+<p>Despite the differences, a few key options are common to all <i>mkfs.*</i> utilities. Adding the -c flag checks the specified device for bad blocks, which is then skipped over during the filesystem creation step. Adding the -v or -V flags produces verbose or extremely verbose output, respectively. </p>
+<p>Note: The simulated mkfs commands for XFS and ext3 differ. (The -N and -n flags specify a simulation, which does not actually create a filesystem.) The -f and -F flags tell mkfs to force filesystem creation, even if it detects a filesystem already in place.</p>
+<h2 id="mkfs-examples">mkfs Examples</h2>
+<p>To format the first partition of the first drive on a system as ext4, you would run the command:</p>
+<pre>
+	<code class="lang-bash">mkfs -t ext4 
+		<span class="hljs-regexp">/dev/</span>sda1
+
+	</code>
+</pre>
+<p>This command uses the default block size, inode parameters, and all other options, some of which are determined at run time when mkfs analyzes the geometry of the disk partition. Using</p>
+<pre>
+	<code class="lang-bash">mkfs -t ext4 -
+		<span class="hljs-selector-tag">b</span>
+		<span class="hljs-number">4096</span> /dev/sda1
+
+	</code>
+</pre>
+<p>also creates an ext4 filesystem on <em>/dev/sda1</em>, but it forces the use of 4096-byte blocks. Running </p>
+<pre>
+	<code class="lang-bash">mkfs -t ext4 -b 
+		<span class="hljs-number">4096</span> -J device=
+		<span class="hljs-regexp">/dev/</span>sdb1 
+		<span class="hljs-regexp">/dev/</span>sda1
+
+	</code>
+</pre>
+<p>creates the same filesystem as the preceding command, but it creates the journal on a separate partition (*/dev/sdb1).</p>
+<p>To create an XFS partition on <em>/dev/sda1</em>, enter the following mkfs command: </p>
+<pre>
+	<code class="lang-bash">mkfs -t xfs 
+		<span class="hljs-regexp">/dev/</span>sda1
+
+	</code>
+</pre>
+<p>To specify the use of 4096-byte blocks on this filesystem, use</p>
+<pre>
+	<code class="lang-bash">mkfs -t xfs -b 
+		<span class="hljs-keyword">size</span>=
+		<span class="hljs-number">4096</span>
+		<span class="hljs-regexp">/dev/</span>sda1
+
+	</code>
+</pre>
+<p>which is a different syntax than that used for ext4. The following command, which uses the alternative (and now preferred) <i>mkfs.*</i>
+</p>
+<pre>
+	<code class="lang-bash">mkfs
+		<span class="hljs-selector-class">.btrfs</span> -L mylabel &lt;/dev/partition&gt;
+
+	</code>
+</pre>
+<p>creates a Btrfs filesystem with a 16KiB default block size (where 1000KiB = 1024 KB). To create a partition with 4KiB block size, use:</p>
+<pre>
+	<code class="lang-bash">mkfs.btrfs -L mylabel 
+		<span class="hljs-number">-1</span>
+		<span class="hljs-number">4</span>k &lt;/dev/partition&gt;
+
+	</code>
+</pre>
+<p>The variations in syntax make it especially critical to refer to the man page for more on the use of <em>mkfs</em> with specific filesystem options. </p>
+<h2 id="routine-maintenance">Routine maintenance</h2>
+<p>Running out of space on a filesystem is one of the most common problems you are likely to encounter on a Linux system, and it is not just an inconvenience for storage reasons - the system&#39;s use of temporary files means that a full or nearly full root filesystem could interfere with normal operations.</p>
+<p>To check filesystem usage, use <em>df</em>. When given no arguments, <em>df</em> returns a table summarizing usage of all of the mounted filesystems - in kilobytes and as a percentage of each filesystem&#39;s total size. To get a report for a particular filesystem, specify it as an argument, such as <em>df /dev/sda1</em>. </p>
+<p>Also, you can pass a file name as an argument, and <em>df</em> will report on the filesystem that contains the specified file- which could be handy if you don&#39;t remember where a particular filesystem is mounted. Finally, a few options exist to make <em>df</em> more useful: <em>-i</em> reports inode usage instead of block usage of the filesystem(s); <em>-l</em> limits the report to local filesystems only; <em>--type= &lt; filesystem_type &gt;</em> and <em>--exclude-type= &lt; filesystem_type &gt;</em> allow you to limit or exclude output to a particular filesystem type. </p>
+<p>On discovering a nearly full filesystem, you can further explore space usage with <em>du</em>. Executing <em>du </some /directory>
+  </em> returns a list of the disk space occupied by each subdirectory beneath <em>
+    </some /directory>undefined</em>, expressed in kilobytes. Adding the undefined<em>-a</em> option tells undefined<em>du</em> to report the space used by the files in addition to the directories.undefined</p>undefined<p>Both commands are recursive. If you do not provide a directory as an argument to undefined<em>du</em>, it reports on the current directory. The undefined<em>-c</em> option produces a grand total in addition to individual usage statistics. Other helpful options are undefined<em>-L</em>, which could help track down an errant large file, following all symbolic links; undefined<em>-x</em>, which limits the scope of the search to the current filesystem only; and undefined<em>--max-depth=N</em>, which allows you to limit the number of recursive subdirectories into which you descend. This option is very helpful when dealing with a large file library.undefined</p>undefined<p>Several utilities exist to help you get better performance out of your filesystems. The undefined<em>tune2fs</em> program lets you control many parameters of ext2, ext3, and ext4 filesystems. You can set the number of mounts between automatic filesystem integrity checks with undefined<em>tune2fs -c N</em>, set the maximum time interval between checks with undefined<em>tune2fs -i N[d|m|w]</em> (where undefined<em>d</em>, undefined<em>m</em>, and undefined<em>w</em> are days months and weeks, respectively), or add an ext3 or ext4 journal to a filesystem that does not have one with undefined<em>tune2fs -j</em>. Additionally, you can adjust RAID parameters, journal settings, and reserved block behavior, as well as change parameters manually, such as the time last checked and number of mounts, which are usually reported automatically.undefined</p>undefined<p>Other utilities are associated with specific filesystems. Btrfs has a separate utility for resizing filesystems (undefined<em>btrfs filesystem resize</em>). The *btrfs-convert tool can migrate data from existing ext2/3/4 volumes to the Btrfs filesystem.undefined</p>undefined<p>XFS also provides a defragmentation tool called undefined<em>xfs_fsr</em> that can defragment a mounted XFS filesystem, and Btrfs supports defragmentation of metadata or entire filesystems. Theundefined</p>undefined
+<pre>undefined<code class="lang-bash">
+<span class="hljs-keyword">btrfs </span>filesystem defragment -r -v /
+undefined</code>undefined</pre>undefined<p>command defragments the entire filesystem verbosely. No such utilities exist for ext3, but ext4 has undefined<em>e4defrag</em>.undefined</p>undefined<h2 id="troubleshooting">Troubleshooting</h2>undefined<p>If you suspect trouble on a filesystem, you can run </p>undefined
+<pre>undefined<code class="lang-bash">fsck 
+<span class="hljs-meta-keyword">/a/</span>
+<span class="hljs-params">&lt;device&gt;</span>undefined</code>undefined</pre>undefined<p>to check and make repairs. If you run undefined<em>fsck</em> with no target device specified, it will run checks sequentially on all of the filesystems in undefined<em>/etc/fstab</em>.undefined</p>undefined<p>The filesystem-specific error-checking programs - undefined<em>e2fsck</em> for ext2, ext3 and ext4, undefined<em>btrfsck</em> for Btrfs, and undefined<em>fsck.vfat</em> for VFAT - support many of the same options, but again, the syntax may vary, so it is critical to read the man page for the filesystem checker before attempting any repairs.undefined</p>undefined<p>When corrupted, VFAT filesystems suffer from bad clusters, bad directory pointers, and even bad file names. The undefined<em>fsck.vfat</em> tool can find and correct many of these problems. Like the others, it can be called in non-interactive mode for use in scripts, and it can mark bad clusters automatically to prevent their reuse in the future. The undefined<em>-V</em> flag tells undefined<em>fsck.vfat</em> to run a second check after it has tried to correct any errors.undefined</p>undefined<p>XFS has separate error-checking and repair utilities: undefined<em>xfs_check</em> and undefined<em>xfs_repair</em> (see the man pages for more on command-line options).undefined</p>undefined<p>For ext2/3/4 problems, the undefined<em>debugfs</em> tool lets you examine a filesystem and correct errors interactively. It can step through and work with commands similar to those of a typical Linux shell, such as undefined<em>cd</em>, undefined<em>open</em>, undefined<em>close</em>, undefined<em>pwd</em>, undefined<em>mkdir</em>, and even undefined<em>chroot</em>.undefined</p>
+</html>
