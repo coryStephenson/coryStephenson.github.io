@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://corystephenson.github.io/</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/index.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/aboutme.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/contact.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/Linux.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/media/Cloud_Computing.pdf</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/bookmarks.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/news_sources.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/notes.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/summaries/summaries.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/media/up2020-en.pdf</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/media/Linux%20Notes.pdf</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/media/audio.pdf</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://corystephenson.github.io/pages/summaries/The_Secure_Methodology.html</loc>
+  <lastmod>2022-06-16T21:28:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

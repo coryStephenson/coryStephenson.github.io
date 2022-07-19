@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notes - Main</title>
-</head>
-<body>
-
-<div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="https://corystephenson.github.io/index.html">Home</a>
-</div>
-
-<h3 id="DarkModetext">Dark Mode is OFF</h3>
-    <button onclick="darkMode()">Darkmode</button>
-    <button onclick="lightMode()">LightMode</button>
-<script>
-      function darkMode() {
+function darkMode() {
         var element = document.body;
         var content = document.getElementById("DarkModetext");
         element.className = "dark-mode";
@@ -27,8 +10,7 @@
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
       }
-</script>
-<script>
+
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -38,8 +20,3 @@ function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
-</script>
-  
-                 <div id="main">
-                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
-  <h2>Other Notes</h2>
