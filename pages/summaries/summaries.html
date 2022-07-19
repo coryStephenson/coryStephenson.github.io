@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summaries</title>
+<style>                                                               
+
+body {                                                                 
+  font-family: "Lato", sans-serif;                                     
+}                                                                    
+
+.sidebar {                                                            
+  height: 100%;                                                         
+  width: 0;                                                               
+  position: fixed;                                                       
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4F2984; 
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #FFDD00; 
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #FFFFFF; 
+}
+
+.sidebar .closebtn { 
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn { 
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #0066CC;
+  color: #F3F4F5;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #009AD6;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+ .dark-mode {
+        background-color: black;
+        color: #00FF33;
+}
+.light-mode {
+        background-color: white;
+        color: black;
+}   
+</style>
+</head>
+<body>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="https://corystephenson.github.io/index.html">Home</a>
+</div>
+
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>
+<script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+  
+                 <div id="main">
+                  <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+  <h2>Book Summaries</h2>
+  
+  <li><a href="https://corystephenson.github.io/pages/summaries/The_Secure_Methodology.html">The Smartest Person in the Room:The Root Cause and New Solution For Cybersecurity by Christian Espinosa</a></li>                 
+  
+</div>
+
+</body>
+</html>
