@@ -1,91 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+=======
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/contact.css">  
+>>>>>>> e1d52af (Added link to contact.css)
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.dark-mode {
-        background-color: black;
-        color: #00FF33;
-}
-.light-mode {
-        background-color: white;
-        color: black;
-} 
-  
- .container {
-  width: 80%;
-  padding: 50px;
-  display: flex;
-  justify-content: space-between;
-  }
-  
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 320px;
-  margin: 10px;
-  float: center;
-  text-align: center;
-  font-family: arial;
-  
-}
-
-button {
-  border: 2px solid #000000;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: #FFDD00;
-  background-color: #4F2984;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
-
-a {
-  text-decoration: none;
-  font-size: 22px;
-  color: #00FF33
-}
-
-button:hover, a:hover {
-  opacity: 0.7;
-}  
-</style>
+<<<<<<< HEAD
+<link rel="stylesheet" href="/css/contact.css">
+<script src="/js/contact.js"></script>
+=======
+>>>>>>> 1e85f23 (Removed css code)
+=======
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/contact.css">
+<script src="/js/contact.js"></script>
+>>>>>>> 80af56f (Update contact.html)
 </head>
 <body>
 
 
-  <button><a href="https://corystephenson.github.io/index.html">Home</a></button>
+<button><a href="https://corystephenson.github.io/index.html">Home</a></button>
 
-<h3 id="DarkModetext">Dark Mode is OFF</h3>
-    <button onclick="darkMode()">Darkmode</button>
-    <button onclick="lightMode()">LightMode</button>
-<script>
-      function darkMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "dark-mode";
-        content.innerText = "Dark Mode is ON";
-      }
-      function lightMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "light-mode";
-        content.innerText = "Dark Mode is OFF";
-      }
-</script>
-
-<h2>Contact Me</h2>
+<h1>Contact Me</h1>
 
 <div class="card">
   <img src="https://i.postimg.cc/fTVzhhVw/Cory-Professional-Photo-2018.jpg" alt="Cory" style="width:100%">
-  <h1>Cory Stephenson</h1>
+  <h2>Cory Stephenson</h2>
   <p><a href="mailto:coryintenn@gmail.com">coryintenn@gmail.com</a></p>
   <p>Middle Tennessee State University</p>
   <p>Tennessee Technological University</p>
@@ -101,6 +46,9 @@ button:hover, a:hover {
        <button type="submit" class="inline-block" onclick="window.location.href='SMS:9312155067';">Text</button>
   </div>
 </div>
-  
+ 
+<h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="darkMode()">Darkmode</button>
+    <button onclick="lightMode()">LightMode</button>  
 </body>
 </html>

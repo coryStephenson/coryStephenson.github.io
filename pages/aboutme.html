@@ -2,211 +2,57 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/aboutme.css">  
 <title>Cory - About Me</title>
-<style>                                                               
 
-                       body {                                                                 
-                              font-family: "Lato", sans-serif;                                     
-                       }                                                                    
-                       /* Fixed sidebar, full height */
-                       .sidebar {                                                            
-                                  height: 100%;                                                         
-                                  width: 0;                                                               
-                                  position: fixed;                                                       
-                                  z-index: 1;
-                                  top: 0;
-                                  left: 0;
-                                  background-color: #4F2984;
-                                  overflow-x: hidden;
-                                  transition: 0.5s;
-                                  padding-top: 60px;
-                        }
-                        .sidebar a { color: #FFDD00;
-                                     padding: 8px 16px;
-                                     text-decoration: none;
-                                     font-size: 25px;
-                                     color: #FFDD00
-                                     display: block;
-                                     transition: 0.3s;
-                        }
-                        
-                        /* Style the sidebar links and the dropdown button */
-                       .button, .dropdown-btn {
-                                 display: block;
-                                 color: #FFDD00;
-                                 text-shadow: 0 0 2px rgba(0,0,0,.3);
-                                 font-family: sans-serif;
-                                  box-shadow:
-                                      inset 0 0 2px 0 rgba(255,255,255,.4),
-                                      inset 0 0 3px 0 rgba(0,0,0,.4),
-                                      inset 0 0 3px 5px rgba(0,0,0,.05),
-                                  border-radius: 4px;
-                                  padding: 8px 16px;
-                                  font-size: 25px;
-                                  line-height: 14px;
-                                  position: relative;
-                                  transition: 0.3s;                             
-                      }
-    
-                      .button.purple { background: #4F2984; }
-                      .dropdown-btn { background: #4F2984; }
-                  
-                      .button:before, .button:after {
-                            content: '';
-                            display: block;
-                            position: absolute;
-                            left: 2px;
-                            right: 2px;
-                            height: 3px;
-                        }
-                        .button:before {
-                            top: 0;
-                            background: rgba(255,255,255,.6);
-                            box-shadow:
-                                      inset 0 0 2px 0 rgba(255,255,255,.4),
-                                      inset 0 0 3px 0 rgba(0,0,0,.4),
-                                      inset 0 0 3px 5px rgba(0,0,0,.05),
-                           border-radius: 4px;      
-                        }
-                        .button:after {
-                            bottom: 0;
-                            border-top-left-radius: 4px;
-                            border-top-right-radius: 4px;
-                            background: rgba(0,0,0,.15);
-                            box-shadow:
-                                      inset 0 0 2px 0 rgba(255,255,255,.4),
-                                      inset 0 0 3px 0 rgba(0,0,0,.4),
-                                      inset 0 0 3px 5px rgba(0,0,0,.05),
-                           border-radius: 4px;    
-                        }
-
-    
-    
-                          /* On mouse-over */
-                          .sidenav a:hover, .button:hover {
-                            color: #FFFFFF; 
-                          }
-                          /* Style the sidebar close button */
-                          .sidebar .closebtn { 
-                                                position: absolute;
-                                                top: 0;
-                                                right: 25px;
-                                                font-size: 36px;
-                                                color: #4F2984
-                                                margin-left: 50px;
-                          }
-                          /* Style the sidebar open button */
-                         .openbtn { 
-                                    font-size: 20px;
-                                    cursor: pointer;
-                                    background-color: #0066CC;
-                                    color: #F3F4F5;
-                                    padding: 10px 15px;
-                                    border: none;
-                         }
-                          /* On mouse-over */
-                          .openbtn:hover {
-                            background-color: #009AD6;
-                          }
-                          /* Main content */
-                          #main {
-                            transition: margin-left .5s;
-                            padding: 16px;
-                          }
-                          /* Add an active class to the active dropdown button */
-                          .active {
-                            background-color: #009AD6;
-                            color: #FFFFFF;
-                          }
-
-                          /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-                          .dropdown-container {
-                            display: none;
-                            background-color: #FFFFFF;
-                            color: #000000
-                            padding-left: 8px;
-                          }
-
-                          .fa-caret-down{
-                                 float: right;
-                           }
-                           
-                          /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-                          @media screen and (max-height: 450px) {
-                            .sidebar {padding-top: 15px;}
-                            .sidebar a {font-size: 18px;}
-                          }
-                           .dark-mode {
-                                  background-color: black;
-                                  color: #00FF33;
-                          }
-                          .light-mode {
-                                  background-color: white;
-                                  color: black;
-                          }   
-                 </style>
 </head>
 <body>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c26bf17 (Fixed collapsible sidebar issue)
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a class='button' href="https://corystephenson.github.io/index.html">Home</a>
 </div>
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
     <button onclick="set_theme('dark-mode');">Darkmode</button>
     <button onclick="set_theme('light_mode');">LightMode</button>
-<script>
-            var THEME_KEY = "corystephenson_theme";
-            function set_theme(theme) {
-                var element = document.getElementsByTagName("html")[0];
-                var content = document.getElementById("DarkModetext");
-                if (!element) {
-                  return;
-                }
-
-                if (theme === "dark-mode" ) {
-                    element.className = "dark-mode";
-                    content.innerText = "Dark Mode is ON";
-                } else {
-                    element.className = "light-mode";
-                    content.innerText = "Dark Mode is OFF";
-                }
-
-                localStorage.setItem(THEME_KEY, theme);
-            }
-
-            function load_theme() {
-              var theme = localStorage.getItem(THEME_KEY);
-              if (theme) {
-                set_theme(theme);
-              }
-            }
-
-            // Attempt immediate application of html style
-            load_theme();
-
-            // Backup: do it onload. Will flash, but better than nothing.
-            window.addEventListener("load", function(){
-              load_theme();
-            });
-        </script>  
+ 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 <script>
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
 }
+=======
+>>>>>>> 478f20c (Update aboutme.html)
 
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
 </script>
+>>>>>>> 7bce2b1 (Removed some of the js code)
+=======
+>>>>>>> 295c9dd (Update aboutme.html)
+=======
+
+>>>>>>> 987409f (Update aboutme.html)
+=======
+>>>>>>> c26bf17 (Fixed collapsible sidebar issue)
   
                  <div id="main">
                   <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
-  <h2>About Me</h2>
-  <h3>The kinds of platforms that I've used</h3>
+  <h1>About Me</h1>
+  <h2>The kinds of platforms that I've used</h2>
   <p>Born and raised in Columbia, Tennessee, I used Windows operating systems exclusively until 2015, when a friend gave me a 2012 MacBook Pro that he modified himself, replacing
      the hard disk with an SSD and upgrading the RAM to 16GB. It still works like a charm, although I've been hamstrung by the hardware such that MacOS Sierra
      is the latest iteration of the operating system that I can run. My first exposure to Linux came in the spring of 2019, in the form of a Unix-like environment 
@@ -228,7 +74,7 @@ function closeNav() {
        I'm clearly biased here, but most of the software I had to use in college were propietary, commercial products, and virtually cost prohibitive when it came to individual licensing. Things like AutoCAD,
        Autodesk Inventor, Solidworks, Tableau, and Splunk are totally outside my income bracket.
                    </p>
-   <h3>More specifically about me</h3>                
+   <h2>More specifically about me</h2>                
      <blockquote>"Jack of all trades, master of none, though often better than a master of one." - Adam Savage
      </blockquote>
      <p>I would describe myself as a self-starter, an autodidact (when given enough time) and a lover of books and magazines (bibliophagist). What sets me apart
@@ -238,7 +84,15 @@ function closeNav() {
         have to have the desire. Not everybody has that, but I do. I also consider myself to be somewhat of a cynicologist, although financial freedom and the options that it provides
        would be nice.
      </p>
-</div>
 
+  </div>               
+    <h3 id="DarkModetext">Dark Mode is OFF</h3>
+    <button onclick="set_theme('dark-mode');">Darkmode</button>
+    <button onclick="set_theme('light-mode');">LightMode</button>
+ 
+
+  
+<script type="text/javascript" src="/js/aboutme.js"></script>
+  
 </body>
 </html>
