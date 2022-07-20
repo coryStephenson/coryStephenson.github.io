@@ -36,6 +36,9 @@ var THEME_KEY = "corystephenson_theme";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dac2634 (Commit changes)
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 
@@ -73,6 +76,7 @@ for (i = 0; i < dropdown.length; i++) {
 >>>>>>> 8e4d14e (Create aboutme.js)
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
@@ -107,3 +111,5 @@ for (i = 0; i < dropdown.length; i++) {
 >>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 =======
 >>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
+=======
+>>>>>>> dac2634 (Commit changes)
