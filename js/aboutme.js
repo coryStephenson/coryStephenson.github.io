@@ -35,6 +35,7 @@ var THEME_KEY = "corystephenson_theme";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 
@@ -73,6 +74,8 @@ for (i = 0; i < dropdown.length; i++) {
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 =======
+=======
+>>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
 
 function darkMode() {
         var element = document.body;
@@ -88,4 +91,7 @@ function lightMode() {
         element.className = "light-mode";
         content.innerText = "Dark Mode is OFF";
 }
+<<<<<<< HEAD
 >>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
+=======
+>>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
