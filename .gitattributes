@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 *.html linguist-detectable=true
 *.css linguist-detectable=true
 *.js linguist-detectable=true
 
+=======
 *.pdf filter=lfs diff=lfs merge=lfs -text
+>>>>>>> 03e6292 (Squashed operating-systems.pdf commit)

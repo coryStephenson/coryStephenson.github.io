@@ -13,6 +13,7 @@ function darkMode() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 </script>
@@ -24,6 +25,9 @@ function darkMode() {
 =======
 
 >>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
+=======
+
+>>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
