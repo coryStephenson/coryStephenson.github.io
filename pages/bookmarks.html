@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
   <meta charset="utf-8" />
@@ -32,10 +33,16 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <link rel="stylesheet" href="css/bookmarks.css">
 	
 <title>Linux - Main</title>                                                               
 
+<<<<<<< HEAD
 =======
 <title>Linux - Main</title>
 <style>                                                               
@@ -188,14 +195,52 @@
 <<<<<<< HEAD
  
       
+=======
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 </head>
 <body>
 
-
 <h3 id="DarkModetext">Dark Mode is OFF</h3>
-    <button onclick="darkMode()">Darkmode</button>
-    <button onclick="lightMode()">LightMode</button>
-<br><br>
+  
+    <button onclick="set_theme('dark-mode');">Darkmode</button>
+    <button onclick="set_theme('light-mode');">LightMode</button>
+
+<script>
+            var THEME_KEY = "corystephenson_theme";
+            function set_theme(theme) {
+                var element = document.getElementsByTagName("html")[0];
+                var content = document.getElementById("DarkModetext");
+                if (!element) {
+                  return;
+                }
+
+                if (theme === "dark-mode" ) {
+                    element.className = "dark-mode";
+                    content.innerText = "Dark Mode is ON";
+                } else {
+                    element.className = "light-mode";
+                    content.innerText = "Dark Mode is OFF";
+                }
+
+                localStorage.setItem(THEME_KEY, theme);
+            }
+
+            function load_theme() {
+              var theme = localStorage.getItem(THEME_KEY);
+              if (theme) {
+                set_theme(theme);
+              }
+            }
+
+            // Attempt immediate application of html style
+            load_theme();
+
+            // Backup: do it onload. Will flash, but better than nothing.
+            window.addEventListener("load", function(){
+              load_theme();
+            });
+          
+</script>
 
 
 <h1 id="bookmarks">Bookmarks</h1>
@@ -207,6 +252,7 @@
 	<!-- The innerHTML of children with class="topic" becomes this items "topic" value -->	
 <h2 class="topic">Information Security Publications</h2>
 
+<<<<<<< HEAD
 =======
 >>>>>>> 44fd5aa (Update bookmarks.html)
 </script>
@@ -262,11 +308,16 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
+<<<<<<< HEAD
 >>>>>>> gh-pages
+=======
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <a class="url" href="https://www.google.com/url?q=https://cacm.acm.org/about-communications&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw0Tjp7pBdaYbyJHhsVFPL9t">About Communications | Communications of the ACM</a>
 <a class="url" href="https://www.google.com/url?q=https://aisel.aisnet.org/cais/about.html&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw1sChiGS-yaTj425y_2UvP6">About This Journal | Communications of the Association for Information Systems | AIS Journals | Association for Information Systems</a>
 <a class="url" href="https://www.google.com/url?q=https://onlinelibrary.wiley.com/pb-assets/assets/15405915/Scope%2520of%2520the%2520Decision%2520Sciences%2520Journal%2520and%2520Department%2520Mission%2520Statements-1533224838207.pdf&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw2lihKIoImjfe4h1nvKBK4t">Scope of the Decision Sciences Journal and Department Mission Statements-1533224838207.pdf</a>
@@ -275,6 +326,7 @@
 <a class="url" href="https://www.google.com/url?q=https://www.journals.elsevier.com/information-and-management&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw3f6uRaHo_-_nMnAEXHCleY">Information and Management - Journal - Elsevier</a></p></li>
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -297,6 +349,10 @@
 =======
 <li><p><a href="https://dns.google/resolve?name=google.com/url?q=https://cacm.acm.org/about-communications&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw0Tjp7pBdaYbyJHhsVFPL9t">About Communications | Communications of the ACM</a></p></li>
 >>>>>>> ea245af (Update bookmarks.html)
+=======
+=======
+<li><p><a href="https://dns.google/resolve?name=google.com/url?q=https://cacm.acm.org/about-communications&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw0Tjp7pBdaYbyJHhsVFPL9t">About Communications | Communications of the ACM</a></p></li>
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <a href="www.google.com/url?q=https://aisel.aisnet.org/cais/about.html&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw1sChiGS-yaTj425y_2UvP6">About This Journal | Communications of the Association for Information Systems | AIS Journals | Association for Information Systems</a></p></li>
 <li><p><a href="https://www.google.com/url?q=https://onlinelibrary.wiley.com/pb-assets/assets/15405915/Scope%2520of%2520the%2520Decision%2520Sciences%2520Journal%2520and%2520Department%2520Mission%2520Statements-1533224838207.pdf&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw2lihKIoImjfe4h1nvKBK4t">Scope of the Decision Sciences Journal and Department Mission Statements-1533224838207.pdf</a></p></li>
 <li><p><a href="https://www.google.com/url?q=https://www.journals.elsevier.com/decision-support-systems&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw31IcEvt-PYuiHoY7p1nXYT">Decision Support Systems - Journal - Elsevier</a></p></li>
@@ -304,7 +360,10 @@
 <li><p><a href="https://www.google.com/url?q=https://www.journals.elsevier.com/information-and-management&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw3f6uRaHo_-_nMnAEXHCleY">Information and Management - Journal - Elsevier</a></p></li>
 >>>>>>> 5ffd7cb1fd77ac6b2c5d1531d91f341742c5ebe5
 >>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
+<<<<<<< HEAD
 >>>>>>> gh-pages
+=======
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <li><p><a href="https://www.google.com/url?q=https://www.igi-global.com/journal/information-resources-management-journal/1073&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw3zvBNHPkBH53Mt7g4CZP_o">Information Resources Management Journal</a></p></li>
 <li><p><a href="https://www.google.com/url?q=https://www.tandfonline.com/action/journalInformation?show%3DaimsScope%26journalCode%3Duiss20&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw3jjcCaejyd1fJ2_E--7wBC">Information Security Journal: A Global Perspective Aims &amp; Scope</a></p></li>
 <li><p><a href="https://www.google.com/url?q=https://www.tandfonline.com/action/journalInformation?show%3DaimsScope%26journalCode%3Duism20&amp;source=gmail-html&amp;ust=1637262213463000&amp;usg=AOvVaw1Ex37QT_khrTMa0vo4PmgW">Information Systems Management Aims &amp; Scope</a></p></li>
@@ -1563,9 +1622,15 @@
 <p><a href="https://manybutfinite.com/">Many But Infinite</a></p>
 <p><a href="https://jianxiapyh.github.io/sitemap/">Yihan Pang’s Website - Ph.D. student researching in Computer Architecture &amp; System Software</a></p>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>http://eddiejackson.net/web_documents/SysAdminCheatSheet_pdf.pdf</p>
 <p>https://www.jonathanmedd.net/wp-content/uploads/2010/09/PowerShell_2_One_Cmdlet_at_a_Time.pdf</p>
 <p>http://eddiejackson.net/bash/BashNotesForProfessionals.pdf</p>
+=======
+<p><a href="http://eddiejackson.net/web_documents/SysAdminCheatSheet_pdf.pdf">SysAdminCheatSheet</a></p>
+<p><a href="https://www.jonathanmedd.net/wp-content/uploads/2010/09/PowerShell_2_One_Cmdlet_at_a_Time.pdf">PowerShell_2_One_Cmdlet_at_a_Time.pdf</p>
+<p><a href="http://eddiejackson.net/bash/BashNotesForProfessionals.pdf"</a></p>
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
 <p>https://www.jonathanmedd.net/wp-content/uploads/2010/09/PowerShell_2_One_Cmdlet_at_a_Time.pdf</p>
 <p>https://gousios.org/pub/oos-10000-feet.pdf</p>
 <p>https://gousios.org/pub/eval-quality-of-open-source-software.pdf</p>

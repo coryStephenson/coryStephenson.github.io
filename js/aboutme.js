@@ -34,6 +34,7 @@ var THEME_KEY = "corystephenson_theme";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
 
@@ -71,3 +72,20 @@ for (i = 0; i < dropdown.length; i++) {
 >>>>>>> 8e4d14e (Create aboutme.js)
 =======
 >>>>>>> 5ffd7cb (Added darkMode() and lightMode())
+=======
+
+function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+}
+      
+
+function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+}
+>>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
