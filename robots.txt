@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /*.html$
+Allow: /*.pdf$
+
+Sitemap: https://corystephenson.github.io/sitemap.xml
