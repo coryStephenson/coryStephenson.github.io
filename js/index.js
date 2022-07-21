@@ -45,7 +45,7 @@ function closeNav() {
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("active");
+  document.getElementById("myDropdown").classList.toggle("show");
 }
 
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
