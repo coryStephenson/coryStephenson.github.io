@@ -25,7 +25,6 @@ body {
                         
                         /* Style the sidebar links and the dropdown button */
                        .button, .dropdown-btn {
-                                 display: block;
                                  color: #FFDD00;
                                  text-shadow: 0 0 2px rgba(0,0,0,.3);
                                  font-family: sans-serif;
@@ -46,7 +45,6 @@ body {
                   
                       .button:before, .button:after {
                             content: '';
-                            display: block;
                             position: absolute;
                             left: 2px;
                             right: 2px;
