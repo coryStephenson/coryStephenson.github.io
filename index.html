@@ -1,27 +1,81 @@
-<!DOCTYPE html>                                                        
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
 
-<html lang = "en">                                                                 
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4F2984;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
 
-                <head>                                                                 
-                      <meta name="viewport" content="width=device-width, initial-scale=1">
-                      <title>Cory Stephenson - Information Systems Security & Assurance Professional</title>
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #FFDD00;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
 
-                      <meta name="description" content="I've been a Linux user for 3 years, with a passion for Information Systems Security. I am currently seeking entry-level employment.">
-                      <meta name="keywords" content="Cory Stephenson, Columbia, Tennessee, Linux, information assurance, systems security, information systems security">
-                      <meta property="article:published_time" content="2022-06-16">
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #FFFFFF;
+}
 
-                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                      <link rel="stylesheet" type="text/css" href="/css/index.css">
-                      <script type="text/javascript" src="/js/index.js"></script>
-                      <link rel="canonical" href="https://www.corystephenson.com/" />
-               
-                      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-                      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-                      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-                      <link rel="manifest" href="/site.webmanifest">
-                 </head>
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
 
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #FFDD00;
+  color: #4F2984;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #4F2984;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
 <body>
+
 <div class="sidenav">
      <a href="https://corystephenson.github.io/index.html">Home</a>
      <a href="pages/aboutme.html">About Me</a>
@@ -40,14 +94,14 @@
               <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-             <a class='button purple' href="pages/bookmarks.html">Online</a>
-             <a class='button purple' href="pages/news_sources.html">News Sources</a>
-             <a class='button purple' href="pages/notes.html">Notes</a>
-             <a class='button purple' href="pages/summaries/summaries.html">Summaries</a>
+             <a href="pages/bookmarks.html">Online</a>
+             <a href="pages/news_sources.html">News Sources</a>
+             <a href="pages/notes.html">Notes</a>
+             <a href="pages/summaries/summaries.html">Summaries</a>
           </div>
  
 </div>  
-  
+
 <div class="main">
                   
                        <h1>Cory Stephenson - Information Systems Security & Assurance Professional</h1>   
@@ -61,5 +115,23 @@
                        </p> 
                  </div>
 
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
 </body>
-</html>
+</html> 
