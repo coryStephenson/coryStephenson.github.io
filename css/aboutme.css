@@ -3,7 +3,7 @@ body {
 }
 
 /* Fixed sidenav, full height */
-.sidenav {
+.topnav {
   height: 100%;
   width: 200px;
   position: fixed;
@@ -16,7 +16,7 @@ body {
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
+.topnav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -31,7 +31,7 @@ body {
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
+.topnav a:hover, .dropdown-btn:hover {
   color: #FFFFFF;
 }
 
@@ -63,6 +63,6 @@ body {
 
 /* Some media queries for responsiveness */
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .topnav {padding-top: 15px;}
+  .topnav a {font-size: 18px;}
 }
