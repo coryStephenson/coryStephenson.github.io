@@ -22,33 +22,17 @@ body {
 }
 
 .dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
+  font-size: 17px;  
   color: #4F2984;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
-  margin: 0;
 }
 .topnav a.active {
   background-color: #FFDD00;
   color: #FFFFFF;
 }
 
-.dropdown-btn {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #FFDD00;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-}
 
 /* On mouse-over */
 .topnav a:hover {
