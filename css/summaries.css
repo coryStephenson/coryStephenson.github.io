@@ -1,0 +1,40 @@
+body {                                                                 
+  font-family: "Lato", sans-serif;                                     
+}                                                                    
+
+.sidebar {                                                            
+  height: 100%;                                                         
+  width: 0;                                                               
+  position: fixed;                                                       
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4F2984; 
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #FFDD00; 
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #FFFFFF; 
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
