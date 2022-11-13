@@ -1,69 +1,97 @@
-body {                                                                 
-  font-family: "Lato", sans-serif;                                     
-}                                                                    
-
-.sidebar {                                                            
-  height: 100%;                                                         
-  width: 0;                                                               
-  position: fixed;                                                       
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #4F2984; 
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
+body {
+  font-family: "Lato", sans-serif;
 }
 
-.sidebar a {
-  padding: 8px 8px 8px 32px;
+.topnav {
+  overflow: hidden;
+  background-color: #4F2984;
+}
+
+.topnav a {
+  float: left;
+  color: #FFDD00;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
-  font-size: 25px;
-  color: #FFDD00; 
-  display: block;
-  transition: 0.3s;
+  font-size: 17px;
 }
 
-.sidebar a:hover {
-  color: #FFFFFF; 
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
 
-.sidebar .closebtn { 
+.dropdown .dropbtn {
+  font-size: 17px;  
+  color: #4F2984;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+}
+.topnav a.active {
+  background-color: #FFDD00;
+  color: #FFFFFF;
+}
+
+
+/* On mouse-over */
+.topnav a:hover {
+  color: #FFFFFF;
+}
+
+.dropdown-content {
+  display: none;
   position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
-.openbtn { 
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #0066CC;
-  color: #F3F4F5;
-  padding: 10px 15px;
-  border: none;
+.dropdown-content a {
+  float: none;
+  color: #FFDD00;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
 
-.openbtn:hover {
-  background-color: #009AD6;
+.dropdown-content a:hover {
+  background-color: #ddd;
 }
 
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #FFDD00;
+  color: #4F2984;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #4F2984;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
 @media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .topnav {padding-top: 15px;}
+  .topnav a {font-size: 18px;}
 }
- .dark-mode {
-        background-color: black;
-        color: #00FF33;
-}
-.light-mode {
-        background-color: white;
-        color: black;
-}   
