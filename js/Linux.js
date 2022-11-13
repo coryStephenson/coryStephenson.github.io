@@ -1,45 +1,18 @@
-function darkMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "dark-mode";
-        content.innerText = "Dark Mode is ON";
-      }
-      function lightMode() {
-        var element = document.body;
-        var content = document.getElementById("DarkModetext");
-        element.className = "light-mode";
-        content.innerText = "Dark Mode is OFF";
-      }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dac2634 (Commit changes)
+/* Loop through all dropdown buttons 
+to toggle between hiding and showing its dropdown content - This allows 
+the user to have multiple dropdowns without any conflict */
 
-=======
-</script>
-<script>
->>>>>>> 4ebcde2 (Create Linux.js)
-=======
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
 
->>>>>>> aa3e027 (Update Linux.js)
-<<<<<<< HEAD
-=======
-
->>>>>>> dfd1ed0 (Adding files from gh-pages after rebase)
-=======
-
->>>>>>> 03e6292 (Squashed operating-systems.pdf commit)
-=======
->>>>>>> dac2634 (Commit changes)
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
 }
