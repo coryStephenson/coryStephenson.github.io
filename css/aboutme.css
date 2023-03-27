@@ -2,8 +2,8 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-/* Fixed sidenav, full height */
-.sidenav {
+/* Fixed topnav, full height */
+.topnav {
   height: 100%;
   width: 200px;
   position: fixed;
@@ -16,7 +16,7 @@ body {
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
+.topnav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -31,7 +31,7 @@ body {
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
+.topnav a:hover, .dropdown-btn:hover {
   color: #FFFFFF;
 }
 
