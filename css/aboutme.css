@@ -22,6 +22,7 @@
   overflow: hidden;
 }
 
+
 /* Dropdown button */
 .dropdown-btn {
   padding: 14px 16px;
@@ -33,6 +34,11 @@
   width: 100%;
   text-align: center;
   outline: none;
+}
+
+/* On mouse-over */
+.dropdown-btn:hover {
+  color: #FFFFFF;
 }
 
 /* Add a red background color to navbar links on hover */
