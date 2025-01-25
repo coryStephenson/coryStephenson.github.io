@@ -15,9 +15,6 @@
   text-decoration: none;
 }
 
-.dropdown-menu{
-    display: none;   /*hide the menu*/
-}
 
 .open .dropdown-menu{
     display: block;  /*show the menu when its parent has class "open"*/
@@ -93,7 +90,7 @@
 }
 
 /* Add an active class to the active dropdown button */
-.active {
+.open .dropdown-content{
   background-color: #FFDD00;
   color: #4F2984;
 }
