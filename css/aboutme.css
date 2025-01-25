@@ -90,7 +90,7 @@
 }
 
 /* Add an active class to the active dropdown button */
-.open .dropdown-content{
+.active .dropdown-content{
   background-color: #FFDD00;
   color: #4F2984;
 }
