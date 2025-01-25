@@ -16,6 +16,11 @@ body {
   font-size: 17px;
 }
 
+.dropdown-menu{
+    display: none;   /*hide the menu*/
+}
+
+
 .dropdown {
   float: left;
   overflow: hidden;
@@ -39,8 +44,8 @@ body {
   color: #FFFFFF;
 }
 
-.dropdown-content {
-  display: none;
+.open .dropdown-content {
+  display: block;      /*show the menu when its parent has class "open"*/
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
