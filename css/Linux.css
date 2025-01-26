@@ -1,53 +1,44 @@
-body {
+.navbar {
+  overflow: hidden;
+  background-color: #4F2984;
   font-family: "Lato", sans-serif;
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #4F2984;
-}
-
-.topnav a {
+.navbar a {
   float: left;
+  font-size: 16px;
   color: #FFDD00;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
 }
-
-.dropdown-menu{
-    display: none;   /*hide the menu*/
-}
-
 
 .dropdown {
+  background-color: #4F2984;
   float: left;
   overflow: hidden;
 }
 
 .dropdown .dropbtn {
-  font-size: 17px;  
-  color: #4F2984;
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: #FFDD00;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
+  margin: 0;
 }
-.topnav a.active {
-  background-color: #FFDD00;
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
   color: #FFFFFF;
 }
 
-
-/* On mouse-over */
-.topnav a:hover {
-  color: #FFFFFF;
-}
-
-.open .dropdown-content {
-  display: block;      /*show the menu when its parent has class "open"*/
+.dropdown-content {
+  display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #4F2984;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -63,40 +54,10 @@ body {
 }
 
 .dropdown-content a:hover {
+  color: #FFFFFF;
   background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-content {
+.show {
   display: block;
-}
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: #FFDD00;
-  color: #4F2984;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #4F2984;
-  padding-left: 8px;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .topnav {padding-top: 15px;}
-  .topnav a {font-size: 18px;}
 }
