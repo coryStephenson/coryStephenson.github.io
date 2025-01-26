@@ -29,7 +29,7 @@
 
 
 /* Dropdown button */
-.dropdown-btn {
+.dropbtn {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
@@ -42,15 +42,10 @@
 }
 
 /* On mouse-over */
-.dropdown-btn:hover {
+.dropbtn:hover {
   color: #FFFFFF;
 }
 
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
- background-color: #FFDD00; 
- color: #FFFFFF;
-}
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
