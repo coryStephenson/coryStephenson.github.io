@@ -7,7 +7,7 @@
 .navbar {
   overflow: hidden;
   background-color: #4F2984;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .navbar a {
@@ -20,6 +20,7 @@
 }
 
 .dropdown {
+  background-color: #4F2984;
   float: left;
   overflow: hidden;
 }
@@ -29,7 +30,7 @@
   font-size: 16px;  
   border: none;
   outline: none;
-  color: white;
+  color: #FFDD00;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
@@ -37,13 +38,13 @@
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-  background-color: red;
+  color: #FFFFFF;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #4F2984;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -51,7 +52,7 @@
 
 .dropdown-content a {
   float: none;
-  color: black;
+  color: #FFDD00;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -59,6 +60,7 @@
 }
 
 .dropdown-content a:hover {
+  color: #FFFFFF;
   background-color: #ddd;
 }
 
@@ -70,39 +72,32 @@
 <body style="background-color:white;">
 
 <div class="navbar">
-  <a href="#home">Home</a>
-  <a href="#news">News</a>
+  <a href="https://corystephenson.github.io/index.html">Home</a>
   <div class="dropdown">
-  <button class="dropbtn" onclick="myFunction()">Dropdown
+  <button class="dropbtn" onclick="myFunction()">Guides
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-content" id="myDropdown">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="#">Distros</a>
+    <a href="#">Customization</a>
+    <a href="#">Commands</a>
+    <a href="#">Features</a>
   </div>
   </div> 
 </div>
 
-<h3>Dropdown Menu inside a Navigation Bar</h3>
-<p>Click on the "Dropdown" link to see the dropdown menu.</p>
+<div id="main">
+                 
+  <h2>My Linux Compendium</h2>
+  
+  <p><a href="../pdf/linux/20221112-unix-philosophy-2020.pdf">Unix Philosophy (2020)</a></p>
+  <p><a href="../pdf/linux/Linux Notes.pdf">My personal Linux notes (read only as PDF)</a></p>
+  <p><a href="../md/Linux.md">My personal Linux notes (download as markdown)</a></p>             
+  <p><a href="../pdf/linux/audio.pdf">Deeper Look at the ALSA Architecture</a></p>
+  <p><a href="https://vim.rtorr.com/">Vim Cheat Sheet</a></p>
 
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
-  }
-}
-</script>
+</div>
+<script type="text/javascript" src="js/Linux.js"></script>
+  
 </body>
 </html>
