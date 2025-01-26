@@ -87,12 +87,7 @@
   padding: 0px 10px;
 }
 
-/* Add an active class to the active dropdown button */
-.active .dropdown-content{
-  display: block;
-  background-color: #FFDD00;
-  color: #4F2984;
-}
+
 
 /* Optional: Style the caret down icon */
 .fa-caret-down {
