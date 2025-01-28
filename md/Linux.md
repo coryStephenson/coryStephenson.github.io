@@ -1,5 +1,80 @@
 # Cory's Linux Notes
+My general-purpose distro is Kubuntu.
 
+# Adding an Appimage to the Application Launcher
+
+1. ​    If you haven't done so yet, make the appimage executable.  (Right-click on the AppImage file, go to Properties, and check the  'Allow executing file as program' box," or use the `chmod +x /path/to/app.AppImage` command in the terminal.)  
+2. ​    Create a desktop entry for the app  
+
+​    A desktop entry in Linux is a configuration file that tells your  desktop environment how to handle and present an application.  
+
+​    How to create a desktop entry:  
+
+1. ​    Open a text editor. 
+2. ​    In a new file, paste the following:  
+
+​      
+
+```
+[Desktop Entry]
+Type=Application
+Name=Appname
+Icon=/path/to/your/icon.png
+Exec=/path/to/app.AppImage
+Categories=Utility;
+```
+
+​    3. Replace Appname with the name of the app  
+
+​    4. Replace `/path/to/your/icon.png` with the full path to an icon file for the app if you have one. If you don't have an icon,  you can omit this line, but having an icon is recommended for better  integration.  
+
+​    5. Replace `/path/to/app.AppImage` with the full path to your AppImage file.  
+
+​    6. Save this file with a .desktop extension, so appname.desktop.  
+
+​    7. Move the new .desktop file to `~/.local/share/applications`  
+
+​    Your system should automatically detect the new desktop entry. If it doesn't show up immediately, you might need to log out and log back in, or reboot your system.  
+
+​    Hopefully this helps anyone who, like me, came here from a search  engine and didn't understand how to use AppImageLauncher :')  
+
+​          
+
+
+
+# Text-to-Speech (TTS) on Linux (method used as of August 23, 2024)
+
+## PDF Viewer 
+
+I use Okular, which is Kubuntu's native PDF viewer, to view PDFs for now.
+
+## Speech Dispatcher
+
+Speech Dispatcher is a high-level interface to speech synthesis, according to the developer's website.
+
+[Free(B)Soft - Free Accessibility Solutions](https://freebsoft.org/speechd)
+
+As far as Okular is concerned, Speech Dispatcher becomes an option for the text-to-speech engine after you install it.
+
+Once you install Speech Dispatcher, I believe a restart is required. But maybe not.
+
+Post installation, open Okular, and go to Settings, and then Configue Okular. Go to the Accessibility tab in the window's sidebar on the left. Select the`speechd` option from the dropdown menu associated with the Text-to-speech engine. 
+
+Now, when selecting one of the Speech options from the Tools menu, the text in the PDF will be read to you out loud. But, without something to make the speech sound more natural, it will undoubtedly sound too robotic. A solution for this that appears to work better than I had initially expected is called Pied.
+
+### Pied
+
+[Pied](https://pied.mikeasoft.com/)
+
+From the website given above:
+
+> Pied makes it simple to install and manage text-to-speech [Piper](https://github.com/rhasspy/piper) voices for use with [Speech Dispatcher](https://freebsoft.org/speechd) . Pied installs and configures the Piper neural text-to-speech engine to work with Speech Dispatcher. It can then be used to download and manage different voices.
+
+The github repository can be found here: [GitHub](https://github.com/Elleo/pied)
+
+Once I got past the initial setup for Pied, I downloaded the **Amy** voice.
+
+It works great!
 # Downloading Typora
 
 ```
