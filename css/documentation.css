@@ -87,7 +87,14 @@
   padding: 0px 10px;
 }
 
+div.container {
+  text-align: center;
+}
 
+ol.myOL {
+  display: inline-block;
+  text-align: left;
+}
 
 /* Optional: Style the caret down icon */
 .fa-caret-down {
