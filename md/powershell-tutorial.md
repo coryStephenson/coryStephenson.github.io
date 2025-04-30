@@ -240,9 +240,13 @@ $myVariable = 42   # Changes the value to an integer
 Although PowerShell determines the data type for you, it's helpful to understand the basic types it handles:
 
 **- Strings:** Text values, e.g., "Hello"
+
 **- Integers:** Whole numbers, e.g., `10`
+
 **- Decimals:** Floating point numbers, e.g., 3.14
+
 **- Booleans:** Logical values, e.g., `$true` or `$false`
+
 **- Arrays:** Collections of values, e.g., `@ (1, 2, 3)`
 
 To check a variable's type, use the `.GetType() method:
