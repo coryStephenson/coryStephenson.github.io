@@ -238,6 +238,7 @@ $myVariable = 42   # Changes the value to an integer
 
 **Data Types in PowerShell:**
 Although PowerShell determines the data type for you, it's helpful to understand the basic types it handles:
+
 **- Strings:** Text values, e.g., "Hello"
 **- Integers:** Whole numbers, e.g., `10`
 **- Decimals:** Floating point numbers, e.g., 3.14
