@@ -328,3 +328,56 @@ Update-Help
 This keeps your help system current, especially as new cmdlets and features are introduced in updated versions of PowerShell.
 
 Troubleshooting often involves trial and error, but `Get-Help` minimizes guesswork. By studying parameter options, identifying common examples, and understanding error messages, you'll tackle challenges with confidence. Remember, PowerShell is vast, but mastering the help system ensures you're never navigating it blind. Keep `Get-Help` as your first port of call whenever you're stuck. It's there to guide you.
+
+### 5. Practical Example
+
+*Combining basic concepts to write a small script for renaming multiple files*
+
+Imagine you have dozens, or even hundreds, of files with inconsistent names, and you want to standardize them quickly. This small script will show you how to combine cmdlets, loops, and variables effectively.
+
+Here's the scenario: you have a folder of images with names like *IMG001.jpg*, *IMG002.jpg*, and so on. You want to rename them to something more descriptive, like Vacation_001.jpg, Vacation_002.jpg, etc. Here's how you can do it step-by-step:
+
+**Step 1: Define the Target Folder**
+
+First, tell PowerShell where your files are located. Use the `Get-ChildItem` cmdlet to list all files in the folder.
+
+```powershell
+
+$FolderPath = "C:\Users\YourName\Pictures"
+$Files = Get-ChildItem -Path $FolderPath -File
+```
+
+**Step 2: Set the New Naming Pattern**
+
+Decide on a consistent pattern for the new file names. We'll use a base name like *Vacation_* and append a sequential number to it.
+
+```powershell
+
+$BaseName = "Vacation_"
+$Counter = 1
+```
+
+**Step 3: Loop through the files**
+
+PowerShell's `foreach` loop allows you to iterate through each file, rename it, and increment the counter.
+
+```powershell
+
+foreach ($File in $Files) {
+    $Extension = $File.Extension
+    $NewName = "$BaseName{0:D3}$Extension" -f $Counter
+    Rename-Item -Path $File.FullName -NewName $NewName
+    $Counter++
+}
+```
+
+**Explanation of Key Elements:**
+
+- `Get-ChildItem`: Lists all files in the specified folder.
+- `foreach`: Loops through each file, letting you perform actions on it.
+- `{0:D3}`: Formats the counter to include leading zeros (e.g., 001, 002).
+- `Rename-Item`: Renames the file, using its full path and the new name.
+
+**Step 4: Run the Script**
+
+Save the script as a `.ps1` file, like *RenameFiles.ps1*. Run it in PowerShell by navigating to its location and executing it. Make sure to provide appropriate permissions if needed.
