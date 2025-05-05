@@ -375,9 +375,66 @@ foreach ($File in $Files) {
 
 - `Get-ChildItem`: Lists all files in the specified folder.
 - `foreach`: Loops through each file, letting you perform actions on it.
-- `{0:D3}`: Formats the counter to include leading zeros (e.g., 001, 002).
+- `{0:D3}`: The `D` specifies decimal format. The `3` is the minimum number of digits. This pads the number out to 3 digits with leading zeros.
 - `Rename-Item`: Renames the file, using its full path and the new name.
+
+Visit [this link](https://www.sharepointdiary.com/2020/10/powershell-pad-number-with-leading-zeros.html) to learn more about padding numbers with leading zeros.
 
 **Step 4: Run the Script**
 
 Save the script as a `.ps1` file, like *RenameFiles.ps1*. Run it in PowerShell by navigating to its location and executing it. Make sure to provide appropriate permissions if needed.
+
+***
+**Chapter 3: Working with Cmdlets**
+***
+
+### 1. Cmdlet Syntax Breakdown
+
+*Anatomy of a Cmdlet with practical examples like `Get-Process`*
+
+At their core, cmdlets follow a straightforward **verb-noun** syntax, which describes what action you want to perform (the verb) and on what object (the noun). For example, the cmdlet `Get-Process` retrieves a list of processes running on your system.
+
+Let's break this down further:
+
+**1. Verb**: The action you want to take. Common examples include `Get` (retrieve information), `Set` (modify settings), `Start` (initiate actions), and `Stop` (halt actions). The verb gives PowerShell its instructional clarity.
+
+**2. Noun**: The object you're acting upon. In `Get-Process`, the noun is `Process`, indicating that you're working with processes on your system. PowerShell's nouns are specific, helping you identify exactly what's being manipulated.
+
+**3. Parameters**: Cmdlets often include parameters, which modify their behavior. For instance, adding `-Name` to `Get-Process` allows you to target specific processes by name:
+
+```powershell
+
+Get-Process -Name "notepad"
+```
+
+**4. Output**: Most cmdlets return objects, not plain text, which is a major strength of PowerShell. These objects can be inspected, filtered, or piped into other cmdlets for further processing.
+
+**Pratical Example:** `Get-Process`
+Let's start with a simple command:
+
+```powershell
+Get-Process
+```
+When you run this, PowerShell displays a table with columns like `Handles`, `CPU`, and `ProcessName`. This output shows all processes currently running on your machine. But what if you only want to see processes consuming significant CPU? That's where parameters come into play:
+
+```powershell
+
+Get-Process | Where-Object {$_.CPU -gt 10}
+```
+
+Here, the pipeline (`|`) sends the output of `Get-Process` to the `Where-Object` cmdlet, which filters results to show only processes using more than 10 CPU seconds.
+
+**Anatomy in Action**
+Every part of the cmdlet serves a purpose. Consider this slightly more advanced usage:
+
+```powershell
+
+Get-Process -Name "explorer" | Select-Object - Property Name, Id, CPU
+```
+
+**- Cmdlet**: `Get-Process` retrieves process data.
+**- Parameter**: `-Name "explorer"` specifies you're interested in the Explorer process.
+**- Pipeline**: Passes the retrieved object to the next cmdlet.
+**- Cmdlet**: `Select-Object` narrows down the properties displayed to `Name`, `Id`, and `CPU`.
+
+This modular design allows you to chain cmdlets, filter data, and focus on what matters most, turning PowerShell into a versatile and powerful tool for automation.
