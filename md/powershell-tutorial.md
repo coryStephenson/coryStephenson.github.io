@@ -438,3 +438,50 @@ Get-Process -Name "explorer" | Select-Object - Property Name, Id, CPU
 **- Cmdlet**: `Select-Object` narrows down the properties displayed to `Name`, `Id`, and `CPU`.
 
 This modular design allows you to chain cmdlets, filter data, and focus on what matters most, turning PowerShell into a versatile and powerful tool for automation.
+
+### 2. Common Cmdlets
+
+*Overview of frequently used Cmdlets for beginners (`Get-ChildItem`, `Set-Location`, etc.)*
+
+**1. Get-ChildItem**
+
+Imagine you're navigating through the folders on your computer, looking for files or subfolders. That's precisely what `Get-ChildItem` helps you do. Often abbreviated as `gci`, this Cmdlet lists the contents of a directory, whether files or directories, in a clean, readable format. For example:
+```powershell
+
+Get-ChildItem C:\Documents
+```
+This command lists everything in the `C:\Documents` folder. You can also filter results using parameters like `-File` or `-Directory` to see only file or directories. If you're searching for something specific, the `-Recurse` parameter dives into all subfolders, and `-Filter` helps narrow down results:
+```powershell
+
+Get-ChildItem -Path C:\Documents -Recurse -Filter "*.txt"
+```
+This search for all `.txt` files in `C:\Documents` and its subfolders.
+
+**2. Set-Location**
+PowerShell operates much like navigating a file explorer, and `Set-Location` (aliased as `cd`) is your way to move between directories. Whether you're switching to a folder on your local disk or a remote network drive, `Set-Location` makes it seamless.
+For instance, to move to your desktop folder:
+```powershell
+
+Set-Location C:\Users\YourUsername\Desktop
+```
+Combine this with `Get-ChildItem` to explore the contents of your new location instantly:
+
+```powershell
+
+Set-Location C:\Users\YourUsername\Desktop
+Get-ChildItem
+```
+
+**3. Get-Help**
+PowerShell's built-in documentation system is a lifesaver, and `Get-Help` is your gateway to it. Whenever you encounter a Cmdlet you're unfamilar with, run:
+```powershell
+
+Get-Help Get-ChildItem
+```
+This provides a comprehensive guide on how to use the Cmdlet, including examples. For the most detailed help, append `-Full`:
+```powershell
+
+Get-Help Get-ChildItem -Full
+```
+
+**4. Clear-Host**
