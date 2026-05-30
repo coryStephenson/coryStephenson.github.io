@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompTIA Security+ Matching Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .quiz-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .definitions-column, .terms-column {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .column-title {
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .definition-item, .term-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        .definition-item {
+            border-left: 4px solid #007bff;
+        }
+        
+        .term-item {
+            border-left: 4px solid #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .definition-item:hover, .term-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .selected {
+            background: #e3f2fd !important;
+            border-color: #2196f3 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+        
+        .matched {
+            background: #e8f5e8 !important;
+            border-color: #4caf50 !important;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .incorrect {
+            background: #ffebee !important;
+            border-color: #f44336 !important;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-area {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 CompTIA Security+ Quiz</h1>
+        <p class="subtitle">Match each definition with its corresponding security term</p>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="score" id="score">Score: 0/15</div>
+        
+        <div class="quiz-area">
+            <div class="definitions-column">
+                <div class="column-title">📋 Definitions</div>
+                <div id="definitions"></div>
+            </div>
+            
+            <div class="terms-column">
+                <div class="column-title">🏷️ Terms</div>
+                <div id="terms"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="checkAnswer()" id="checkBtn" disabled>Check Match</button>
+            <button onclick="resetQuiz()">Reset Quiz</button>
+            <button onclick="newQuiz()">New Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { term: "Generative AI", definition: "AI models designed to generate new content (text, images, code) based on patterns learned from training data. In cybersecurity, used for both automated reporting and generating phishing templates." },
+            { term: "Machine Learning (ML)", definition: "A subset of AI that enables systems to learn and improve from experience without being explicitly programmed. It relies on algorithms analyzing historical data to make predictions." },
+            { term: "Statistical Learning", definition: "A framework for understanding data based on statistics, focusing on building predictive models based on probability and statistical inference." },
+            { term: "Transformers", definition: "A deep learning architecture that relies on mechanisms of attention, weighting the significance of each part of the input data. They are the underlying architecture for modern LLMs." },
+            { term: "Deep Learning", definition: "A subset of ML based on artificial neural networks with multiple layers (deep networks). Highly effective for complex pattern recognition like malware analysis." },
+            { term: "Generative Adversarial Networks (GANs)", definition: "A system of two neural networks (a generator and a discriminator) competing against each other. Used to generate highly realistic synthetic data, useful for training evasion detection." },
+            { term: "Natural Language Processing (NLP)", definition: "The ability of a computer program to understand human language as it is spoken and written. Crucial for analyzing threat intelligence feeds." },
+            { term: "Large Language Models (LLMs)", definition: "Massive NLP models trained on vast amounts of text. Highly versatile but require immense computational resources." },
+            { term: "Small Language Models (SLMs)", definition: "Scaled-down versions of LLMs. They are more efficient, can be run locally for better privacy, and are tailored for specific tasks." },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" },
+            { term: "", definition: "" }
+        ];
+
+        let currentQuiz = [];
+        let selectedDefinition = null;
+        let selectedTerm = null;
+        let score = 0;
+        let totalQuestions = 15;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function newQuiz() {
+            currentQuiz = shuffleArray(quizData).slice(0, totalQuestions);
+            score = 0;
+            selectedDefinition = null;
+            selectedTerm = null;
+            updateScore();
+            updateProgress();
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const definitionsContainer = document.getElementById('definitions');
+            const termsContainer = document.getElementById('terms');
+            
+            const shuffledDefinitions = shuffleArray([...currentQuiz]);
+            const shuffledTerms = shuffleArray([...currentQuiz]);
+            
+            definitionsContainer.innerHTML = '';
+            termsContainer.innerHTML = '';
+            
+            shuffledDefinitions.forEach((item, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'definition-item';
+                defDiv.textContent = item.definition;
+                defDiv.onclick = () => selectDefinition(defDiv, item);
+                definitionsContainer.appendChild(defDiv);
+            });
+            
+            shuffledTerms.forEach((item, index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'term-item';
+                termDiv.textContent = item.term;
+                termDiv.onclick = () => selectTerm(termDiv, item);
+                termsContainer.appendChild(termDiv);
+            });
+        }
+
+        function selectDefinition(element, item) {
+            if (element.classList.contains('matched')) return;
+            
+            document.querySelectorAll('.definition-item').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedDefinition = { element, item };
+            updateCheckButton();
+        }
+
+        function selectTerm(element, item) {
+            if (element.classList.contains('matched')) return;
+            
+            document.querySelectorAll('.term-item').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedTerm = { element, item };
+            updateCheckButton();
+        }
+
+        function updateCheckButton() {
+            const checkBtn = document.getElementById('checkBtn');
+            checkBtn.disabled = !(selectedDefinition && selectedTerm);
+        }
+
+        function checkAnswer() {
+            if (!selectedDefinition || !selectedTerm) return;
+            
+            if (selectedDefinition.item.term === selectedTerm.item.term) {
+                // Correct match
+                selectedDefinition.element.classList.add('matched');
+                selectedTerm.element.classList.add('matched');
+                score++;
+                updateScore();
+                updateProgress();
+                
+                // Check if quiz is complete
+                if (score === totalQuestions) {
+                    setTimeout(() => {
+                        alert(`🎉 Congratulations! You've completed the quiz with a perfect score of ${score}/${totalQuestions}!`);
+                    }, 500);
+                }
+            } else {
+                // Incorrect match
+                selectedDefinition.element.classList.add('incorrect');
+                selectedTerm.element.classList.add('incorrect');
+                
+                setTimeout(() => {
+                    selectedDefinition.element.classList.remove('incorrect');
+                    selectedTerm.element.classList.remove('incorrect');
+                }, 500);
+            }
+            
+            // Clear selections
+            selectedDefinition.element.classList.remove('selected');
+            selectedTerm.element.classList.remove('selected');
+            selectedDefinition = null;
+            selectedTerm = null;
+            updateCheckButton();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Score: ${score}/${totalQuestions}`;
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const percentage = (score / totalQuestions) * 100;
+            progressBar.style.width = percentage + '%';
+        }
+
+        function resetQuiz() {
+            score = 0;
+            selectedDefinition = null;
+            selectedTerm = null;
+            updateScore();
+            updateProgress();
+            
+            document.querySelectorAll('.definition-item, .term-item').forEach(el => {
+                el.classList.remove('matched', 'selected', 'incorrect');
+            });
+            
+            updateCheckButton();
+        }
+
+        // Initialize quiz on page load
+        newQuiz();
+    </script>
+</body>
+</html>
