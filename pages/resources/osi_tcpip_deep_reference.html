@@ -1,0 +1,585 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--c-app:#7C3AED;--c-pres:#6D28D9;--c-sess:#1D6A8B;--c-trans:#0E7490;--c-net:#0F766E;--c-dl:#065F46;--c-phy:#374151;
+--c-app-l:#EDE9FE;--c-pres-l:#EDE9FE;--c-sess-l:#E0F2FE;--c-trans-l:#CFFAFE;--c-net-l:#CCFBF1;--c-dl-l:#D1FAE5;--c-phy-l:#F3F4F6;
+--c-tcp:#B45309;--c-udp:#7C2D12;
+}
+@media(prefers-color-scheme:dark){
+:root{
+--c-app-l:#2E1065;--c-pres-l:#2E1065;--c-sess-l:#0C2333;--c-trans-l:#0C2C33;--c-net-l:#022C22;--c-dl-l:#022C22;--c-phy-l:#111827;
+}
+}
+body{font-family:"Anthropic Sans",sans-serif;font-size:13px;color:var(--color-text-primary);background:transparent}
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+.top-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab-btn{padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;cursor:pointer;font-size:12px;color:var(--color-text-secondary);transition:all .15s}
+.tab-btn.active,.tab-btn:hover{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+
+.panel{display:none}.panel.active{display:block}
+
+/* --- OVERVIEW PANEL --- */
+.model-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:0.5px solid var(--color-border-secondary);border-radius:10px;overflow:hidden}
+.model-col{display:flex;flex-direction:column}
+.model-header{padding:8px 10px;font-weight:500;font-size:13px;text-align:center;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-secondary)}
+.layer-row{display:flex;gap:0}
+.osi-side .layer-box,.tcp-side .layer-box,.proto-side .layer-box{padding:7px 9px;font-size:11.5px;cursor:pointer;transition:filter .15s;border-bottom:0.5px solid rgba(0,0,0,.08)}
+.osi-side .layer-box:hover,.proto-side .layer-box:hover,.tcp-side .layer-box:hover{filter:brightness(1.07)}
+.layer-name{font-weight:500;font-size:12px}
+.layer-num{font-size:10px;opacity:.7}
+.layer-mnemonic{font-size:10px;opacity:.8;font-style:italic}
+.tcp-bracket{display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:500;padding:6px;border-bottom:0.5px solid rgba(0,0,0,.08);cursor:pointer;transition:filter .15s}
+.tcp-bracket:hover{filter:brightness(1.07)}
+.proto-chips{display:flex;flex-wrap:wrap;gap:3px;padding:6px 7px;border-bottom:0.5px solid rgba(0,0,0,.08)}
+.chip{font-size:10px;padding:2px 6px;border-radius:10px;cursor:pointer;font-weight:500}
+.chip:hover{opacity:.8}
+.legend-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--color-text-secondary)}
+.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:3px;vertical-align:middle}
+
+/* --- LAYER DETAIL PANEL --- */
+.layer-detail{border:0.5px solid var(--color-border-secondary);border-radius:10px;overflow:hidden}
+.ld-header{padding:12px 16px;display:flex;align-items:center;gap:12px}
+.ld-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:18px;color:#fff;flex-shrink:0}
+.ld-title{font-size:18px;font-weight:500}
+.ld-sub{font-size:12px;opacity:.75;margin-top:2px}
+.ld-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:520px){.ld-grid{grid-template-columns:1fr}}
+.ld-section{padding:12px 16px;border-top:0.5px solid var(--color-border-secondary)}
+.ld-section:nth-child(even){border-left:0.5px solid var(--color-border-secondary)}
+.ld-section h3{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-secondary);margin-bottom:8px}
+.ld-section ul{padding-left:14px;line-height:1.7}
+.ld-section li{font-size:12.5px;margin-bottom:2px}
+.exploit-badge{display:inline-block;background:var(--color-background-danger);color:var(--color-text-danger);font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;margin:2px 2px 2px 0}
+.port-badge{display:inline-block;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);font-size:10px;padding:2px 7px;border-radius:6px;font-family:var(--font-mono);margin:2px 2px 2px 0}
+.modern-badge{display:inline-block;background:var(--color-background-success);color:var(--color-text-success);font-size:10px;padding:2px 7px;border-radius:10px;margin:2px 2px 2px 0}
+.ld-full{grid-column:1/-1}
+.nav-btns{display:flex;gap:8px;padding:10px 16px;border-top:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary)}
+.nav-btn{padding:5px 14px;border:0.5px solid var(--color-border-secondary);border-radius:6px;cursor:pointer;font-size:12px;background:transparent;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-primary)}
+.nav-btn:disabled{opacity:.35;cursor:default}
+
+/* --- COMPARISON PANEL --- */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px}
+.comp-table th{background:var(--color-background-secondary);padding:7px 10px;text-align:left;font-weight:500;border:0.5px solid var(--color-border-secondary)}
+.comp-table td{padding:7px 10px;border:0.5px solid var(--color-border-secondary);vertical-align:top;line-height:1.5}
+.comp-table tr:hover td{background:var(--color-background-secondary)}
+
+/* --- ACRONYMS PANEL --- */
+.acronym-card{border:0.5px solid var(--color-border-secondary);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.acronym-title{padding:10px 14px;background:var(--color-background-secondary);font-weight:500;border-bottom:0.5px solid var(--color-border-secondary);font-size:13px}
+.acronym-list{padding:10px 14px}
+.acronym-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.acronym-row:last-child{border-bottom:none}
+.acronym-letter{font-size:22px;font-weight:500;width:28px;flex-shrink:0;text-align:center}
+.acronym-word{font-weight:500;font-size:13px}
+.acronym-desc{font-size:11.5px;color:var(--color-text-secondary);margin-top:1px}
+.spfb-row{display:flex;gap:0;margin-top:4px}
+.spfb-cell{flex:1;padding:10px;text-align:center;border-right:0.5px solid var(--color-border-secondary)}
+.spfb-cell:last-child{border-right:none}
+.spfb-letter{font-size:28px;font-weight:500}
+.spfb-word{font-size:12px;font-weight:500;margin:2px 0}
+.spfb-unit{font-size:11px;color:var(--color-text-secondary)}
+
+/* --- PORTS PANEL --- */
+.ports-search{width:100%;padding:7px 12px;border:0.5px solid var(--color-border-secondary);border-radius:7px;font-size:13px;background:var(--color-background-primary);color:var(--color-text-primary);margin-bottom:10px}
+.ports-list{max-height:480px;overflow-y:auto;border:0.5px solid var(--color-border-secondary);border-radius:8px}
+.port-row{display:grid;grid-template-columns:60px 55px 1fr 80px;gap:8px;padding:7px 12px;border-bottom:0.5px solid var(--color-border-tertiary);align-items:center;font-size:12px}
+.port-row:last-child{border-bottom:none}
+.port-row:hover{background:var(--color-background-secondary)}
+.port-row.header{background:var(--color-background-secondary);font-weight:500;font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}
+.proto-tag{font-size:10px;padding:2px 6px;border-radius:10px;font-weight:500;text-align:center}
+.tcp-tag{background:#FEF3C7;color:#92400E}
+.udp-tag{background:#FEE2E2;color:#991B1B}
+.both-tag{background:#EDE9FE;color:#5B21B6}
+.layer-tag{font-size:10px;padding:2px 6px;border-radius:6px}
+
+/* MODERN PANEL */
+.modern-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.modern-card{border:0.5px solid var(--color-border-secondary);border-radius:10px;padding:12px 14px}
+.modern-card h3{font-size:13px;font-weight:500;margin-bottom:6px}
+.modern-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.modern-card .tag{font-size:10px;display:inline-block;padding:1px 6px;border-radius:8px;margin-bottom:6px;font-weight:500}
+</style>
+
+<h2 class="sr-only">OSI & TCP/IP Model Deep Reference — interactive guide covering all 7 OSI layers, TCP/IP mapping, protocols, port numbers, exploits, and modern technologies</h2>
+
+<div class="top-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('layers')">Layer Deep-Dive</button>
+  <button class="tab-btn" onclick="showTab('comparison')">OSI vs TCP/IP</button>
+  <button class="tab-btn" onclick="showTab('acronyms')">Mnemonics</button>
+  <button class="tab-btn" onclick="showTab('ports')">Port Numbers</button>
+  <button class="tab-btn" onclick="showTab('modern')">Modern Tech</button>
+</div>
+
+<!-- OVERVIEW -->
+<div class="panel active" id="panel-overview">
+  <div class="model-grid">
+    <div class="model-col osi-side">
+      <div class="model-header">OSI Model (ISO, 1984)</div>
+      <div id="osi-layers"></div>
+    </div>
+    <div class="model-col tcp-side">
+      <div class="model-header">TCP/IP Model (DoD, 1974)</div>
+      <div id="tcp-layers"></div>
+    </div>
+    <div class="model-col proto-side">
+      <div class="model-header">Key Protocols</div>
+      <div id="proto-layers"></div>
+    </div>
+  </div>
+  <div class="legend-row">
+    <span><span class="legend-dot" style="background:#7C3AED"></span>Upper layers (app focus)</span>
+    <span><span class="legend-dot" style="background:#0E7490"></span>Transport layer</span>
+    <span><span class="legend-dot" style="background:#0F766E"></span>Network layer</span>
+    <span><span class="legend-dot" style="background:#374151"></span>Lower layers (hardware focus)</span>
+    <span style="color:var(--color-text-secondary)">Click any layer for details →</span>
+  </div>
+</div>
+
+<!-- LAYER DETAIL -->
+<div class="panel" id="panel-layers">
+  <div class="layer-detail" id="layer-detail-box"></div>
+</div>
+
+<!-- COMPARISON -->
+<div class="panel" id="panel-comparison">
+  <table class="comp-table">
+    <thead><tr><th>Feature</th><th>OSI Model</th><th>TCP/IP Model</th></tr></thead>
+    <tbody>
+      <tr><td>Full name</td><td>Open Systems Interconnection</td><td>Transmission Control Protocol / Internet Protocol</td></tr>
+      <tr><td>Created by</td><td>ISO & CCITT (now ITU-T)</td><td>DARPA / Vint Cerf & Bob Kahn</td></tr>
+      <tr><td>Year</td><td>1984 (finalized)</td><td>1974 (RFC 675), refined 1978–1983</td></tr>
+      <tr><td>Purpose</td><td>Universal reference/teaching model; vendor-neutral interoperability standard</td><td>Practical protocol suite to interconnect ARPANET nodes; basis for the modern Internet</td></tr>
+      <tr><td>Motivation</td><td>IBM's SNA, DEC's DECnet, and others were proprietary; ISO wanted a universal framework so any vendor's hardware could talk to any other's</td><td>US DoD needed resilient, survivable communication that could reroute around damaged nodes; existing protocols were brittle</td></tr>
+      <tr><td>Layers</td><td>7 (Physical, Data Link, Network, Transport, Session, Presentation, Application)</td><td>4 (Network Access, Internet, Transport, Application)</td></tr>
+      <tr><td>Layer mapping</td><td>Strict 1-to-1 separation of concerns</td><td>OSI layers 5-6-7 collapsed into Application; layers 1-2 collapsed into Network Access</td></tr>
+      <tr><td>Data unit names</td><td>Bits, Frames, Packets, Segments, Data, Data, Data</td><td>Frames, Datagrams, Segments, Messages</td></tr>
+      <tr><td>Transport protocols</td><td>Model defines—doesn't specify</td><td>TCP (reliable) and UDP (unreliable/fast)</td></tr>
+      <tr><td>Adoption</td><td>Reference model; actual OSI protocol stack rarely deployed</td><td>De facto standard; powers the entire Internet</td></tr>
+      <tr><td>Strengths</td><td>Clear separation of concerns, excellent for teaching, vendor-neutral</td><td>Proven at Internet scale, simple, flexible</td></tr>
+      <tr><td>Weaknesses</td><td>Complex, late to market, never widely implemented as actual protocols</td><td>No clear separation of service/interface/protocol; security bolted on later</td></tr>
+      <tr><td>Session/Presentation</td><td>Explicit separate layers</td><td>Application layer handles both (e.g., TLS ≈ Presentation, RPC ≈ Session)</td></tr>
+      <tr><td>Modern relevance</td><td>Foundation for network engineering education, troubleshooting framework</td><td>The running Internet—every device uses TCP/IP</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ACRONYMS -->
+<div class="panel" id="panel-acronyms">
+  <div class="acronym-card">
+    <div class="acronym-title">OSI Layer Mnemonics — top to bottom (7→1)</div>
+    <div class="acronym-list">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Multiple memory aids — pick your favorite:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="border:0.5px solid var(--color-border-secondary);border-radius:8px;padding:10px">
+          <div style="font-weight:500;margin-bottom:6px;font-size:12px">📚 Classic (polite)</div>
+          <div style="font-size:12.5px;line-height:2">
+            <b>A</b>ll <span style="color:var(--color-text-secondary)">(Application)</span><br>
+            <b>P</b>eople <span style="color:var(--color-text-secondary)">(Presentation)</span><br>
+            <b>S</b>eem <span style="color:var(--color-text-secondary)">(Session)</span><br>
+            <b>T</b>o <span style="color:var(--color-text-secondary)">(Transport)</span><br>
+            <b>N</b>eed <span style="color:var(--color-text-secondary)">(Network)</span><br>
+            <b>D</b>ata <span style="color:var(--color-text-secondary)">(Data Link)</span><br>
+            <b>P</b>rocessing <span style="color:var(--color-text-secondary)">(Physical)</span>
+          </div>
+        </div>
+        <div style="border:0.5px solid var(--color-border-secondary);border-radius:8px;padding:10px">
+          <div style="font-weight:500;margin-bottom:6px;font-size:12px">🍕 Food version</div>
+          <div style="font-size:12.5px;line-height:2">
+            <b>A</b>wesome <span style="color:var(--color-text-secondary)">(Application)</span><br>
+            <b>P</b>izza <span style="color:var(--color-text-secondary)">(Presentation)</span><br>
+            <b>S</b>lices <span style="color:var(--color-text-secondary)">(Session)</span><br>
+            <b>T</b>hroughout <span style="color:var(--color-text-secondary)">(Transport)</span><br>
+            <b>N</b>ew <span style="color:var(--color-text-secondary)">(Network)</span><br>
+            <b>D</b>imensions <span style="color:var(--color-text-secondary)">(Data Link)</span><br>
+            <b>P</b>lease <span style="color:var(--color-text-secondary)">(Physical)</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--color-text-secondary)">Bottom to top (1→7): <b>Please Do Not Throw Sausage Pizza Away</b></div>
+    </div>
+  </div>
+
+  <div class="acronym-card">
+    <div class="acronym-title">PDU Mnemonic — "Some People Fear Bacon" (top→bottom, L4→L1)</div>
+    <div class="spfb-row">
+      <div class="spfb-cell" style="background:var(--c-trans-l)">
+        <div class="spfb-letter" style="color:var(--c-trans)">S</div>
+        <div class="spfb-word">Segments</div>
+        <div class="spfb-unit">Transport Layer 4</div>
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-top:4px">TCP/UDP data units. Include source/dest port, sequence #, flags</div>
+      </div>
+      <div class="spfb-cell" style="background:var(--c-net-l)">
+        <div class="spfb-letter" style="color:var(--c-net)">P</div>
+        <div class="spfb-word">Packets</div>
+        <div class="spfb-unit">Network Layer 3</div>
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-top:4px">IP datagrams. Add source/dest IP address, TTL, protocol field</div>
+      </div>
+      <div class="spfb-cell" style="background:var(--c-dl-l)">
+        <div class="spfb-letter" style="color:var(--c-dl)">F</div>
+        <div class="spfb-word">Frames</div>
+        <div class="spfb-unit">Data Link Layer 2</div>
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-top:4px">Ethernet/Wi-Fi frames. Add MAC addresses, FCS/CRC checksum</div>
+      </div>
+      <div class="spfb-cell" style="background:var(--c-phy-l)">
+        <div class="spfb-letter" style="color:var(--c-phy)">B</div>
+        <div class="spfb-word">Bits</div>
+        <div class="spfb-unit">Physical Layer 1</div>
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-top:4px">Raw 0s and 1s encoded as voltage, light, or radio waves on medium</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acronym-card">
+    <div class="acronym-title">OSI Layer Letters — A through P</div>
+    <div class="acronym-list" id="osi-letters"></div>
+  </div>
+</div>
+
+<!-- PORTS -->
+<div class="panel" id="panel-ports">
+  <input class="ports-search" type="text" id="port-search" placeholder="Search port, protocol, or name…" oninput="filterPorts()">
+  <div class="ports-list">
+    <div class="port-row header"><span>Port</span><span>Protocol</span><span>Service</span><span>Layer</span></div>
+    <div id="ports-body"></div>
+  </div>
+</div>
+
+<!-- MODERN -->
+<div class="panel" id="panel-modern">
+  <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;line-height:1.6">Modern technologies map to the OSI model even though they didn't exist when it was written. Understanding where they "live" helps with troubleshooting and security.</div>
+  <div class="modern-grid" id="modern-grid"></div>
+</div>
+
+<script>
+const LAYERS = [
+  {
+    num:7, name:"Application", color:"#7C3AED", bg:"#EDE9FE", bgDark:"#2E1065",
+    tcpLayer:"Application", acronym:"A",
+    mnemonic:"All People Seem To Need Data Processing",
+    pdu:"Data (Messages)",
+    summary:"The window between the user/app and the network. Provides high-level APIs: file transfer, email, web browsing, directory access.",
+    sublayers:["No formal sublayers in OSI, but TCP/IP Application layer encompasses Session (L5) and Presentation (L6) functions","APIs, sockets, user-facing protocols"],
+    functions:["Resource sharing & remote file access","Remote printer access","Directory services (LDAP)","Network management (SNMP)","Email (SMTP, IMAP, POP3)","Web (HTTP/HTTPS)","Name resolution (DNS)","File transfer (FTP, SFTP)","Remote access (SSH, Telnet)","Voice/Video (SIP, RTP)"],
+    protocols:["HTTP","HTTPS","FTP","SFTP","SSH","Telnet","SMTP","IMAP","POP3","DNS","DHCP","SNMP","NTP","LDAP","BGP","RIP","OSPF (routing updates)","SIP","RTP","QUIC"],
+    ports:["80 HTTP","443 HTTPS","21 FTP","22 SSH","23 Telnet","25 SMTP","53 DNS","67/68 DHCP","110 POP3","143 IMAP","161 SNMP","389 LDAP","587 SMTP-TLS","993 IMAPS","995 POP3S"],
+    exploits:["Phishing / social engineering","SQL injection (app-level)","Cross-site scripting (XSS)","Cross-site request forgery (CSRF)","DNS spoofing/poisoning","DNS amplification DDoS","BGP hijacking","HTTP response splitting","API abuse & scraping","Zero-day app vulnerabilities","SMTP open relay","Directory traversal attacks"],
+    modern:["REST & GraphQL APIs","WebSockets","gRPC","QUIC (HTTP/3)","Service mesh (Envoy, Istio) at app layer","Serverless / FaaS — functions exposed over HTTP","API gateways (Kong, AWS API GW)"]
+  },
+  {
+    num:6, name:"Presentation", color:"#6D28D9", bg:"#EDE9FE", bgDark:"#2E1065",
+    tcpLayer:"Application", acronym:"P",
+    pdu:"Data",
+    summary:"The 'translator'. Converts data between formats the application and network understand. Handles encoding, encryption, and compression.",
+    sublayers:["No formal sublayers. In practice, TLS/SSL lives here","Character encoding (ASCII, UTF-8, EBCDIC)","Serialization formats (JSON, XML, ASN.1, XDR)"],
+    functions:["Character set translation (ASCII ↔ EBCDIC)","Data compression (reduce bandwidth)","Encryption & decryption (TLS/SSL)","Data serialization / deserialization","Media format conversion (JPEG, MPEG, GIF)","Abstract Syntax Notation (ASN.1)"],
+    protocols:["TLS/SSL","MIME","ASCII / UTF-8","EBCDIC","JPEG","GIF / PNG","MPEG","XDR (eXternal Data Representation)","ASN.1","JSON / XML (de-facto)"],
+    ports:["443 (TLS inside HTTPS)","636 (LDAPS)","993 (IMAPS)","995 (POP3S)","5061 (SIP-TLS)"],
+    exploits:["SSL stripping attacks (force HTTP)","TLS downgrade attacks (POODLE, BEAST)","Weak cipher negotiation","Certificate forgery / MITM","Padding oracle attacks","Data format injection (malformed ASN.1)","Compression side-channels (CRIME, BREACH)"],
+    modern:["TLS 1.3 (mandatory forward secrecy)","mTLS in service meshes","Certificate Transparency logs","QUIC encrypts transport+presentation","JSON Web Tokens (JWT)","Protobuf / MessagePack serialization"]
+  },
+  {
+    num:5, name:"Session", color:"#1D6A8B", bg:"#E0F2FE", bgDark:"#0C2333",
+    tcpLayer:"Application", acronym:"S",
+    pdu:"Data",
+    summary:"Establishes, manages, and terminates sessions (logical connections) between applications. Controls dialog and synchronization.",
+    sublayers:["Half-duplex vs. full-duplex dialog control","Synchronization points / checkpointing","Token management"],
+    functions:["Session establishment, maintenance, teardown","Dialog control (half/full duplex)","Synchronization points (resume after failure)","Token management","Authentication at session level","Remote Procedure Call (RPC) management","NetBIOS name service"],
+    protocols:["RPC (Remote Procedure Call)","NetBIOS","SMB session setup","NFS (Network File System)","SQL sessions","SSH (channel management)","H.323 (video conf sessions)","PPTP","SIP session control","TLS handshake (session setup)"],
+    ports:["137-139 NetBIOS","445 SMB","2049 NFS","1723 PPTP","5060 SIP"],
+    exploits:["Session hijacking (steal session token/cookie)","Session fixation","CSRF (cross-session request forgery)","NetBIOS enumeration","SMB relay attacks","Pass-the-hash (Kerberos/NTLM)","RPC attacks (MS03-026 — spawned Blaster worm)","Replay attacks","Half-open session exhaustion","Broken session management in web apps"],
+    modern:["OAuth 2.0 / OIDC session tokens","JWT session management","WebSocket persistent sessions","gRPC streaming (long-lived sessions)","Container health checks maintaining sessions","Service mesh circuit breakers"]
+  },
+  {
+    num:4, name:"Transport", color:"#0E7490", bg:"#CFFAFE", bgDark:"#0C2C33",
+    tcpLayer:"Transport", acronym:"T",
+    pdu:"Segments (TCP) / Datagrams (UDP)",
+    summary:"End-to-end, host-to-host communication. Provides reliable (TCP) or unreliable-but-fast (UDP) delivery, flow control, and error recovery.",
+    sublayers:["TCP: connection-oriented — 3-way handshake (SYN, SYN-ACK, ACK), 4-way teardown","UDP: connectionless — fire and forget, no handshake","SCTP: combines TCP reliability with UDP-like multi-streaming","QUIC: UDP-based, built-in encryption, multiplexing (now in HTTP/3)"],
+    functions:["Segmentation and reassembly","Port addressing (multiplexing multiple apps)","Connection establishment (TCP 3-way handshake)","Reliable delivery + ACKs (TCP)","Sequence numbering and reordering","Flow control (TCP sliding window)","Congestion control (TCP CUBIC, BBR, Reno)","Error detection (checksum)","Multiplexing via port numbers","QoS marking","Socket API interface"],
+    protocols:["TCP (Transmission Control Protocol)","UDP (User Datagram Protocol)","SCTP (Stream Control Transmission Protocol)","DCCP (Datagram Congestion Control)","QUIC (Quick UDP Internet Connections)","TLS over TCP","DTLS over UDP","MPTCP (Multipath TCP)"],
+    ports:["Well-known: 0–1023","Registered: 1024–49151","Dynamic/ephemeral: 49152–65535","TCP & UDP share the 0–65535 range"],
+    exploits:["SYN flood / TCP SYN DDoS","TCP session hijacking (sequence prediction)","UDP amplification DDoS (DNS, NTP, SSDP)","TCP reset attacks","Port scanning (Nmap)","Slowloris (keep connections open)","LAND attack (src=dst)","Teardrop attack (overlapping fragments)","Christmas tree / Xmas scan","TCP ISN predictability attacks"],
+    modern:["QUIC / HTTP/3 (UDP-based, 0-RTT)","MPTCP (multiple paths)","BBR congestion control (Google)","SCTP for VoIP / WebRTC","eBPF-based transport layer offloading","Kernel TLS (kTLS) offload","TCP Fast Open (TFO)"]
+  },
+  {
+    num:3, name:"Network", color:"#0F766E", bg:"#CCFBF1", bgDark:"#022C22",
+    tcpLayer:"Internet", acronym:"N",
+    pdu:"Packets",
+    summary:"Logical addressing and routing. Determines the best path through the network. Handles IP addressing, subnetting, and inter-network routing.",
+    sublayers:["IP (Internet Protocol): logical addressing","ICMP: error reporting and diagnostics","Routing protocols: determine best path (OSPF, BGP, RIP, EIGRP)","ARP / RARP: bridge L2 ↔ L3 (technically L2.5)","NAT: translate private ↔ public IPs (done at routers)"],
+    functions:["Logical addressing (IPv4 32-bit, IPv6 128-bit)","Routing — selecting best path","Packet forwarding (hop-by-hop)","Fragmentation and reassembly (MTU)","Inter-network communication","TTL — prevent infinite loops","Subnetting and CIDR","QoS / DSCP marking","ECMP (Equal-Cost Multipath)","VPN tunneling encapsulation"],
+    protocols:["IPv4 / IPv6","ICMP / ICMPv6","ARP (Address Resolution Protocol)","RARP (Reverse ARP)","OSPF","BGP (Border Gateway Protocol)","RIP / RIPng","EIGRP","IS-IS","IGMP (multicast)","GRE (tunnel)","IPSec (AH + ESP)","MPLS (label switching)"],
+    ports:["ICMP has no ports","ARP operates below IP","IPSec: Protocol 50 (ESP), 51 (AH), UDP 500 (IKE), UDP 4500 (NAT-T)","GRE: IP Protocol 47"],
+    exploits:["IP spoofing","ICMP flood / Smurf attack","Routing table poisoning (BGP hijack)","IP fragmentation attacks","Ping of Death","Teardrop / Rose attack","ARP poisoning (L2.5)","Man-in-the-middle via routing","Black hole routing","Traceroute-based network mapping","TTL manipulation","IPv6-specific: NDP spoofing, Router Advertisement flood"],
+    modern:["IPv6 deployment (128-bit addressing)","SDN (Software-Defined Networking) — OpenFlow, P4","Segment Routing (SR-MPLS, SRv6)","EVPN / VXLAN (overlay networks)","Kubernetes CNI plugins (Calico, Cilium, Flannel)","Container networking: overlay networks","Cloud VPCs (AWS, GCP, Azure virtual routers)","eBPF-based packet forwarding (Cilium XDP)"]
+  },
+  {
+    num:2, name:"Data Link", color:"#065F46", bg:"#D1FAE5", bgDark:"#022C22",
+    tcpLayer:"Network Access", acronym:"D",
+    pdu:"Frames",
+    summary:"Node-to-node delivery on the same network segment. MAC addressing, framing, error detection, and media access control. Divided into two sublayers.",
+    sublayers:["LLC (Logical Link Control — IEEE 802.2): framing, flow control, error notification, multiplexing L3 protocols","MAC (Media Access Control — IEEE 802.3/802.11): hardware addressing, access to physical medium (CSMA/CD for Ethernet, CSMA/CA for Wi-Fi), frame delimiting"],
+    functions:["Physical (MAC) addressing — 48-bit MAC addresses","Framing — encapsulate packets into frames","Error detection — CRC/FCS checksum","Error correction — ARQ (Automatic Repeat reQuest)","Flow control (on a link)","Media access control — who transmits when","Link establishment and termination","VLAN tagging (802.1Q)","Spanning Tree Protocol — loop prevention","PPP link negotiation"],
+    protocols:["Ethernet (IEEE 802.3)","Wi-Fi (IEEE 802.11 a/b/g/n/ac/ax)","PPP (Point-to-Point Protocol)","HDLC","Frame Relay","ATM","Token Ring (IEEE 802.5, legacy)","FDDI (legacy)","ARP (L2.5)","STP / RSTP / MSTP (Spanning Tree)","LACP (Link Aggregation)","MACsec (IEEE 802.1AE)","LLDP","CDP (Cisco proprietary)"],
+    ports:["No ports — uses MAC addresses","EtherType field identifies L3 protocol: 0x0800=IPv4, 0x0806=ARP, 0x86DD=IPv6, 0x8100=VLAN","VLAN IDs: 1–4094 (802.1Q)"],
+    exploits:["ARP spoofing / poisoning — MITM on LAN","MAC flooding — overwhelm switch CAM table","MAC spoofing","VLAN hopping (double-tagging)","STP attacks (become root bridge)","Rogue DHCP server (sits here + L3)","Wi-Fi deauth / disassociation attacks","Evil twin AP","KRACK (Wi-Fi WPA2 key reinstallation)","MACsec bypass","CDP/LLDP information disclosure","Storm attacks (broadcast storm)"],
+    modern:["MACsec (line-rate L2 encryption)","SR-IOV (NIC virtualization — VF per VM/container)","VXLAN (encapsulate L2 in UDP — stretch L2 across L3)","EVPN MAC-IP distribution","802.1X port-based NAC (Network Access Control)","SmartNICs / DPUs (offload to NIC)","OVS (Open vSwitch) in hypervisors","Calico / Cilium handle virtual L2 in Kubernetes"]
+  },
+  {
+    num:1, name:"Physical", color:"#374151", bg:"#F3F4F6", bgDark:"#111827",
+    tcpLayer:"Network Access", acronym:"P",
+    pdu:"Bits",
+    summary:"The raw transmission of bits over a physical medium. Defines electrical, optical, or radio signals, cable standards, connector types, and timing.",
+    sublayers:["PMA (Physical Medium Attachment) — signal encoding/decoding","PMD (Physical Medium Dependent) — medium-specific (copper, fiber, wireless)","MDI (Medium Dependent Interface) — the actual connector/plug","Repeaters and hubs operate here"],
+    functions:["Bit transmission — encode bits as signals","Physical medium specification (copper, fiber, wireless, coax)","Signal encoding (NRZ, Manchester, 4B/5B, 8B/10B, PAM-4)","Bit synchronization (clock signals)","Transmission mode (simplex, half-duplex, full-duplex)","Topology (bus, ring, star, mesh)","Data rate / bandwidth","Connector standards (RJ-45, SFP, LC, SC)","Pin layout (TIA-568)","Power over Ethernet (PoE 802.3af/at/bt)"],
+    protocols:["Ethernet (physical standards: 1000BASE-T, 10GBASE-SR, 40GBASE-LR4)","USB (Universal Serial Bus)","Bluetooth (802.15.1)","Wi-Fi RF (802.11 radio layer)","DSL (Digital Subscriber Line)","SONET / SDH (fiber backbone)","T-carrier (T1/T3) / E-carrier","OC (Optical Carrier) standards","RS-232 / RS-485","Token Ring (ring topology)","Infrared (IrDA)","Satellite / 4G LTE / 5G NR (radio)"],
+    ports:["No logical ports — physical medium only","Well-known physical: RJ-45 port, SFP+ cage, LC fiber connector","PoE: 15.4W (802.3af), 30W (802.3at), 90W (802.3bt)"],
+    exploits:["Physical cable tapping / wiretapping","Optical fiber tapping (bending fiber to emit light)","Signal jamming (RF — Wi-Fi, cellular)","Rogue hardware (evil NIC, keylogger)","Power line attacks","Physical access — unplugging cables, inserting rogue device","Electromagnetic eavesdropping (TEMPEST)","PoE overloading / power attack","Laser listening (vibration via window)","Evil maid attacks"],
+    modern:["400G/800G Ethernet (PAM-4 signaling)","5G NR (New Radio) mm-wave","Wi-Fi 7 (802.11be) — multi-link operation","Silicon Photonics","Smart transceivers (QSFP-DD)","PoE++","Fiber to the X (FTTx)","Passive Optical Networks (PON)","Open RAN (software-defined radio layer)","Quantum key distribution (QKD) — quantum physical layer"]
+  }
+];
+
+const TCP_GROUPS = [
+  {name:"Application", layers:[7,6,5], color:"#7C3AED", bg:"#EDE9FE"},
+  {name:"Transport",   layers:[4],     color:"#0E7490", bg:"#CFFAFE"},
+  {name:"Internet",    layers:[3],     color:"#0F766E", bg:"#CCFBF1"},
+  {name:"Network Access", layers:[2,1], color:"#374151", bg:"#F3F4F6"},
+];
+
+const PORTS_DATA = [
+  {port:20,proto:"TCP",service:"FTP Data",layer:"Application (7)"},
+  {port:21,proto:"TCP",service:"FTP Control",layer:"Application (7)"},
+  {port:22,proto:"TCP",service:"SSH / SFTP",layer:"Application (7)"},
+  {port:23,proto:"TCP",service:"Telnet (insecure!)",layer:"Application (7)"},
+  {port:25,proto:"TCP",service:"SMTP (email send)",layer:"Application (7)"},
+  {port:53,proto:"Both",service:"DNS",layer:"Application (7)"},
+  {port:67,proto:"UDP",service:"DHCP Server",layer:"Application (7)"},
+  {port:68,proto:"UDP",service:"DHCP Client",layer:"Application (7)"},
+  {port:69,proto:"UDP",service:"TFTP",layer:"Application (7)"},
+  {port:80,proto:"TCP",service:"HTTP",layer:"Application (7)"},
+  {port:110,proto:"TCP",service:"POP3",layer:"Application (7)"},
+  {port:119,proto:"TCP",service:"NNTP (newsgroups)",layer:"Application (7)"},
+  {port:123,proto:"UDP",service:"NTP (time sync)",layer:"Application (7)"},
+  {port:135,proto:"TCP",service:"MS RPC",layer:"Session (5)"},
+  {port:137,proto:"UDP",service:"NetBIOS Name",layer:"Session (5)"},
+  {port:138,proto:"UDP",service:"NetBIOS Datagram",layer:"Session (5)"},
+  {port:139,proto:"TCP",service:"NetBIOS Session",layer:"Session (5)"},
+  {port:143,proto:"TCP",service:"IMAP",layer:"Application (7)"},
+  {port:161,proto:"UDP",service:"SNMP",layer:"Application (7)"},
+  {port:162,proto:"UDP",service:"SNMP Trap",layer:"Application (7)"},
+  {port:179,proto:"TCP",service:"BGP",layer:"Application (7)"},
+  {port:389,proto:"Both",service:"LDAP",layer:"Application (7)"},
+  {port:443,proto:"TCP",service:"HTTPS / TLS",layer:"Application + Presentation"},
+  {port:445,proto:"TCP",service:"SMB (Windows shares)",layer:"Session (5)"},
+  {port:465,proto:"TCP",service:"SMTPS (deprecated)",layer:"Application (7)"},
+  {port:500,proto:"UDP",service:"IKEv1/v2 (IPSec)",layer:"Network (3)"},
+  {port:514,proto:"UDP",service:"Syslog",layer:"Application (7)"},
+  {port:520,proto:"UDP",service:"RIP",layer:"Application (7)"},
+  {port:587,proto:"TCP",service:"SMTP Submission (TLS)",layer:"Application (7)"},
+  {port:636,proto:"TCP",service:"LDAPS",layer:"Application (7)"},
+  {port:993,proto:"TCP",service:"IMAPS",layer:"Application (7)"},
+  {port:995,proto:"TCP",service:"POP3S",layer:"Application (7)"},
+  {port:1194,proto:"UDP",service:"OpenVPN",layer:"Network (3)"},
+  {port:1433,proto:"TCP",service:"MS SQL Server",layer:"Application (7)"},
+  {port:1521,proto:"TCP",service:"Oracle DB",layer:"Application (7)"},
+  {port:1723,proto:"TCP",service:"PPTP VPN",layer:"Session (5)"},
+  {port:2049,proto:"Both",service:"NFS",layer:"Session (5)"},
+  {port:3306,proto:"TCP",service:"MySQL / MariaDB",layer:"Application (7)"},
+  {port:3389,proto:"TCP",service:"RDP",layer:"Application (7)"},
+  {port:4500,proto:"UDP",service:"IPSec NAT-T",layer:"Network (3)"},
+  {port:5060,proto:"Both",service:"SIP (VoIP)",layer:"Session (5)"},
+  {port:5061,proto:"TCP",service:"SIP-TLS",layer:"Presentation (6)"},
+  {port:5432,proto:"TCP",service:"PostgreSQL",layer:"Application (7)"},
+  {port:5900,proto:"TCP",service:"VNC",layer:"Application (7)"},
+  {port:6379,proto:"TCP",service:"Redis",layer:"Application (7)"},
+  {port:6443,proto:"TCP",service:"Kubernetes API",layer:"Application (7)"},
+  {port:8080,proto:"TCP",service:"HTTP Alternate",layer:"Application (7)"},
+  {port:8443,proto:"TCP",service:"HTTPS Alternate",layer:"Application (7)"},
+  {port:9090,proto:"TCP",service:"Prometheus",layer:"Application (7)"},
+  {port:9200,proto:"TCP",service:"Elasticsearch",layer:"Application (7)"},
+];
+
+const MODERN_TECH = [
+  {tag:"L7 App",tagColor:"#7C3AED",tagBg:"#EDE9FE",title:"Service Mesh (Istio/Envoy)",desc:"Sidecar proxies intercept all L7 traffic. Provides mTLS, retries, circuit breaking, distributed tracing, and fine-grained routing — all transparent to the application."},
+  {tag:"L7 App",tagColor:"#7C3AED",tagBg:"#EDE9FE",title:"API Gateways",desc:"Kong, AWS API Gateway, Nginx — perform auth, rate limiting, request transformation, and routing at Layer 7. Kubernetes Ingress controllers operate here."},
+  {tag:"L6 Pres",tagColor:"#6D28D9",tagBg:"#EDE9FE",title:"TLS 1.3 & mTLS",desc:"TLS 1.3 mandates forward secrecy (ECDHE), reduces handshake to 1-RTT (0-RTT for resumed sessions). mTLS (mutual TLS) authenticates both sides — standard in zero-trust architectures."},
+  {tag:"L4 Transport",tagColor:"#0E7490",tagBg:"#CFFAFE",title:"QUIC / HTTP3",desc:"QUIC runs over UDP, embedding TLS 1.3, stream multiplexing, and connection migration. Eliminates TCP head-of-line blocking. HTTP/3 uses QUIC as its transport — now 30%+ of web traffic."},
+  {tag:"L4 Transport",tagColor:"#0E7490",tagBg:"#CFFAFE",title:"eBPF (Transport/Network)",desc:"Extended BPF programs run in the kernel, intercepting and manipulating network packets at L3/L4 without leaving kernel space. Powers Cilium, Facebook's Katran load balancer, and Cloudflare's DDoS mitigation."},
+  {tag:"L3 Network",tagColor:"#0F766E",tagBg:"#CCFBF1",title:"Software-Defined Networking",desc:"SDN (OpenFlow, P4, OpenDaylight) decouples the control plane (routing decisions) from the data plane (packet forwarding). Controllers program the entire network centrally. Basis of cloud provider networks."},
+  {tag:"L3 Network",tagColor:"#0F766E",tagBg:"#CCFBF1",title:"Container Networking (CNI)",desc:"Kubernetes CNI plugins (Calico, Cilium, Flannel, Weave) create overlay or underlay networks. Each pod gets an IP. Calico uses BGP to advertise pod routes; Cilium replaces kube-proxy with eBPF."},
+  {tag:"L3 Network",tagColor:"#0F766E",tagBg:"#CCFBF1",title:"Cloud VPCs & Virtual Routers",desc:"AWS VPC, Azure VNet, GCP VPC implement software L3 routing inside hypervisors. Security groups = stateful firewall at L3/L4. Transit gateways connect VPCs like routers."},
+  {tag:"L2 Data Link",tagColor:"#065F46",tagBg:"#D1FAE5",title:"VXLAN / Overlay Networks",desc:"VXLAN wraps L2 Ethernet frames in UDP (port 4789) headers — effectively stretching a Layer 2 broadcast domain across a Layer 3 routed infrastructure. Used by Docker, Kubernetes (Flannel), and cloud providers."},
+  {tag:"L2 Data Link",tagColor:"#065F46",tagBg:"#D1FAE5",title:"SR-IOV & SmartNICs/DPUs",desc:"Single Root I/O Virtualization lets one physical NIC appear as many virtual functions — each VM/container gets a direct hardware NIC path. SmartNICs (DPUs like NVIDIA BlueField) offload OVS, encryption, and RDMA from CPU."},
+  {tag:"L1 Physical",tagColor:"#374151",tagBg:"#F3F4F6",title:"5G NR & Wi-Fi 7",desc:"5G New Radio introduces massive MIMO, beamforming, and network slicing (virtual L1 partitions). Wi-Fi 7 (802.11be) supports multi-link operation — a device transmits on multiple channels simultaneously."},
+  {tag:"L1 Physical",tagColor:"#374151",tagBg:"#F3F4F6",title:"400G/800G Ethernet",desc:"PAM-4 (4-level pulse amplitude modulation) encodes 2 bits per symbol, enabling 400/800 Gbps on existing fiber. Silicon photonics integrate optics on-chip, reducing latency and power in hyperscale data centers."},
+  {tag:"L3–L7 All",tagColor:"#B45309",tagBg:"#FEF3C7",title:"Zero Trust Networking",desc:"'Never trust, always verify.' Every connection authenticated regardless of source — no implicit trust for being inside the network perimeter. Implemented via identity-aware proxies, mTLS, and micro-segmentation."},
+  {tag:"L3–L7 All",tagColor:"#B45309",tagBg:"#FEF3C7",title:"Containerization & Namespaces",desc:"Linux network namespaces give each container its own isolated L2/L3 stack (interfaces, routing tables, iptables). veth pairs connect namespaces. Docker/Kubernetes orchestrate thousands of isolated network stacks."},
+];
+
+let currentLayer = 7;
+
+function showTab(t){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick="showTab('${t}')"]`).classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+  if(t==='layers') renderLayerDetail(currentLayer);
+}
+
+function buildOverview(){
+  const osiEl = document.getElementById('osi-layers');
+  const tcpEl = document.getElementById('tcp-layers');
+  const protoEl = document.getElementById('proto-layers');
+
+  LAYERS.forEach(l=>{
+    const div = document.createElement('div');
+    div.className='layer-box';
+    div.style.background=l.bg;
+    div.style.cursor='pointer';
+    div.innerHTML=`<span class="layer-name" style="color:${l.color}">${l.name}</span><span class="layer-num" style="color:${l.color}"> (L${l.num})</span><br><span class="layer-mnemonic" style="color:${l.color}">${l.pdu.split(' ')[0]}</span>`;
+    div.onclick=()=>{currentLayer=l.num;showTab('layers')};
+    osiEl.appendChild(div);
+  });
+
+  const rendered=[];
+  TCP_GROUPS.forEach(g=>{
+    const rows=g.layers.length;
+    const div=document.createElement('div');
+    div.className='tcp-bracket';
+    div.style.background=g.bg;
+    div.style.gridRow=`span ${rows}`;
+    div.style.color=g.color;
+    div.style.minHeight=(rows*44)+'px';
+    div.style.flexDirection='column';
+    div.innerHTML=`<span style="font-weight:500">${g.name}</span><span style="font-size:10px;opacity:.7">L${g.layers.join('/')}</span>`;
+    div.onclick=()=>{currentLayer=g.layers[0];showTab('layers')};
+    tcpEl.appendChild(div);
+  });
+
+  const protoMap=[
+    {protos:["HTTP","HTTPS","FTP","SSH","SMTP","DNS"],colors:["#7C3AED","#7C3AED","#6D28D9","#1D6A8B","#1D6A8B","#1D6A8B"],layers:[7,7,7,7,7,7]},
+    {protos:["TLS","JPEG","MIME"],colors:["#6D28D9","#6D28D9","#6D28D9"],layers:[6,6,6]},
+    {protos:["RPC","NetBIOS","SMB"],colors:["#1D6A8B","#1D6A8B","#1D6A8B"],layers:[5,5,5]},
+    {protos:["TCP","UDP","QUIC","SCTP"],colors:["#0E7490","#0E7490","#0E7490","#0E7490"],layers:[4,4,4,4]},
+    {protos:["IP","ICMP","BGP","OSPF","ARP"],colors:["#0F766E","#0F766E","#0F766E","#0F766E","#0F766E"],layers:[3,3,3,3,3]},
+    {protos:["Ethernet","Wi-Fi","STP","VLAN"],colors:["#065F46","#065F46","#065F46","#065F46"],layers:[2,2,2,2]},
+    {protos:["Cable","Fiber","5G","PoE"],colors:["#374151","#374151","#374151","#374151"],layers:[1,1,1,1]},
+  ];
+
+  protoMap.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.className='proto-chips';
+    const layer=LAYERS.find(l=>l.num===p.layers[0]);
+    div.style.background=layer?layer.bg:'#fff';
+    p.protos.forEach((pr,j)=>{
+      const chip=document.createElement('span');
+      chip.className='chip';
+      chip.textContent=pr;
+      chip.style.background=p.colors[j]+'22';
+      chip.style.color=p.colors[j];
+      chip.onclick=()=>{currentLayer=p.layers[j];showTab('layers')};
+      div.appendChild(chip);
+    });
+    protoEl.appendChild(div);
+  });
+}
+
+function renderLayerDetail(num){
+  const l=LAYERS.find(x=>x.num===num);
+  const box=document.getElementById('layer-detail-box');
+  const prev=LAYERS.find(x=>x.num===num+1);
+  const next=LAYERS.find(x=>x.num===num-1);
+  box.innerHTML=`
+  <div class="ld-header" style="background:${l.bg}">
+    <div class="ld-num" style="background:${l.color}">${l.num}</div>
+    <div>
+      <div class="ld-title" style="color:${l.color}">${l.name} Layer</div>
+      <div class="ld-sub">PDU: <b>${l.pdu}</b> · TCP/IP: <b>${l.tcpLayer}</b></div>
+    </div>
+  </div>
+  <div style="padding:10px 16px;border-top:0.5px solid var(--color-border-secondary);font-size:12.5px;line-height:1.65">${l.summary}</div>
+  <div class="ld-grid">
+    <div class="ld-section">
+      <h3>Sublayers & Structure</h3>
+      <ul>${l.sublayers.map(s=>`<li>${s}</li>`).join('')}</ul>
+    </div>
+    <div class="ld-section">
+      <h3>Core Functions</h3>
+      <ul>${l.functions.map(f=>`<li>${f}</li>`).join('')}</ul>
+    </div>
+    <div class="ld-section">
+      <h3>Protocols</h3>
+      <div>${l.protocols.map(p=>`<span class="port-badge">${p}</span>`).join('')}</div>
+    </div>
+    <div class="ld-section">
+      <h3>Port Numbers / Addressing</h3>
+      <div>${l.ports.map(p=>`<span class="port-badge">${p}</span>`).join('')}</div>
+    </div>
+    <div class="ld-section ld-full">
+      <h3>Security Exploits & Attacks</h3>
+      <div>${l.exploits.map(e=>`<span class="exploit-badge">⚠ ${e}</span>`).join('')}</div>
+    </div>
+    <div class="ld-section ld-full">
+      <h3>Modern Technologies</h3>
+      <div>${l.modern.map(m=>`<span class="modern-badge">✦ ${m}</span>`).join('')}</div>
+    </div>
+  </div>
+  <div class="nav-btns">
+    <button class="nav-btn" ${!prev?'disabled':''} onclick="renderLayerDetail(${num+1})">↑ L${num+1} ${prev?prev.name:''}</button>
+    <div style="flex:1;text-align:center;font-size:11px;color:var(--color-text-secondary);align-self:center">Layer ${num} of 7</div>
+    <button class="nav-btn" ${!next?'disabled':''} onclick="renderLayerDetail(${num-1})">L${num-1} ${next?next.name:''} ↓</button>
+  </div>
+  `;
+}
+
+function buildPorts(){
+  renderPorts(PORTS_DATA);
+}
+function renderPorts(data){
+  const body=document.getElementById('ports-body');
+  body.innerHTML=data.map(p=>`
+  <div class="port-row">
+    <span style="font-family:var(--font-mono);font-weight:500">${p.port}</span>
+    <span class="proto-tag ${p.proto==='TCP'?'tcp-tag':p.proto==='UDP'?'udp-tag':'both-tag'}">${p.proto}</span>
+    <span>${p.service}</span>
+    <span class="layer-tag" style="font-size:10px;color:var(--color-text-secondary)">${p.layer}</span>
+  </div>`).join('');
+}
+function filterPorts(){
+  const q=document.getElementById('port-search').value.toLowerCase();
+  renderPorts(PORTS_DATA.filter(p=>
+    p.port.toString().includes(q)||p.service.toLowerCase().includes(q)||p.proto.toLowerCase().includes(q)||p.layer.toLowerCase().includes(q)
+  ));
+}
+
+function buildModern(){
+  const grid=document.getElementById('modern-grid');
+  MODERN_TECH.forEach(t=>{
+    const div=document.createElement('div');
+    div.className='modern-card';
+    div.innerHTML=`<div class="tag" style="color:${t.tagColor};background:${t.tagBg}">${t.tag}</div><h3>${t.title}</h3><p>${t.desc}</p>`;
+    grid.appendChild(div);
+  });
+}
+
+function buildAcronyms(){
+  const el=document.getElementById('osi-letters');
+  LAYERS.forEach(l=>{
+    const div=document.createElement('div');
+    div.className='acronym-row';
+    div.style.cursor='pointer';
+    div.innerHTML=`<div class="acronym-letter" style="color:${l.color}">${l.acronym}</div><div><div class="acronym-word" style="color:${l.color}">L${l.num}: ${l.name}</div><div class="acronym-desc">${l.summary.substring(0,90)}…</div></div>`;
+    div.onclick=()=>{currentLayer=l.num;showTab('layers')};
+    el.appendChild(div);
+  });
+}
+
+buildOverview();
+buildPorts();
+buildModern();
+buildAcronyms();
+</script>
